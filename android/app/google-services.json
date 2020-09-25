@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "909704441528",
+    "firebase_url": "https://malioboro-mall-jogja.firebaseio.com",
+    "project_id": "malioboro-mall-jogja",
+    "storage_bucket": "malioboro-mall-jogja.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:909704441528:android:560beb575b83bcdd364e4d",
+        "android_client_info": {
+          "package_name": "id.co.malmalioboro.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "909704441528-tldegrgm10ve9ccangopv8f9kk32ahup.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "id.co.malmalioboro.app",
+            "certificate_hash": "2c8692e88f114884345c0589bf13e5f1a2d39f82"
+          }
+        },
+        {
+          "client_id": "909704441528-fo716qo3seed0m9sgu6nqbr86ngnsjsk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUKV_h7bGNDt6M4SD_47T8TJxrSTs7X04"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "909704441528-fo716qo3seed0m9sgu6nqbr86ngnsjsk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
