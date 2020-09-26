@@ -1,14 +1,14 @@
+import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:malioboromall/model/ScopeManage.dart';
-import 'auth/Auth.dart';
 import 'main.dart';
 import 'Home.dart';
 import 'Promo.dart';
 import 'Tenant.dart';
 import 'Profile.dart';
-//import 'package:firebase_database/firebase_database.dart';
+import 'auth/Auth.dart';
+import 'model/ScopeManage.dart';
 
 class Menu extends StatefulWidget {
   Menu({Key key, this.auth, this.userid, this.logoutCallback, this.appModel})
@@ -20,14 +20,10 @@ class Menu extends StatefulWidget {
   static final String route = 'Menu-route';
 
   @override
-  State<StatefulWidget> createState() {
-    return MenuState();
-  }
-  //_MenuState createState() => _MenuState();
+  _MenuState createState() => _MenuState();
 }
 
-class MenuState extends State<Menu> {
-  //final FirebaseDatabase _database = FirebaseDatabase.instance;
+class _MenuState extends State<Menu> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   int selectedIndex = 0;
@@ -63,28 +59,29 @@ class MenuState extends State<Menu> {
   void pageChanged(int index) {
     setState(() {
       selectedIndex = index;
-      pageController.animateToPage(index,
-          duration: Duration(milliseconds: 100), curve: Curves.ease);
-    });
-  }
-
-  void bottomTapped(int index) {
-    setState(() {
-      selectedIndex = index;
-      pageController.jumpToPage(index);
+      pageController.animateToPage(
+        index,
+        duration: Duration(milliseconds: 100),
+        curve: Curves.ease,
+      );
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        child: Scaffold(body: pageView(), bottomNavigationBar: bottomItems()));
+      child: Scaffold(
+        extendBody: true,
+        body: pageView(),
+        bottomNavigationBar: bottomBar(),
+      ),
+    );
   }
 
-  FFNavigationBar bottomItems() {
+  Widget bottomItems() {
     return FFNavigationBar(
         theme: FFNavigationBarTheme(
-          barBackgroundColor: Colors.white,
+          barBackgroundColor: Color(0xfffed8b1),
           selectedItemBackgroundColor: Colors.orangeAccent,
           selectedItemIconColor: Colors.white,
           selectedItemLabelColor: Colors.orangeAccent,
@@ -94,7 +91,14 @@ class MenuState extends State<Menu> {
         ),
         selectedIndex: selectedIndex,
         onSelectTab: (index) {
-          bottomTapped(index);
+          setState(() {
+            selectedIndex = index;
+            pageController.animateToPage(
+              index,
+              duration: Duration(milliseconds: 100),
+              curve: Curves.ease,
+            );
+          });
         },
         items: [
           FFNavigationBarItem(label: 'Home', iconData: Icons.home),
@@ -102,6 +106,35 @@ class MenuState extends State<Menu> {
           FFNavigationBarItem(label: 'Tenants', iconData: Icons.store),
           FFNavigationBarItem(label: 'Profile', iconData: Icons.account_circle),
         ]);
+  }
+
+  Widget bottomBar() {
+    return CustomNavigationBar(
+      iconSize: 30.0,
+      selectedColor: Colors.orangeAccent,
+      strokeColor: Colors.orangeAccent,
+      unSelectedColor: Colors.grey[600],
+      backgroundColor: Colors.white,
+      borderRadius: Radius.circular(15.0),
+      onTap: (index) {
+        setState(() {
+          selectedIndex = index;
+          pageController.animateToPage(
+            index,
+            duration: Duration(milliseconds: 100),
+            curve: Curves.ease,
+          );
+        });
+      },
+      currentIndex: selectedIndex,
+      isFloating: true,
+      items: [
+        CustomNavigationBarItem(icon: Icons.home),
+        CustomNavigationBarItem(icon: Icons.monetization_on),
+        CustomNavigationBarItem(icon: Icons.local_mall),
+        CustomNavigationBarItem(icon: Icons.account_circle),
+      ],
+    );
   }
 
   Future<bool> onWillPop() {

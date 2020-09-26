@@ -1,18 +1,18 @@
 import 'dart:async';
-import 'dart:convert';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
-import 'package:http/http.dart' as http;
 import 'package:scoped_model/scoped_model.dart';
+import 'auth/Auth.dart';
+import 'model/ScopeManage.dart';
 import 'Login.dart';
 import 'Menu.dart';
-import 'model/ScopeManage.dart';
-//import 'auth/Auth.dart';
-//import 'Root.dart';
+import 'Root.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(
     Main(),
   );
@@ -44,11 +44,13 @@ class Main extends StatelessWidget {
           primaryColor: Colors.white,
           fontFamily: 'Poppins',
         ),
-        home: Menu(),
+        //home: Menu(),
+        home: Root(
+          auth: Auth(),
+        ),
         routes: routes,
       ),
     );
-    //home: Root(auth: Auth())));
   }
 }
 
@@ -95,11 +97,4 @@ class SplashState extends State<Splash> {
       ),
     );
   }
-}
-
-Future getData() async {
-  var url = '';
-  http.Response response = await http.get(url);
-  var data = jsonDecode(response.body);
-  print(data.toString());
 }

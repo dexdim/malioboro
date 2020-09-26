@@ -159,68 +159,73 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-          child: Container(
-        height: MediaQuery.of(context).size.height,
-        child: Stack(
-          children: <Widget>[
-            Container(
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      begin: Alignment.topRight,
-                      end: Alignment.bottomLeft,
-                      stops: [0.6, 0.9],
-                      colors: [Colors.white, Color(0xffFED8B1)])),
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  SizedBox(
-                    height: 100,
-                  ),
-                  _title(),
-                  SizedBox(
-                    height: 50,
-                  ),
-                  _signupform(),
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(15, 0, 30, 0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Checkbox(
-                            value: accept,
-                            onChanged: (bool value) {
-                              setState(() {
-                                accept = value;
-                              });
-                            }),
-                        Expanded(
-                            child: Text(
-                                'Dengan ini saya telah membaca dan menyetujui Mal Malioboro Terms and Conditions, Privacy Policy, dan Terms of Service.',
-                                textAlign: TextAlign.justify)),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  _submitButton('SUBMIT'),
-                  Expanded(
-                    flex: 2,
-                    child: SizedBox(),
-                  )
-                ],
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          child: Stack(
+            children: <Widget>[
+              Positioned(
+                top: 40,
+                left: 0,
+                child: _backButton(),
               ),
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: _loginAccountLabel(),
-            ),
-            Positioned(top: 40, left: 0, child: _backButton()),
-          ],
+              Container(
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                        begin: Alignment.topRight,
+                        end: Alignment.bottomLeft,
+                        stops: [0.6, 0.9],
+                        colors: [Colors.white, Color(0xfffed8b1)])),
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(
+                      height: 100,
+                    ),
+                    _title(),
+                    SizedBox(
+                      height: 50,
+                    ),
+                    _signupform(),
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(15, 0, 30, 0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Checkbox(
+                              value: accept,
+                              onChanged: (bool value) {
+                                setState(() {
+                                  accept = value;
+                                });
+                              }),
+                          Expanded(
+                              child: Text(
+                                  'Dengan ini saya telah membaca dan menyetujui Mal Malioboro Terms and Conditions, Privacy Policy, dan Terms of Service.',
+                                  textAlign: TextAlign.justify)),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    _submitButton('SUBMIT'),
+                    Expanded(
+                      flex: 2,
+                      child: SizedBox(),
+                    )
+                  ],
+                ),
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: _loginAccountLabel(),
+              ),
+            ],
+          ),
         ),
-      )),
+      ),
     );
   }
 }

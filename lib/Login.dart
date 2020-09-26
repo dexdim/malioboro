@@ -12,7 +12,7 @@ class Login extends StatefulWidget {
   static final String route = 'Login-route';
 
   @override
-  State<StatefulWidget> createState() => _LoginState();
+  _LoginState createState() => _LoginState();
 }
 
 class _LoginState extends State<Login> {
