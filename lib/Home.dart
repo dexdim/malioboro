@@ -40,9 +40,13 @@ class _HomeState extends State<Home> {
       margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Material(
         elevation: 3,
-        borderRadius: BorderRadius.all(Radius.circular(15.0)),
+        borderRadius: BorderRadius.all(
+          Radius.circular(15.0),
+        ),
         child: ClipRRect(
-          borderRadius: BorderRadius.all(Radius.circular(15.0)),
+          borderRadius: BorderRadius.all(
+            Radius.circular(15.0),
+          ),
           child: Image.network(
             'http://www.malmalioboro.co.id/images/1530614179slide.jpg',
             fit: BoxFit.cover,
@@ -85,7 +89,7 @@ class _HomeState extends State<Home> {
   Widget _subtitle(String subtitle) {
     return Align(
       alignment: Alignment.centerLeft,
-      child: (Padding(
+      child: Padding(
         padding: EdgeInsets.only(left: 20),
         child: Text(
           '$subtitle',
@@ -102,7 +106,7 @@ class _HomeState extends State<Home> {
             ],
           ),
         ),
-      )),
+      ),
     );
   }
 
@@ -129,43 +133,45 @@ class _HomeState extends State<Home> {
 
   Widget _socialmedia(String title) {
     return Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Container(
-            height: 50,
-            width: 50,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        Container(
+          height: 50,
+          width: 50,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(
               Radius.circular(5),
-            )),
-            alignment: Alignment.center,
-            child: InkWell(
-              child: Image(
-                  image: AssetImage('assets/icon/$title.png'),
-                  height: 40,
-                  width: 40),
-              onTap: () async {
-                String url;
-                if (title == 'Facebook') {
-                  url = 'https://facebook.com/MalioboroMall';
-                } else if (title == 'Twitter') {
-                  url = 'https://twitter.com/malioboromall';
-                } else if (title == 'Instagram') {
-                  url = 'https://instagram.com/malioboromall';
-                }
-                if (await canLaunch(url)) {
-                  await launch(url);
-                } else {
-                  throw 'Tidak bisa membuka $title';
-                }
-              },
             ),
           ),
-          Text(
-            '$title',
-            style: TextStyle(fontSize: 14),
+          alignment: Alignment.center,
+          child: InkWell(
+            child: Image(
+                image: AssetImage('assets/icon/$title.png'),
+                height: 40,
+                width: 40),
+            onTap: () async {
+              String url;
+              if (title == 'Facebook') {
+                url = 'https://facebook.com/MalioboroMall';
+              } else if (title == 'Twitter') {
+                url = 'https://twitter.com/malioboromall';
+              } else if (title == 'Instagram') {
+                url = 'https://instagram.com/malioboromall';
+              }
+              if (await canLaunch(url)) {
+                await launch(url);
+              } else {
+                throw 'Tidak bisa membuka $title';
+              }
+            },
           ),
-        ]);
+        ),
+        Text(
+          '$title',
+          style: TextStyle(fontSize: 14),
+        ),
+      ],
+    );
   }
 
   Widget _listsocialmedia() {
@@ -176,9 +182,15 @@ class _HomeState extends State<Home> {
           vertical: 20, horizontal: MediaQuery.of(context).size.width * 0.20),
       child: Row(
         children: <Widget>[
-          Expanded(child: _socialmedia('Facebook')),
-          Expanded(child: _socialmedia('Twitter')),
-          Expanded(child: _socialmedia('Instagram')),
+          Expanded(
+            child: _socialmedia('Facebook'),
+          ),
+          Expanded(
+            child: _socialmedia('Twitter'),
+          ),
+          Expanded(
+            child: _socialmedia('Instagram'),
+          ),
         ],
       ),
     );
@@ -207,35 +219,38 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: _title(),
-          automaticallyImplyLeading: false,
-          centerTitle: true,
-          backgroundColor: Colors.white,
-          elevation: 0,
+      appBar: AppBar(
+        title: _title(),
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        backgroundColor: Colors.white,
+        elevation: 0,
+      ),
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        decoration: BoxDecoration(color: Colors.white),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              //SizedBox(height: 5),
+              //_subtitle('News :'),
+              //_news(),
+              _line(),
+              _subtitle('Highlight promo :'),
+              _carousel(),
+              _line(),
+              _subtitle('Upcoming events :'),
+              SizedBox(height: 5),
+              _event(),
+              _line(),
+              _subtitle('Find us on :'),
+              _listsocialmedia()
+            ],
+          ),
         ),
-        body: Container(
-            height: MediaQuery.of(context).size.height,
-            decoration: BoxDecoration(color: Colors.white),
-            child: SingleChildScrollView(
-                child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                //SizedBox(height: 5),
-                //_subtitle('News :'),
-                //_news(),
-                _line(),
-                _subtitle('Highlight promo :'),
-                _carousel(),
-                _line(),
-                _subtitle('Upcoming events :'),
-                SizedBox(height: 5),
-                _event(),
-                _line(),
-                _subtitle('Find us on :'),
-                _listsocialmedia()
-              ],
-            ))));
+      ),
+    );
   }
 }

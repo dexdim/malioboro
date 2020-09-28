@@ -46,6 +46,7 @@ class _PromoState extends State<Promo> {
         elevation: 0,
       ),
       body: Container(
+        width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(color: Colors.white),
         child: ListView.builder(
             itemCount: promoData.length,
@@ -53,7 +54,7 @@ class _PromoState extends State<Promo> {
               return GestureDetector(
                 onTap: () {},
                 child: Container(
-                  margin: EdgeInsets.symmetric(vertical: 10, horizontal: 40),
+                  margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                   height: MediaQuery.of(context).size.height / 6,
                   child: Container(
                     child: Row(

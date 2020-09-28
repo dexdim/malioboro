@@ -70,12 +70,12 @@ class _LoginState extends State<Login> {
 
   Widget _form(String title, {bool isPassword = false}) {
     return Container(
-      width: MediaQuery.of(context).size.width / 1.3,
+      width: MediaQuery.of(context).size.width * 0.75,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Container(
-            height: 50,
+            height: MediaQuery.of(context).size.height * 0.1,
             child: TextFormField(
                 autofocus: false,
                 maxLines: 1,
@@ -97,7 +97,6 @@ class _LoginState extends State<Login> {
                     ),
                     filled: true)),
           ),
-          SizedBox(height: 10),
         ],
       ),
     );
@@ -298,56 +297,68 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SingleChildScrollView(
-            child: Container(
-      height: MediaQuery.of(context).size.height,
-      child: Stack(
+      body: Stack(
         children: <Widget>[
           Container(
             decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.topRight,
-                    end: Alignment.bottomLeft,
-                    stops: [0.6, 0.9],
-                    colors: [Colors.white, Color(0xffFED8B1)])),
+              gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                stops: [0.6, 0.9],
+                colors: [
+                  Colors.white,
+                  Color(0xffFED8B1),
+                ],
+              ),
+            ),
             key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                SizedBox(
-                  height: 70,
-                ),
-                _logo(),
-                SizedBox(
-                  height: 100,
-                ),
-                _loginform(),
-                Container(
-                    width: MediaQuery.of(context).size.width / 1.3,
+            child: Container(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.08,
+                  ),
+                  _logo(),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.08,
+                  ),
+                  _loginform(),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.75,
                     alignment: Alignment.centerRight,
                     child: InkWell(
                       onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Forgot()));
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Forgot(),
+                          ),
+                        );
                       },
-                      child: Text('Lupa password?',
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                              color: Color(0xffD67219))),
-                    )),
-                SizedBox(
-                  height: 30,
-                ),
-                _loginButton(),
-                _divider(),
-                _socmedButton(),
-                Expanded(
-                  flex: 2,
-                  child: SizedBox(),
-                ),
-              ],
+                      child: Text(
+                        'Lupa password?',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          color: Color(0xffD67219),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.04,
+                  ),
+                  _loginButton(),
+                  _divider(),
+                  _socmedButton(),
+                  Expanded(
+                    flex: 2,
+                    child: SizedBox(),
+                  ),
+                ],
+              ),
             ),
           ),
           Align(
@@ -357,6 +368,6 @@ class _LoginState extends State<Login> {
           showCircularProgress(),
         ],
       ),
-    )));
+    );
   }
 }
