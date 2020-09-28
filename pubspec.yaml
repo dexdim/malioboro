@@ -9,6 +9,7 @@ dependencies:
   flutter:
     sdk: flutter
 
+  cached_network_image: ^2.3.2+1
   carousel_slider: ^2.2.1
   cupertino_icons: ^1.0.0
   custom_navigation_bar: ^0.3.2

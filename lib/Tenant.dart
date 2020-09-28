@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'model/ScopeManage.dart';
@@ -65,9 +66,10 @@ class _TenantState extends State<Tenant> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Expanded(
-                          child: Image.network(
-                            'http://malmalioboro.co.id/${tenantData[index].logo}',
-                            fit: BoxFit.cover,
+                          child: CachedNetworkImage(
+                            imageUrl:
+                                'http://malmalioboro.co.id/${tenantData[index].logo}',
+                            fit: BoxFit.fill,
                           ),
                           flex: 2,
                         ),
