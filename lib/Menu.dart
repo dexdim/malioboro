@@ -67,6 +67,13 @@ class _MenuState extends State<Menu> {
     });
   }
 
+  void bottomTapped(int index) {
+    setState(() {
+      selectedIndex = index;
+      pageController.jumpToPage(index);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -76,36 +83,6 @@ class _MenuState extends State<Menu> {
         bottomNavigationBar: bottomBar(),
       ),
     );
-  }
-
-  Widget bottomItems() {
-    return FFNavigationBar(
-        theme: FFNavigationBarTheme(
-          barBackgroundColor: Color(0xfffed8b1),
-          selectedItemBackgroundColor: Colors.orangeAccent,
-          selectedItemIconColor: Colors.white,
-          selectedItemLabelColor: Colors.orangeAccent,
-          unselectedItemIconColor: Colors.black,
-          unselectedItemLabelColor: Colors.black,
-          barHeight: 50,
-        ),
-        selectedIndex: selectedIndex,
-        onSelectTab: (index) {
-          setState(() {
-            selectedIndex = index;
-            pageController.animateToPage(
-              index,
-              duration: Duration(milliseconds: 100),
-              curve: Curves.ease,
-            );
-          });
-        },
-        items: [
-          FFNavigationBarItem(label: 'Home', iconData: Icons.home),
-          FFNavigationBarItem(label: 'Promos', iconData: Icons.monetization_on),
-          FFNavigationBarItem(label: 'Tenants', iconData: Icons.store),
-          FFNavigationBarItem(label: 'Profile', iconData: Icons.account_circle),
-        ]);
   }
 
   Widget bottomBar() {
@@ -119,10 +96,8 @@ class _MenuState extends State<Menu> {
       onTap: (index) {
         setState(() {
           selectedIndex = index;
-          pageController.animateToPage(
+          pageController.jumpToPage(
             index,
-            duration: Duration(milliseconds: 100),
-            curve: Curves.ease,
           );
         });
       },

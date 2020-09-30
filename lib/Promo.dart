@@ -57,58 +57,58 @@ class _PromoState extends State<Promo> {
                   margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                   height: MediaQuery.of(context).size.height / 6,
                   child: Container(
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          Container(
-                            child: CachedNetworkImage(
-                              imageUrl:
-                                  'http://www.malmalioboro.co.id/${promoData[index].logo}',
+                    child: Row(children: <Widget>[
+                      Expanded(
+                        flex: 2,
+                        child: CachedNetworkImage(
+                          imageUrl:
+                              'http://www.malmalioboro.co.id/${promoData[index].logo}',
+                        ),
+                      ),
+                      VerticalDivider(
+                        width: 30,
+                        thickness: 1,
+                      ),
+                      Expanded(
+                        flex: 3,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              promoData[index].tenant,
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
-                          ),
-                          VerticalDivider(
-                            width: 50,
-                            thickness: 1,
-                          ),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                            Text(
+                              promoData[index].nama,
+                              style: TextStyle(
+                                fontSize: 16,
+                              ),
+                            ),
+                            Row(
                               children: <Widget>[
-                                Text(
-                                  promoData[index].tenant,
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                                Icon(
+                                  Icons.event,
+                                  size: 16,
+                                  color: Colors.redAccent,
+                                ),
+                                SizedBox(
+                                  width: 5,
                                 ),
                                 Text(
-                                  promoData[index].nama,
+                                  '${promoData[index].tglawal} - ${promoData[index].tglakhir}',
                                   style: TextStyle(
                                     fontSize: 16,
                                   ),
                                 ),
-                                Row(
-                                  children: <Widget>[
-                                    Icon(
-                                      Icons.event,
-                                      size: 16,
-                                      color: Colors.redAccent,
-                                    ),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    Text(
-                                      '${promoData[index].tglawal} - ${promoData[index].tglakhir}',
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                  ],
-                                ),
                               ],
                             ),
-                          ),
-                        ]),
+                          ],
+                        ),
+                      ),
+                    ]),
                   ),
                 ),
               );

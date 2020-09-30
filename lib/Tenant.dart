@@ -36,7 +36,7 @@ class _TenantState extends State<Tenant> {
         ScopedModel.of<AppModel>(context).tenantListing;
 
     var size = MediaQuery.of(context).size;
-    final double listHeight = (size.height - kToolbarHeight + 100) / 3;
+    final double listHeight = (size.height - kToolbarHeight + 200) / 3.5;
     final double listWidth = size.width;
     final double aspectRatio = listWidth / listHeight;
 
@@ -74,7 +74,7 @@ class _TenantState extends State<Tenant> {
                           flex: 2,
                         ),
                         SizedBox(
-                          width: 15,
+                          width: 20,
                         ),
                         Expanded(
                           child: Column(
