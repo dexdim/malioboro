@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'auth/Auth.dart';
 import 'Signup.dart';
 import 'Forgot.dart';
@@ -33,10 +34,12 @@ class _LoginState extends State<Login> {
   }
 
   void validateAndSubmit() async {
-    setState(() {
-      _errorMessage = "";
-      _isLoading = true;
-    });
+    setState(
+      () {
+        _errorMessage = "";
+        _isLoading = true;
+      },
+    );
 
     if (validateAndSave()) {
       String userid = "";
@@ -68,192 +71,9 @@ class _LoginState extends State<Login> {
     super.initState();
   }
 
-  Widget _form(String title, {bool isPassword = false}) {
-    return Container(
-      width: MediaQuery.of(context).size.width * 0.75,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Container(
-            height: MediaQuery.of(context).size.height * 0.1,
-            child: TextFormField(
-                autofocus: false,
-                maxLines: 1,
-                validator: (value) =>
-                    value.isEmpty ? '$title can\'t be empty' : null,
-                onSaved: (value) => title = value.trim(),
-                style: TextStyle(color: Color(0xff333333), fontSize: 16),
-                obscureText: isPassword,
-                decoration: InputDecoration(
-                    fillColor: Color(0xfffffff),
-                    contentPadding: EdgeInsets.symmetric(horizontal: 10),
-                    labelText: title,
-                    labelStyle: TextStyle(color: Color(0xff333333)),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Color(0xffaaaaaa)),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Color(0xffD67219)),
-                    ),
-                    filled: true)),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _loginButton() {
-    return RaisedButton(
-      elevation: 3,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(25.00),
-        side: BorderSide(
-          color: Color(0xffd67219),
-          width: 1,
-        ),
-      ),
-      color: Color(0xffffffff),
-      padding: EdgeInsets.symmetric(
-        vertical: 10,
-        horizontal: 70,
-      ),
-      child: Text(
-        'LOGIN',
-        style: TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.w400,
-          color: Color(0xff333333),
-        ),
-      ),
-      //onPressed: validateAndSubmit,
-      onPressed: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Menu()));
-      },
-      splashColor: Color.fromRGBO(214, 114, 25, 90),
-      highlightColor: Colors.transparent,
-    );
-  }
-
-  Widget _divider() {
-    return Container(
-      margin: EdgeInsets.only(top: 50),
-      child: Row(
-        children: <Widget>[
-          SizedBox(
-            width: 20,
-          ),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10),
-              child: Divider(
-                thickness: 1,
-              ),
-            ),
-          ),
-          Text('atau login dengan', style: TextStyle(fontSize: 16)),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10),
-              child: Divider(
-                thickness: 1,
-              ),
-            ),
-          ),
-          SizedBox(
-            width: 20,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _socmedButton() {
-    return Container(
-      height: 80,
-      margin: EdgeInsets.symmetric(
-          vertical: 20, horizontal: MediaQuery.of(context).size.width * 0.20),
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            flex: 1,
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                      height: 50,
-                      width: 50,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(
-                        Radius.circular(5),
-                      )),
-                      alignment: Alignment.center,
-                      child:
-                          Image(image: AssetImage('assets/icon/Facebook.png'))),
-                  Text(
-                    'Facebook',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                ]),
-          ),
-          Expanded(
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                      height: 50,
-                      width: 50,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(
-                        Radius.circular(5),
-                      )),
-                      alignment: Alignment.center,
-                      child: Image(
-                        image: AssetImage('assets/icon/Google.png'),
-                      )),
-                  Text(
-                    'Google',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                ]),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _createAccountLabel() {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 20),
-      alignment: Alignment.bottomCenter,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text(
-            'Anda belum punya akun? ',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
-          ),
-          InkWell(
-            onTap: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => SignUp()));
-            },
-            child: Text(
-              'Register',
-              style: TextStyle(
-                  color: Color(0xffD67219),
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400),
-            ),
-          )
-        ],
-      ),
-    );
-  }
-
   Widget _logo() {
     return Image(
-      width: MediaQuery.of(context).size.width / 2,
+      width: MediaQuery.of(context).size.width * 0.5,
       image: AssetImage('assets/icon/logomall.png'),
     );
   }
@@ -267,9 +87,239 @@ class _LoginState extends State<Login> {
     );
   }
 
+  Widget _form(String title, {bool isPassword = false}) {
+    return Container(
+      width: MediaQuery.of(context).size.width * 0.7,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Container(
+            margin: EdgeInsets.symmetric(vertical: 10),
+            child: TextFormField(
+              style: TextStyle(
+                fontSize: 16,
+              ),
+              maxLines: 1,
+              validator: (value) =>
+                  value.isEmpty ? '$title can\'t be empty' : null,
+              onSaved: (value) => title = value.trim(),
+              obscureText: isPassword,
+              decoration: InputDecoration(
+                fillColor: Colors.white,
+                contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                labelText: title,
+                labelStyle: TextStyle(
+                  color: Colors.black,
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.grey,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.orangeAccent,
+                  ),
+                ),
+                filled: true,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _forgotPassword() {
+    return Container(
+      width: MediaQuery.of(context).size.width * 0.7,
+      alignment: Alignment.centerRight,
+      child: InkWell(
+        onTap: () {
+          Navigator.push(
+            context,
+            PageTransition(
+              child: Forgot(),
+              type: PageTransitionType.fade,
+              inheritTheme: true,
+              ctx: context,
+            ),
+          );
+        },
+        child: Text(
+          'Lupa password?',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w400,
+            color: Colors.orangeAccent,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _loginButton() {
+    return RaisedButton(
+      elevation: 3,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+        side: BorderSide(
+          color: Colors.orange[200],
+          width: 1,
+        ),
+      ),
+      color: Colors.white,
+      padding: EdgeInsets.symmetric(
+        vertical: 10,
+        horizontal: 50,
+      ),
+      child: Text(
+        'LOGIN',
+        style: TextStyle(
+            fontSize: 20, fontWeight: FontWeight.w400, color: Colors.black),
+      ),
+      //onPressed: validateAndSubmit,
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Menu(),
+          ),
+        );
+      },
+      splashColor: Colors.transparent,
+      highlightColor: Colors.orange[100],
+    );
+  }
+
+  Widget _divider() {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 30),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          SizedBox(
+            width: 50,
+          ),
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: Divider(
+                thickness: 1,
+              ),
+            ),
+          ),
+          Text(
+            'atau login dengan',
+            style: TextStyle(fontSize: 16),
+          ),
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: Divider(
+                thickness: 1,
+              ),
+            ),
+          ),
+          SizedBox(
+            width: 50,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _socialLogin() {
+    return Container(
+      height: 80,
+      margin: EdgeInsets.symmetric(
+        horizontal: MediaQuery.of(context).size.width * 0.30,
+      ),
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            flex: 1,
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    height: 40,
+                    width: 40,
+                    child: Image(
+                      image: AssetImage('assets/icon/Facebook.png'),
+                    ),
+                  ),
+                  Text(
+                    'Facebook',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ]),
+          ),
+          Expanded(
+            flex: 1,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  height: 40,
+                  width: 40,
+                  child: Image(
+                    image: AssetImage('assets/icon/Google.png'),
+                  ),
+                ),
+                Text(
+                  'Google',
+                  style: TextStyle(fontSize: 16),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _createAccount() {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 20),
+      alignment: Alignment.bottomCenter,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text(
+            'Anda belum punya akun? ',
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+          ),
+          InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                PageTransition(
+                  child: SignUp(),
+                  type: PageTransitionType.fade,
+                  inheritTheme: true,
+                  ctx: context,
+                ),
+              );
+            },
+            child: Text(
+              'Daftar sekarang!',
+              style: TextStyle(
+                  color: Colors.orangeAccent,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
   Widget showCircularProgress() {
     if (_isLoading) {
-      return Center(child: CircularProgressIndicator());
+      return Center(
+        child: CircularProgressIndicator(),
+      );
     }
     return Container(
       height: 0,
@@ -297,6 +347,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Stack(
         children: <Widget>[
           Container(
@@ -325,45 +376,23 @@ class _LoginState extends State<Login> {
                     height: MediaQuery.of(context).size.height * 0.08,
                   ),
                   _loginform(),
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.75,
-                    alignment: Alignment.centerRight,
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Forgot(),
-                          ),
-                        );
-                      },
-                      child: Text(
-                        'Lupa password?',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                          color: Color(0xffD67219),
-                        ),
-                      ),
-                    ),
-                  ),
+                  _forgotPassword(),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.04,
                   ),
                   _loginButton(),
                   _divider(),
-                  _socmedButton(),
+                  _socialLogin(),
                   Expanded(
-                    flex: 2,
                     child: SizedBox(),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: _createAccount(),
                   ),
                 ],
               ),
             ),
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: _createAccountLabel(),
           ),
           showCircularProgress(),
         ],

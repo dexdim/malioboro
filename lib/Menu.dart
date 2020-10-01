@@ -1,8 +1,7 @@
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'main.dart';
+import 'package:page_transition/page_transition.dart';
 import 'Home.dart';
 import 'Promo.dart';
 import 'Tenant.dart';
@@ -11,9 +10,9 @@ import 'auth/Auth.dart';
 import 'model/ScopeManage.dart';
 
 class Menu extends StatefulWidget {
-  Menu({Key key, this.auth, this.userid, this.logoutCallback, this.appModel})
+  Menu({Key key, this.auth, this.userid, this.logoutCallback})
       : super(key: key);
-  final AppModel appModel;
+
   final BaseAuth auth;
   final String userid;
   final VoidCallback logoutCallback;
@@ -43,9 +42,7 @@ class _MenuState extends State<Menu> {
       children: <Widget>[
         Home(),
         Promo(),
-        Tenant(
-          appModel: Main.appModel,
-        ),
+        Tenant(),
         Profile(),
       ],
     );

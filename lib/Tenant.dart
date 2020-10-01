@@ -4,9 +4,6 @@ import 'package:scoped_model/scoped_model.dart';
 import 'model/ScopeManage.dart';
 
 class Tenant extends StatefulWidget {
-  final AppModel appModel;
-  Tenant({this.appModel});
-
   @override
   _TenantState createState() => _TenantState();
 }

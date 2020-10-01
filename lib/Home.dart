@@ -74,9 +74,13 @@ class _HomeState extends State<Home> {
             margin: EdgeInsets.symmetric(vertical: 10),
             child: Material(
               elevation: 3,
-              borderRadius: BorderRadius.all(Radius.circular(10)),
+              borderRadius: BorderRadius.all(
+                Radius.circular(10),
+              ),
               child: ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10.0),
+                ),
                 child: Image.network(url),
               ),
             ),
@@ -136,19 +140,12 @@ class _HomeState extends State<Home> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         Container(
-          height: 50,
-          width: 50,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(
-              Radius.circular(5),
-            ),
-          ),
-          alignment: Alignment.center,
+          height: 40,
+          width: 40,
           child: InkWell(
             child: Image(
-                image: AssetImage('assets/icon/$title.png'),
-                height: 40,
-                width: 40),
+              image: AssetImage('assets/icon/$title.png'),
+            ),
             onTap: () async {
               String url;
               if (title == 'Facebook') {

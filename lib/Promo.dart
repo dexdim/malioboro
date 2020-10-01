@@ -4,9 +4,6 @@ import 'package:scoped_model/scoped_model.dart';
 import 'model/ScopeManage.dart';
 
 class Promo extends StatefulWidget {
-  final AppModel appModel;
-  Promo({this.appModel});
-
   @override
   _PromoState createState() => _PromoState();
 }

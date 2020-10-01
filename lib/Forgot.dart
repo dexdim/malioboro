@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'Login.dart';
 
 class Forgot extends StatefulWidget {
-  Forgot({Key key, this.title}) : super(key: key);
-
-  final String title;
+  Forgot({Key key}) : super(key: key);
 
   @override
   _ForgotState createState() => _ForgotState();
@@ -24,8 +22,10 @@ class _ForgotState extends State<Forgot> {
               padding: EdgeInsets.only(top: 3),
               child: Icon(Icons.keyboard_arrow_left, color: Colors.black),
             ),
-            Text('Back',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400))
+            Text(
+              'Back',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+            ),
           ],
         ),
       ),

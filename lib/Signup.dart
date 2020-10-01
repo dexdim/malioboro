@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'Login.dart';
 
 class SignUp extends StatefulWidget {
@@ -24,8 +25,10 @@ class _SignUpState extends State<SignUp> {
               margin: EdgeInsets.only(top: 3),
               child: Icon(Icons.keyboard_arrow_left, color: Colors.black),
             ),
-            Text('Back',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400))
+            Text(
+              'Back',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+            ),
           ],
         ),
       ),
@@ -34,28 +37,37 @@ class _SignUpState extends State<SignUp> {
 
   Widget _form(String title, {bool isPassword = false}) {
     return Container(
-      width: MediaQuery.of(context).size.width / 1.3,
+      width: MediaQuery.of(context).size.width * 0.7,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Container(
             height: 50,
             child: TextFormField(
-                onSaved: (value) => title = value,
-                style: TextStyle(color: Color(0xff333333), fontSize: 16),
-                obscureText: isPassword,
-                decoration: InputDecoration(
-                    fillColor: Color(0xffffffff),
-                    contentPadding: EdgeInsets.symmetric(horizontal: 10),
-                    labelText: title,
-                    labelStyle: TextStyle(color: Color(0xff333333)),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Color(0xffaaaaaa)),
+              onSaved: (value) => title = value,
+              style: TextStyle(
+                fontSize: 16,
+              ),
+              obscureText: isPassword,
+              decoration: InputDecoration(
+                  fillColor: Colors.white,
+                  contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                  labelText: title,
+                  labelStyle: TextStyle(
+                    color: Colors.black,
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.grey,
                     ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Color(0xffD67219)),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.orangeAccent,
                     ),
-                    filled: true)),
+                  ),
+                  filled: true),
+            ),
           ),
           SizedBox(height: 10),
         ],
@@ -67,60 +79,72 @@ class _SignUpState extends State<SignUp> {
     return RaisedButton(
       elevation: 3,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(25.00),
+        borderRadius: BorderRadius.circular(10),
         side: BorderSide(
-          color: Color(0xffd67219),
+          color: Colors.orangeAccent,
           width: 1,
         ),
       ),
-      color: Color(0xffffffff),
+      color: Colors.white,
       padding: EdgeInsets.symmetric(
         vertical: 10,
-        horizontal: 70,
+        horizontal: 50,
       ),
       child: Text(
         title,
         style: TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.w400,
-          color: Color(0xff333333),
+          color: Colors.black,
         ),
       ),
       onPressed: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Login()));
+          context,
+          MaterialPageRoute(
+            builder: (context) => Login(),
+          ),
+        );
       },
-      splashColor: Color.fromRGBO(214, 114, 25, 90),
-      highlightColor: Colors.transparent,
+      splashColor: Colors.transparent,
+      highlightColor: Colors.orange[100],
     );
   }
 
   Widget _loginAccountLabel() {
     return Container(
-        margin: EdgeInsets.symmetric(vertical: 20),
-        alignment: Alignment.bottomCenter,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Sudah mempunyai akun? ',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+      margin: EdgeInsets.symmetric(vertical: 20),
+      alignment: Alignment.bottomCenter,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text(
+            'Sudah mempunyai akun? ',
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+          ),
+          InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                PageTransition(
+                  child: Login(),
+                  type: PageTransitionType.fade,
+                  inheritTheme: true,
+                  ctx: context,
+                ),
+              );
+            },
+            child: Text(
+              'Login',
+              style: TextStyle(
+                  color: Color(0xfff79c4f),
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400),
             ),
-            InkWell(
-              onTap: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Login()));
-              },
-              child: Text(
-                'Login',
-                style: TextStyle(
-                    color: Color(0xfff79c4f),
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400),
-              ),
-            )
-          ],
-        ));
+          )
+        ],
+      ),
+    );
   }
 
   Widget _signupform() {
@@ -157,74 +181,83 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
+    String tnc =
+        'Dengan ini saya telah membaca dan menyetujui Malioboro Mall Shop & Deals Privacy Policy, T&C, dan ToS.';
+
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          child: Stack(
-            children: <Widget>[
-              Positioned(
-                top: 40,
-                left: 0,
-                child: _backButton(),
-              ),
-              Container(
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                        begin: Alignment.topRight,
-                        end: Alignment.bottomLeft,
-                        stops: [0.6, 0.9],
-                        colors: [Colors.white, Color(0xfffed8b1)])),
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(
-                      height: 100,
-                    ),
-                    _title(),
-                    SizedBox(
-                      height: 50,
-                    ),
-                    _signupform(),
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(15, 0, 30, 0),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Checkbox(
-                              value: accept,
-                              onChanged: (bool value) {
-                                setState(() {
-                                  accept = value;
-                                });
-                              }),
-                          Expanded(
-                              child: Text(
-                                  'Dengan ini saya telah membaca dan menyetujui Mal Malioboro Terms and Conditions, Privacy Policy, dan Terms of Service.',
-                                  textAlign: TextAlign.justify)),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    _submitButton('SUBMIT'),
-                    Expanded(
-                      flex: 2,
-                      child: SizedBox(),
-                    )
-                  ],
-                ),
-              ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: _loginAccountLabel(),
-              ),
-            ],
+      resizeToAvoidBottomInset: false,
+      body: Stack(
+        children: <Widget>[
+          Positioned(
+            top: 40,
+            left: 0,
+            child: _backButton(),
           ),
-        ),
+          Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                stops: [0.6, 0.9],
+                colors: [
+                  Colors.white,
+                  Color(0xfffed8b1),
+                ],
+              ),
+            ),
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Container(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.1,
+                  ),
+                  _title(),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.05,
+                  ),
+                  _signupform(),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.75,
+                    padding: EdgeInsets.only(
+                      right: 20,
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Checkbox(
+                            activeColor: Colors.orangeAccent,
+                            value: accept,
+                            onChanged: (bool value) {
+                              setState(() {
+                                accept = value;
+                              });
+                            }),
+                        Expanded(
+                          child: Text(tnc, textAlign: TextAlign.justify),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  _submitButton('SUBMIT'),
+                  Expanded(
+                    flex: 2,
+                    child: SizedBox(),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: _loginAccountLabel(),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
