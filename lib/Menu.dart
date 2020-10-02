@@ -1,13 +1,11 @@
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:page_transition/page_transition.dart';
 import 'Home.dart';
 import 'Promo.dart';
-import 'Tenant.dart';
+import 'Tenants.dart';
 import 'Profile.dart';
 import 'auth/Auth.dart';
-import 'model/ScopeManage.dart';
 
 class Menu extends StatefulWidget {
   Menu({Key key, this.auth, this.userid, this.logoutCallback})
@@ -64,32 +62,37 @@ class _MenuState extends State<Menu> {
     });
   }
 
-  void bottomTapped(int index) {
-    setState(() {
-      selectedIndex = index;
-      pageController.jumpToPage(index);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
         extendBody: true,
-        body: pageView(),
-        bottomNavigationBar: bottomBar(),
+        body: Stack(
+          children: [
+            pageView(),
+            Positioned(
+              left: 10,
+              bottom: 10,
+              right: 10,
+              child: bottomBar(),
+            ),
+          ],
+        ),
+        //bottomNavigationBar: bottomBar(),
       ),
     );
   }
 
   Widget bottomBar() {
     return CustomNavigationBar(
+      isFloating: true,
       iconSize: 30.0,
       selectedColor: Colors.orangeAccent,
       strokeColor: Colors.orangeAccent,
       unSelectedColor: Colors.grey[600],
       backgroundColor: Colors.white,
-      borderRadius: Radius.circular(15.0),
+      borderRadius: Radius.circular(20.0),
+      currentIndex: selectedIndex,
       onTap: (index) {
         setState(() {
           selectedIndex = index;
@@ -98,8 +101,6 @@ class _MenuState extends State<Menu> {
           );
         });
       },
-      currentIndex: selectedIndex,
-      isFloating: true,
       items: [
         CustomNavigationBarItem(icon: Icons.home),
         CustomNavigationBarItem(icon: Icons.monetization_on),

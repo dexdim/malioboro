@@ -33,7 +33,11 @@ class _TenantState extends State<Tenant> {
         ScopedModel.of<AppModel>(context).tenantListing;
 
     var size = MediaQuery.of(context).size;
-    final double listHeight = (size.height - kToolbarHeight + 200) / 3.5;
+    final double listHeight = (size.height -
+            MediaQuery.of(context).padding.bottom -
+            kToolbarHeight +
+            200) /
+        3.5;
     final double listWidth = size.width;
     final double aspectRatio = listWidth / listHeight;
 
@@ -48,60 +52,68 @@ class _TenantState extends State<Tenant> {
       body: Container(
         decoration: BoxDecoration(color: Colors.white),
         child: Padding(
-          padding: EdgeInsets.all(5),
+          padding: EdgeInsets.symmetric(
+            horizontal: 10,
+          ),
           child: GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2, childAspectRatio: aspectRatio),
             shrinkWrap: true,
             itemBuilder: (context, index) {
-              return Padding(
-                padding: EdgeInsets.all(5),
-                child: GestureDetector(
-                  onTap: () {},
-                  child: Container(
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Expanded(
-                          child: CachedNetworkImage(
-                            imageUrl:
-                                'http://malmalioboro.co.id/${tenantData[index].logo}',
-                            fit: BoxFit.fill,
-                          ),
-                          flex: 2,
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(
-                                tenantData[index].nama.toString(),
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              Text(
-                                'LANTAI ${tenantData[index].lokasi}',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                ),
-                              ),
-                              Text(
-                                tenantData[index].kategori,
-                                style: TextStyle(
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ],
-                          ),
-                          flex: 3,
-                        ),
-                      ],
+              return GestureDetector(
+                onTap: () {},
+                child: Container(
+                  padding: EdgeInsets.only(top: 5, right: 20),
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(
+                        //color: Colors.black,
+                        width: 0.5,
+                      ),
                     ),
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: CachedNetworkImage(
+                          imageUrl:
+                              'http://malmalioboro.co.id/${tenantData[index].logo}',
+                          fit: BoxFit.fill,
+                        ),
+                        flex: 2,
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Expanded(
+                        flex: 3,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              tenantData[index].nama,
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            Text(
+                              'LANTAI ${tenantData[index].lokasi}',
+                              style: TextStyle(
+                                fontSize: 16,
+                              ),
+                            ),
+                            Text(
+                              tenantData[index].kategori,
+                              style: TextStyle(
+                                fontSize: 14,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               );

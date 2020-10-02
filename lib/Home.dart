@@ -17,7 +17,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  Widget _title() {
+  Widget title() {
     return Text(
       'MALIOBORO MALL',
       textAlign: TextAlign.center,
@@ -34,7 +34,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget _news() {
+  Widget news() {
     return Container(
       height: MediaQuery.of(context).size.height / 4.5,
       margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -57,7 +57,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget _carousel() {
+  Widget carousel() {
     return CarouselSlider(
       options: CarouselOptions(
         aspectRatio: 2,
@@ -90,7 +90,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget _subtitle(String subtitle) {
+  Widget subtitle(String subtitle) {
     return Align(
       alignment: Alignment.centerLeft,
       child: Padding(
@@ -100,7 +100,7 @@ class _HomeState extends State<Home> {
           style: TextStyle(
             fontWeight: FontWeight.w500,
             fontSize: 16,
-            color: Color(0xff333333),
+            color: Colors.black,
             shadows: [
               Shadow(
                 offset: Offset(0.00, 2.00),
@@ -114,7 +114,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget _line() {
+  Widget divider() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20),
       child: Divider(
@@ -123,19 +123,19 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget _event() {
+  Widget event() {
     return Column(
       children: <Widget>[
-        _listevent('Event 1', 'Maret 2020 -  April 2020'),
-        _listevent('Event 2', 'Maret 2020 -  April 2020'),
-        _listevent('Event 3', 'Maret 2020 -  April 2020'),
-        _listevent('Event 4', 'Maret 2020 -  April 2020'),
-        _listevent('Event 5', 'Maret 2020 -  April 2020'),
+        listevent('Event 1', 'Maret 2020 -  April 2020'),
+        listevent('Event 2', 'Maret 2020 -  April 2020'),
+        listevent('Event 3', 'Maret 2020 -  April 2020'),
+        listevent('Event 4', 'Maret 2020 -  April 2020'),
+        listevent('Event 5', 'Maret 2020 -  April 2020'),
       ],
     );
   }
 
-  Widget _socialmedia(String title) {
+  Widget socialbutton(String title) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
@@ -171,7 +171,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget _listsocialmedia() {
+  Widget listsocial() {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: 80,
@@ -180,20 +180,20 @@ class _HomeState extends State<Home> {
       child: Row(
         children: <Widget>[
           Expanded(
-            child: _socialmedia('Facebook'),
+            child: socialbutton('Facebook'),
           ),
           Expanded(
-            child: _socialmedia('Twitter'),
+            child: socialbutton('Twitter'),
           ),
           Expanded(
-            child: _socialmedia('Instagram'),
+            child: socialbutton('Instagram'),
           ),
         ],
       ),
     );
   }
 
-  Widget _listevent(String eventTitle, String eventDate) {
+  Widget listevent(String eventTitle, String eventDate) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
       child: Row(
@@ -217,7 +217,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: _title(),
+        title: title(),
         automaticallyImplyLeading: false,
         centerTitle: true,
         backgroundColor: Colors.white,
@@ -234,16 +234,16 @@ class _HomeState extends State<Home> {
               //SizedBox(height: 5),
               //_subtitle('News :'),
               //_news(),
-              _line(),
-              _subtitle('Highlight promo :'),
-              _carousel(),
-              _line(),
-              _subtitle('Upcoming events :'),
+              divider(),
+              subtitle('Highlight promo :'),
+              carousel(),
+              divider(),
+              subtitle('Upcoming events :'),
               SizedBox(height: 5),
-              _event(),
-              _line(),
-              _subtitle('Find us on :'),
-              _listsocialmedia()
+              event(),
+              divider(),
+              subtitle('Find us on :'),
+              listsocial()
             ],
           ),
         ),

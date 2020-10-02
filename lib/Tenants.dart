@@ -3,17 +3,17 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'model/ScopeManage.dart';
 
-class Promo extends StatefulWidget {
+class Tenant extends StatefulWidget {
   @override
-  _PromoState createState() => _PromoState();
+  TenantState createState() => TenantState();
 }
 
-class _PromoState extends State<Promo> {
+class TenantState extends State<Tenant> {
   Widget _title() {
     return Column(
       children: [
         Text(
-          'PROMOS',
+          'TENANTS',
           textAlign: TextAlign.center,
           style: TextStyle(
             fontWeight: FontWeight.w500,
@@ -31,99 +31,60 @@ class _PromoState extends State<Promo> {
     );
   }
 
-  Widget itemImage(
-    promoData,
-    index,
-  ) {
+  Widget itemImage(tenantData, index) {
     return Container(
       width: MediaQuery.of(context).size.width * 0.35,
       child: Container(
         margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-        child: Material(
-          elevation: 3,
-          borderRadius: BorderRadius.all(
-            Radius.circular(10),
-          ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.all(
-              Radius.circular(10.0),
-            ),
-            child: CachedNetworkImage(
-              fit: BoxFit.fill,
-              imageUrl:
-                  'http://www.malmalioboro.co.id/${promoData[index].logo}',
-            ),
-          ),
+        child: CachedNetworkImage(
+          fit: BoxFit.fill,
+          imageUrl: 'http://www.malmalioboro.co.id/${tenantData[index].logo}',
         ),
       ),
     );
   }
 
-  Widget itemDetail(
-    promoData,
-    index,
-  ) {
+  Widget itemDetail(tenantData, index) {
     return Expanded(
       flex: 5,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            promoData[index].tenant,
+            tenantData[index].nama,
             style: TextStyle(
-              fontSize: 20,
+              fontSize: 16,
               fontWeight: FontWeight.w600,
             ),
           ),
           Text(
-            promoData[index].nama,
+            'LANTAI ${tenantData[index].lokasi}',
             style: TextStyle(
               fontSize: 16,
             ),
           ),
-          Row(
-            children: [
-              Icon(
-                Icons.event,
-                size: 16,
-                color: Colors.redAccent,
-              ),
-              SizedBox(
-                width: 5,
-              ),
-              Text(
-                '${promoData[index].tglawal} - ${promoData[index].tglakhir}',
-                style: TextStyle(
-                  fontSize: 16,
-                ),
-              ),
-            ],
+          Text(
+            tenantData[index].kategori,
+            style: TextStyle(
+              fontSize: 14,
+            ),
           ),
         ],
       ),
     );
   }
 
-  Widget itemList(
-    promoData,
-    index,
-  ) {
+  Widget itemList(tenantData, index) {
     return GestureDetector(
       onTap: () {},
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-        height: MediaQuery.of(context).size.height / 6,
+        height: MediaQuery.of(context).size.height / 8,
         child: Container(
           child: Row(
             children: [
-              itemImage(
-                promoData,
-                index,
-              ),
-              itemDetail(
-                promoData,
-                index,
-              ),
+              itemImage(tenantData, index),
+              itemDetail(tenantData, index),
             ],
           ),
         ),
@@ -133,7 +94,8 @@ class _PromoState extends State<Promo> {
 
   @override
   Widget build(BuildContext context) {
-    List<PromoList> promoData = ScopedModel.of<AppModel>(context).promoListing;
+    List<TenantList> tenantData =
+        ScopedModel.of<AppModel>(context).tenantListing;
     return Scaffold(
       appBar: AppBar(
         title: _title(),
@@ -145,20 +107,11 @@ class _PromoState extends State<Promo> {
       body: Container(
         decoration: BoxDecoration(color: Colors.white),
         child: ListView.separated(
-          itemCount: promoData.length,
-          itemBuilder: (
-            context,
-            index,
-          ) {
-            return itemList(
-              promoData,
-              index,
-            );
+          itemCount: tenantData.length,
+          itemBuilder: (context, index) {
+            return itemList(tenantData, index);
           },
-          separatorBuilder: (
-            context,
-            index,
-          ) {
+          separatorBuilder: (context, index) {
             return Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Divider(
