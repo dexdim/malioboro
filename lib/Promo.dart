@@ -31,7 +31,7 @@ class _PromoState extends State<Promo> {
     );
   }
 
-  Widget itemImage(
+  Widget promoImage(
     promoData,
     index,
   ) {
@@ -59,10 +59,7 @@ class _PromoState extends State<Promo> {
     );
   }
 
-  Widget itemDetail(
-    promoData,
-    index,
-  ) {
+  Widget promoDetail(promoData, index) {
     return Expanded(
       flex: 5,
       child: Column(
@@ -104,10 +101,7 @@ class _PromoState extends State<Promo> {
     );
   }
 
-  Widget itemList(
-    promoData,
-    index,
-  ) {
+  Widget promoList(promoData, index) {
     return GestureDetector(
       onTap: () {},
       child: Container(
@@ -116,11 +110,11 @@ class _PromoState extends State<Promo> {
         child: Container(
           child: Row(
             children: [
-              itemImage(
+              promoImage(
                 promoData,
                 index,
               ),
-              itemDetail(
+              promoDetail(
                 promoData,
                 index,
               ),
@@ -143,22 +137,12 @@ class _PromoState extends State<Promo> {
         elevation: 0,
       ),
       body: Container(
-        decoration: BoxDecoration(color: Colors.white),
         child: ListView.separated(
           itemCount: promoData.length,
-          itemBuilder: (
-            context,
-            index,
-          ) {
-            return itemList(
-              promoData,
-              index,
-            );
+          itemBuilder: (context, index) {
+            return promoList(promoData, index);
           },
-          separatorBuilder: (
-            context,
-            index,
-          ) {
+          separatorBuilder: (context, index) {
             return Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Divider(

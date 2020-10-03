@@ -33,13 +33,11 @@ class TenantState extends State<Tenant> {
 
   Widget itemImage(tenantData, index) {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.35,
-      child: Container(
-        margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-        child: CachedNetworkImage(
-          fit: BoxFit.fill,
-          imageUrl: 'http://www.malmalioboro.co.id/${tenantData[index].logo}',
-        ),
+      width: MediaQuery.of(context).size.height / 7,
+      margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+      child: CachedNetworkImage(
+        fit: BoxFit.fill,
+        imageUrl: 'http://www.malmalioboro.co.id/${tenantData[index].logo}',
       ),
     );
   }
@@ -79,7 +77,7 @@ class TenantState extends State<Tenant> {
       onTap: () {},
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-        height: MediaQuery.of(context).size.height / 8,
+        height: MediaQuery.of(context).size.height / 11,
         child: Container(
           child: Row(
             children: [

@@ -17,6 +17,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
   Widget title() {
     return Text(
       'MALIOBORO MALL',
@@ -225,7 +226,7 @@ class _HomeState extends State<Home> {
       ),
       body: Container(
         height: MediaQuery.of(context).size.height,
-        decoration: BoxDecoration(color: Colors.white),
+        //decoration: BoxDecoration(color: Colors.white),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
