@@ -174,7 +174,11 @@ class _ForgotState extends State<Forgot> {
                 ],
               ),
             ),
-            Positioned(top: 40, left: 0, child: _backButton()),
+            Positioned(
+              top: 40,
+              left: 0,
+              child: _backButton(),
+            ),
           ],
         ),
       )),

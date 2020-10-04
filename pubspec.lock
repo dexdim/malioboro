@@ -215,7 +215,7 @@ packages:
       name: flutter_launcher_icons
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.8.0"
+    version: "0.8.1"
   flutter_statusbarcolor:
     dependency: "direct main"
     description:
@@ -316,7 +316,7 @@ packages:
       name: page_transition
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.6"
+    version: "1.1.7+2"
   path:
     dependency: transitive
     description:
