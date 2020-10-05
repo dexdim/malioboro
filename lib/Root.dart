@@ -15,10 +15,10 @@ class Root extends StatefulWidget {
   final BaseAuth auth;
 
   @override
-  State<StatefulWidget> createState() => new _RootState();
+  State<StatefulWidget> createState() => new RootState();
 }
 
-class _RootState extends State<Root> {
+class RootState extends State<Root> {
   AuthStatus authStatus = AuthStatus.NOT_DETERMINED;
   String _userId = "";
 

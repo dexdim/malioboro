@@ -13,10 +13,10 @@ class Login extends StatefulWidget {
   static final String route = 'Login-route';
 
   @override
-  _LoginState createState() => _LoginState();
+  LoginState createState() => LoginState();
 }
 
-class _LoginState extends State<Login> {
+class LoginState extends State<Login> {
   final _formKey = new GlobalKey<FormState>();
 
   String _email;

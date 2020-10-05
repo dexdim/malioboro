@@ -3,38 +3,33 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'model/ScopeManage.dart';
 
-class Promo extends StatefulWidget {
+class Promo extends StatelessWidget {
   @override
-  _PromoState createState() => _PromoState();
-}
+  Widget build(BuildContext context) {
+    List<PromoList> promoData = ScopedModel.of<AppModel>(context).promoListing;
 
-class _PromoState extends State<Promo> {
-  Widget _title() {
-    return Column(
-      children: [
-        Text(
-          'PROMOS',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontWeight: FontWeight.w500,
-            fontSize: 24,
-            shadows: [
-              Shadow(
-                offset: Offset(0.00, 2.00),
-                color: Colors.orangeAccent.withOpacity(0.50),
-                blurRadius: 5,
-              ),
-            ],
-          ),
-        )
-      ],
+    return Container(
+      child: ListView.separated(
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).size.height * 0.1,
+        ),
+        itemCount: promoData.length,
+        itemBuilder: (context, index) {
+          return promoList(promoData, index, context);
+        },
+        separatorBuilder: (context, index) {
+          return Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Divider(
+              thickness: 1,
+            ),
+          );
+        },
+      ),
     );
   }
 
-  Widget promoImage(
-    promoData,
-    index,
-  ) {
+  Widget promoImage(promoData, index, BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width * 0.35,
       child: Container(
@@ -101,7 +96,7 @@ class _PromoState extends State<Promo> {
     );
   }
 
-  Widget promoList(promoData, index) {
+  Widget promoList(promoData, index, BuildContext context) {
     return GestureDetector(
       onTap: () {},
       child: Container(
@@ -110,46 +105,10 @@ class _PromoState extends State<Promo> {
         child: Container(
           child: Row(
             children: [
-              promoImage(
-                promoData,
-                index,
-              ),
-              promoDetail(
-                promoData,
-                index,
-              ),
+              promoImage(promoData, index, context),
+              promoDetail(promoData, index),
             ],
           ),
-        ),
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    List<PromoList> promoData = ScopedModel.of<AppModel>(context).promoListing;
-    return Scaffold(
-      appBar: AppBar(
-        title: _title(),
-        automaticallyImplyLeading: false,
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        elevation: 0,
-      ),
-      body: Container(
-        child: ListView.separated(
-          itemCount: promoData.length,
-          itemBuilder: (context, index) {
-            return promoList(promoData, index);
-          },
-          separatorBuilder: (context, index) {
-            return Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Divider(
-                thickness: 1,
-              ),
-            );
-          },
         ),
       ),
     );

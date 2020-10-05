@@ -3,41 +3,71 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'model/ScopeManage.dart';
 
-class Tenant extends StatefulWidget {
-  @override
-  TenantState createState() => TenantState();
-}
-
-class TenantState extends State<Tenant> {
-  Widget _title() {
-    return Column(
-      children: [
-        Text(
-          'TENANTS',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontWeight: FontWeight.w500,
-            fontSize: 24,
-            shadows: [
-              Shadow(
-                offset: Offset(0.00, 2.00),
-                color: Colors.orangeAccent.withOpacity(0.50),
-                blurRadius: 5,
-              ),
-            ],
+class Tenant extends StatelessWidget {
+  Widget button(context) {
+    return RaisedButton(
+      elevation: 3,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+        side: BorderSide(
+          color: Colors.orange[200],
+          width: 1,
+        ),
+      ),
+      color: Colors.white,
+      padding: EdgeInsets.symmetric(
+        vertical: 10,
+        horizontal: 50,
+      ),
+      child: Text(
+        'LIHAT KATALOG',
+        style: TextStyle(
+            fontSize: 20, fontWeight: FontWeight.w400, color: Colors.black),
+      ),
+      //onPressed: validateAndSubmit,
+      onPressed: () {
+        /*  
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => null,
           ),
-        )
-      ],
+        );
+      */
+      },
+      splashColor: Colors.transparent,
+      highlightColor: Colors.orange[100],
     );
   }
 
-  Widget itemImage(tenantData, index) {
+  Widget popupTenant(tenantData, index, BuildContext context) {
+    return AlertDialog(
+      title: Text(
+        tenantData[index].nama,
+      ),
+      content: Column(
+        children: [
+          Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(10))),
+              child: CachedNetworkImage(
+                imageUrl:
+                    'https://malmalioboro.co.id/${tenantData[index].image}',
+                fit: BoxFit.fill,
+              )),
+          button(context),
+        ],
+      ),
+    );
+  }
+
+  Widget itemImage(tenantData, index, context) {
     return Container(
-      width: MediaQuery.of(context).size.height / 7,
+      width: MediaQuery.of(context).size.height / 11,
       margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
       child: CachedNetworkImage(
         fit: BoxFit.fill,
-        imageUrl: 'http://www.malmalioboro.co.id/${tenantData[index].logo}',
+        imageUrl: 'https://malmalioboro.co.id/${tenantData[index].logo}',
       ),
     );
   }
@@ -72,16 +102,22 @@ class TenantState extends State<Tenant> {
     );
   }
 
-  Widget itemList(tenantData, index) {
+  Widget itemList(tenantData, index, context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) =>
+              popupTenant(tenantData, index, context),
+        );
+      },
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
         height: MediaQuery.of(context).size.height / 11,
         child: Container(
           child: Row(
             children: [
-              itemImage(tenantData, index),
+              itemImage(tenantData, index, context),
               itemDetail(tenantData, index),
             ],
           ),
@@ -94,30 +130,23 @@ class TenantState extends State<Tenant> {
   Widget build(BuildContext context) {
     List<TenantList> tenantData =
         ScopedModel.of<AppModel>(context).tenantListing;
-    return Scaffold(
-      appBar: AppBar(
-        title: _title(),
-        automaticallyImplyLeading: false,
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        elevation: 0,
-      ),
-      body: Container(
-        decoration: BoxDecoration(color: Colors.white),
-        child: ListView.separated(
-          itemCount: tenantData.length,
-          itemBuilder: (context, index) {
-            return itemList(tenantData, index);
-          },
-          separatorBuilder: (context, index) {
-            return Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Divider(
-                thickness: 1,
-              ),
-            );
-          },
+    return Container(
+      child: ListView.separated(
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).size.height * 0.1,
         ),
+        itemCount: tenantData.length,
+        itemBuilder: (context, index) {
+          return itemList(tenantData, index, context);
+        },
+        separatorBuilder: (context, index) {
+          return Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Divider(
+              thickness: 1,
+            ),
+          );
+        },
       ),
     );
   }

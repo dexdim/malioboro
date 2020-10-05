@@ -12,7 +12,7 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   bool accept = false;
 
-  Widget _backButton() {
+  Widget backButton() {
     return InkWell(
       onTap: () {
         Navigator.pop(context);
@@ -35,7 +35,7 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
-  Widget _form(String title, {bool isPassword = false}) {
+  Widget form(String title, {bool isPassword = false}) {
     return Container(
       width: MediaQuery.of(context).size.width * 0.7,
       child: Column(
@@ -75,7 +75,7 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
-  Widget _submitButton(String title) {
+  Widget submitButton(String title) {
     return RaisedButton(
       elevation: 3,
       shape: RoundedRectangleBorder(
@@ -111,7 +111,7 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
-  Widget _loginAccountLabel() {
+  Widget loginAccountLabel() {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 20),
       alignment: Alignment.bottomCenter,
@@ -147,18 +147,18 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
-  Widget _signupform() {
+  Widget signupform() {
     return Column(
       children: <Widget>[
-        _form("Nama Lengkap"),
-        _form("Email"),
-        _form("Password", isPassword: true),
-        _form("Konfirmasi Password", isPassword: true),
+        form("Nama Lengkap"),
+        form("Email"),
+        form("Password", isPassword: true),
+        form("Konfirmasi Password", isPassword: true),
       ],
     );
   }
 
-  Widget _title() {
+  Widget title() {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
@@ -191,7 +191,7 @@ class _SignUpState extends State<SignUp> {
           Positioned(
             top: 40,
             left: 0,
-            child: _backButton(),
+            child: backButton(),
           ),
           Container(
             decoration: BoxDecoration(
@@ -214,11 +214,11 @@ class _SignUpState extends State<SignUp> {
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.1,
                   ),
-                  _title(),
+                  title(),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.05,
                   ),
-                  _signupform(),
+                  signupform(),
                   Container(
                     width: MediaQuery.of(context).size.width * 0.75,
                     padding: EdgeInsets.only(
@@ -244,14 +244,14 @@ class _SignUpState extends State<SignUp> {
                   SizedBox(
                     height: 30,
                   ),
-                  _submitButton('SUBMIT'),
+                  submitButton('SUBMIT'),
                   Expanded(
                     flex: 2,
                     child: SizedBox(),
                   ),
                   Align(
                     alignment: Alignment.bottomCenter,
-                    child: _loginAccountLabel(),
+                    child: loginAccountLabel(),
                   ),
                 ],
               ),

@@ -11,13 +11,7 @@ final List<String> imgList = [
   'http://www.malmalioboro.co.id/assets/images/event/4cefe1787bcc5f8cae71c2cf768ab395.jpg'
 ];
 
-class Home extends StatefulWidget {
-  @override
-  _HomeState createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
-
+class Home extends StatelessWidget {
   Widget title() {
     return Text(
       'MALIOBORO MALL',
@@ -35,7 +29,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget news() {
+  Widget news(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.height / 4.5,
       margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -172,7 +166,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget listsocial() {
+  Widget listsocial(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: 80,
@@ -216,37 +210,28 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: title(),
-        automaticallyImplyLeading: false,
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        elevation: 0,
-      ),
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        //decoration: BoxDecoration(color: Colors.white),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              //SizedBox(height: 5),
-              //_subtitle('News :'),
-              //_news(),
-              divider(),
-              subtitle('Highlight promo :'),
-              carousel(),
-              divider(),
-              subtitle('Upcoming events :'),
-              SizedBox(height: 5),
-              event(),
-              divider(),
-              subtitle('Find us on :'),
-              listsocial()
-            ],
-          ),
+    return Container(
+      height: MediaQuery.of(context).size.height,
+      //decoration: BoxDecoration(color: Colors.white),
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            //SizedBox(height: 5),
+            //_subtitle('News :'),
+            //_news(),
+            divider(),
+            subtitle('Highlight promo :'),
+            carousel(),
+            divider(),
+            subtitle('Upcoming events :'),
+            SizedBox(height: 5),
+            event(),
+            divider(),
+            subtitle('Find us on :'),
+            listsocial(context)
+          ],
         ),
       ),
     );
