@@ -31,23 +31,20 @@ class Promo extends StatelessWidget {
 
   Widget promoImage(promoData, index, BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.35,
-      child: Container(
-        margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-        child: Material(
-          elevation: 3,
+      margin: EdgeInsets.only(left: 30, right: 20),
+      width: MediaQuery.of(context).size.height / 6,
+      child: Material(
+        elevation: 3,
+        borderRadius: BorderRadius.all(
+          Radius.circular(10),
+        ),
+        child: ClipRRect(
           borderRadius: BorderRadius.all(
-            Radius.circular(10),
+            Radius.circular(10.0),
           ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.all(
-              Radius.circular(10.0),
-            ),
-            child: CachedNetworkImage(
-              fit: BoxFit.fill,
-              imageUrl:
-                  'http://www.malmalioboro.co.id/${promoData[index].logo}',
-            ),
+          child: CachedNetworkImage(
+            fit: BoxFit.fill,
+            imageUrl: 'http://www.malmalioboro.co.id/${promoData[index].logo}',
           ),
         ),
       ),

@@ -17,15 +17,15 @@ class Login extends StatefulWidget {
 }
 
 class LoginState extends State<Login> {
-  final _formKey = new GlobalKey<FormState>();
+  final formKey = new GlobalKey<FormState>();
 
-  String _email;
-  String _password;
-  String _errorMessage;
-  bool _isLoading;
+  String email;
+  String password;
+  String errorMessage;
+  bool isLoading;
 
   bool validateAndSave() {
-    final form = _formKey.currentState;
+    final form = formKey.currentState;
     if (form.validate()) {
       form.save();
       return true;
@@ -36,18 +36,18 @@ class LoginState extends State<Login> {
   void validateAndSubmit() async {
     setState(
       () {
-        _errorMessage = "";
-        _isLoading = true;
+        errorMessage = "";
+        isLoading = true;
       },
     );
 
     if (validateAndSave()) {
       String userid = "";
       try {
-        userid = await widget.auth.signIn(_email, _password);
+        userid = await widget.auth.signIn(email, password);
 
         setState(() {
-          _isLoading = false;
+          isLoading = false;
         });
 
         if (userid.length > 0 && userid != null) {
@@ -56,9 +56,9 @@ class LoginState extends State<Login> {
       } catch (e) {
         print('Error $e');
         setState(() {
-          _isLoading = false;
-          _errorMessage = e.message;
-          _formKey.currentState.reset();
+          isLoading = false;
+          errorMessage = e.message;
+          formKey.currentState.reset();
         });
       }
     }
@@ -66,28 +66,28 @@ class LoginState extends State<Login> {
 
   @override
   void initState() {
-    _errorMessage = "";
-    _isLoading = false;
+    errorMessage = "";
+    isLoading = false;
     super.initState();
   }
 
-  Widget _logo() {
+  Widget logo() {
     return Image(
       width: MediaQuery.of(context).size.width * 0.5,
       image: AssetImage('assets/icon/logomall.png'),
     );
   }
 
-  Widget _loginform() {
+  Widget loginform() {
     return Column(
       children: <Widget>[
-        _form("Email"),
-        _form("Password", isPassword: true),
+        form("Email"),
+        form("Password", isPassword: true),
       ],
     );
   }
 
-  Widget _form(String title, {bool isPassword = false}) {
+  Widget form(String title, {bool isPassword = false}) {
     return Container(
       width: MediaQuery.of(context).size.width * 0.7,
       child: Column(
@@ -130,7 +130,7 @@ class LoginState extends State<Login> {
     );
   }
 
-  Widget _forgotPassword() {
+  Widget forgotPassword() {
     return Container(
       width: MediaQuery.of(context).size.width * 0.7,
       alignment: Alignment.centerRight,
@@ -158,7 +158,7 @@ class LoginState extends State<Login> {
     );
   }
 
-  Widget _loginButton() {
+  Widget loginButton() {
     return RaisedButton(
       elevation: 3,
       shape: RoundedRectangleBorder(
@@ -192,7 +192,7 @@ class LoginState extends State<Login> {
     );
   }
 
-  Widget _divider() {
+  Widget divider() {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 30),
       child: Row(
@@ -229,7 +229,7 @@ class LoginState extends State<Login> {
     );
   }
 
-  Widget _socialLogin() {
+  Widget socialLogin() {
     return Container(
       height: 80,
       margin: EdgeInsets.symmetric(
@@ -279,7 +279,7 @@ class LoginState extends State<Login> {
     );
   }
 
-  Widget _createAccount() {
+  Widget createAccount() {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 20),
       alignment: Alignment.bottomCenter,
@@ -316,7 +316,7 @@ class LoginState extends State<Login> {
   }
 
   Widget showCircularProgress() {
-    if (_isLoading) {
+    if (isLoading) {
       return Center(
         child: CircularProgressIndicator(),
       );
@@ -328,9 +328,9 @@ class LoginState extends State<Login> {
   }
 
   Widget showErrorMessage() {
-    if (_errorMessage.length > 0 && _errorMessage != null) {
+    if (errorMessage.length > 0 && errorMessage != null) {
       return new Text(
-        _errorMessage,
+        errorMessage,
         style: TextStyle(
             fontSize: 13.0,
             color: Colors.red,
@@ -362,7 +362,7 @@ class LoginState extends State<Login> {
                 ],
               ),
             ),
-            key: _formKey,
+            key: formKey,
             child: Container(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -371,24 +371,24 @@ class LoginState extends State<Login> {
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.08,
                   ),
-                  _logo(),
+                  logo(),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.08,
                   ),
-                  _loginform(),
-                  _forgotPassword(),
+                  loginform(),
+                  forgotPassword(),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.04,
                   ),
-                  _loginButton(),
-                  _divider(),
-                  _socialLogin(),
+                  loginButton(),
+                  divider(),
+                  socialLogin(),
                   Expanded(
                     child: SizedBox(),
                   ),
                   Align(
                     alignment: Alignment.bottomCenter,
-                    child: _createAccount(),
+                    child: createAccount(),
                   ),
                 ],
               ),

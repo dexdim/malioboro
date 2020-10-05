@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'Home.dart';
 import 'Promo.dart';
-import 'Tenants.dart';
+import 'Tenant.dart';
 import 'Profile.dart';
 import 'auth/Auth.dart';
 
