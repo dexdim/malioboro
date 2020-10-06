@@ -25,6 +25,8 @@ class _MenuState extends State<Menu> {
 
   int selectedIndex = 0;
   String titleText = 'MALIOBORO MALL';
+  String subtitleText = '';
+  bool visible = false;
   DateTime currentBackPressTime;
 
   PageController pageController = PageController(
@@ -32,20 +34,41 @@ class _MenuState extends State<Menu> {
     keepPage: true,
   );
 
-  Widget title(titleText) {
-    return Text(
-      titleText,
-      textAlign: TextAlign.center,
-      style: TextStyle(
-        fontSize: 24,
-        shadows: [
-          Shadow(
-            offset: Offset(0.00, 2.00),
-            color: Colors.orangeAccent.withOpacity(0.50),
-            blurRadius: 5,
-          ),
-        ],
+  Widget divider() {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20),
+      child: Divider(
+        thickness: 1,
       ),
+    );
+  }
+
+  Widget title(titleText) {
+    return Column(
+      children: [
+        Text(
+          titleText,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 24,
+            shadows: [
+              Shadow(
+                offset: Offset(0.00, 2.00),
+                color: Colors.orangeAccent.withOpacity(0.50),
+                blurRadius: 5,
+              ),
+            ],
+          ),
+        ),
+        Visibility(
+          visible: visible,
+          child: Text(
+            subtitleText,
+            style: TextStyle(fontSize: 16),
+          ),
+        ),
+        divider(),
+      ],
     );
   }
 
@@ -73,12 +96,20 @@ class _MenuState extends State<Menu> {
     setState(() {
       if (index == 0) {
         titleText = 'MALIOBORO MALL';
+        subtitleText = '';
+        visible = false;
       } else if (index == 1) {
         titleText = 'PROMOS';
+        subtitleText = 'here is our great deal, grab it fast';
+        visible = true;
       } else if (index == 2) {
         titleText = 'TENANTS';
+        subtitleText = 'meet our special tenants';
+        visible = true;
       } else if (index == 3) {
         titleText = 'PROFILE';
+        subtitleText = 'hello customer!';
+        visible = true;
       }
       selectedIndex = index;
       pageController.animateToPage(
@@ -107,7 +138,7 @@ class _MenuState extends State<Menu> {
                 gradient: LinearGradient(
                   begin: Alignment.topRight,
                   end: Alignment.bottomLeft,
-                  stops: [0.6, 0.9],
+                  stops: [0.4, 0.8],
                   colors: [
                     Colors.white,
                     Color(0xffFED8B1),

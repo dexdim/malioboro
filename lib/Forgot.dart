@@ -5,11 +5,11 @@ class Forgot extends StatefulWidget {
   Forgot({Key key}) : super(key: key);
 
   @override
-  _ForgotState createState() => _ForgotState();
+  ForgotState createState() => ForgotState();
 }
 
-class _ForgotState extends State<Forgot> {
-  Widget _backButton() {
+class ForgotState extends State<Forgot> {
+  Widget backButton() {
     return InkWell(
       onTap: () {
         Navigator.pop(context);
@@ -32,7 +32,7 @@ class _ForgotState extends State<Forgot> {
     );
   }
 
-  Widget _form(String title, {bool isPassword = false}) {
+  Widget form(String title, {bool isPassword = false}) {
     return Container(
       width: MediaQuery.of(context).size.width / 1.3,
       child: Column(
@@ -41,21 +41,25 @@ class _ForgotState extends State<Forgot> {
           Container(
             height: 50,
             child: TextFormField(
-                onSaved: (value) => title = value,
-                style: TextStyle(color: Color(0xff333333), fontSize: 16),
-                obscureText: isPassword,
-                decoration: InputDecoration(
-                    fillColor: Color(0xfffffff),
-                    contentPadding: EdgeInsets.symmetric(horizontal: 10),
-                    labelText: title,
-                    labelStyle: TextStyle(color: Color(0xff333333)),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Color(0xffaaaaaa)),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Color(0xffD67219)),
-                    ),
-                    filled: true)),
+              onSaved: (value) => title = value,
+              style: TextStyle(color: Colors.black, fontSize: 16),
+              obscureText: isPassword,
+              decoration: InputDecoration(
+                fillColor: Colors.white,
+                contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                labelText: title,
+                labelStyle: TextStyle(
+                  color: Colors.black,
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.orangeAccent),
+                ),
+                filled: true,
+              ),
+            ),
           ),
           SizedBox(height: 10),
         ],
@@ -63,47 +67,51 @@ class _ForgotState extends State<Forgot> {
     );
   }
 
-  Widget _resetButton() {
+  Widget resetButton(String title) {
     return RaisedButton(
       elevation: 3,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(25.00),
+        borderRadius: BorderRadius.circular(10),
         side: BorderSide(
-          color: Color(0xffd67219),
+          color: Colors.orangeAccent,
           width: 1,
         ),
       ),
-      color: Color(0xffffffff),
+      color: Colors.white,
       padding: EdgeInsets.symmetric(
         vertical: 10,
-        horizontal: 70,
+        horizontal: 50,
       ),
       child: Text(
-        'SUBMIT',
+        title,
         style: TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.w400,
-          color: Color(0xff333333),
+          color: Colors.black,
         ),
       ),
       onPressed: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Login()));
+          context,
+          MaterialPageRoute(
+            builder: (context) => Login(),
+          ),
+        );
       },
-      splashColor: Color.fromRGBO(214, 114, 25, 90),
-      highlightColor: Colors.transparent,
+      splashColor: Colors.transparent,
+      highlightColor: Colors.orange[100],
     );
   }
 
-  Widget _resetform() {
+  Widget resetform() {
     return Column(
       children: <Widget>[
-        _form("Email"),
+        form("Email"),
       ],
     );
   }
 
-  Widget _title() {
+  Widget title() {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
@@ -128,60 +136,63 @@ class _ForgotState extends State<Forgot> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-          child: Container(
-        height: MediaQuery.of(context).size.height,
-        child: Stack(
-          children: <Widget>[
-            Container(
-              decoration: BoxDecoration(
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          child: Stack(
+            children: <Widget>[
+              Container(
+                decoration: BoxDecoration(
                   gradient: LinearGradient(
-                      begin: Alignment.topRight,
-                      end: Alignment.bottomLeft,
-                      stops: [0.6, 0.9],
-                      colors: [Colors.white, Color(0xffFED8B1)])),
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  SizedBox(
-                    height: 100,
+                    begin: Alignment.topRight,
+                    end: Alignment.bottomLeft,
+                    stops: [0.4, 0.8],
+                    colors: [
+                      Colors.white,
+                      Color(0xffFED8B1),
+                    ],
                   ),
-                  _title(),
-                  SizedBox(
-                    height: 50,
-                  ),
-                  _resetform(),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 30),
-                    child: Row(
-                      children: <Widget>[
-                        Expanded(
-                            child: Text(
-                                'Silakan anda masukkan email yang terdaftar sebagai akun Malioboro Mall.',
-                                textAlign: TextAlign.justify)),
-                      ],
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 30),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(
+                      height: 100,
                     ),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  _resetButton(),
-                  Expanded(
-                    flex: 2,
-                    child: SizedBox(),
-                  )
-                ],
+                    title(),
+                    SizedBox(
+                      height: 50,
+                    ),
+                    resetform(),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 30),
+                      child: Expanded(
+                        child: Text(
+                            'Silakan anda masukkan email yang terdaftar sebagai akun Malioboro Mall.',
+                            textAlign: TextAlign.justify),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    resetButton('RESET'),
+                    Expanded(
+                      flex: 2,
+                      child: SizedBox(),
+                    )
+                  ],
+                ),
               ),
-            ),
-            Positioned(
-              top: 40,
-              left: 0,
-              child: _backButton(),
-            ),
-          ],
+              Positioned(
+                top: 40,
+                left: 0,
+                child: backButton(),
+              ),
+            ],
+          ),
         ),
-      )),
+      ),
     );
   }
 }

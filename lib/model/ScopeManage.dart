@@ -53,6 +53,7 @@ class TenantList {
 }
 
 class AppModel extends Model {
+  List<String> highlight = [];
   List<PromoList> promo = [];
   List<TenantList> tenant = [];
 
@@ -109,7 +110,4 @@ class AppModel extends Model {
     fetchPromo();
     fetchTenant();
   }
-
-  List<PromoList> get promoListing => promo;
-  List<TenantList> get tenantListing => tenant;
 }

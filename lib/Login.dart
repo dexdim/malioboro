@@ -355,7 +355,7 @@ class LoginState extends State<Login> {
               gradient: LinearGradient(
                 begin: Alignment.topRight,
                 end: Alignment.bottomLeft,
-                stops: [0.6, 0.9],
+                stops: [0.4, 0.8],
                 colors: [
                   Colors.white,
                   Color(0xffFED8B1),

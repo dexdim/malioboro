@@ -20,7 +20,7 @@ class Tenant extends StatelessWidget {
         horizontal: 50,
       ),
       child: Text(
-        'LIHAT KATALOG',
+        'BROWSE KATALOG',
         style: TextStyle(
             fontSize: 20, fontWeight: FontWeight.w400, color: Colors.black),
       ),
@@ -49,14 +49,20 @@ class Tenant extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            child: ClipRRect(
+            child: Material(
+              elevation: 3,
               borderRadius: BorderRadius.all(
                 Radius.circular(10),
               ),
-              child: CachedNetworkImage(
-                imageUrl:
-                    'https://malmalioboro.co.id/${tenantData[index].image}',
-                fit: BoxFit.fill,
+              child: ClipRRect(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10),
+                ),
+                child: CachedNetworkImage(
+                  imageUrl:
+                      'https://malmalioboro.co.id/${tenantData[index].image}',
+                  fit: BoxFit.fill,
+                ),
               ),
             ),
           ),
@@ -66,7 +72,19 @@ class Tenant extends StatelessWidget {
           button(context),
         ],
       ),
-      actions: [],
+      actions: [
+        FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: Text(
+            'Close',
+            style: TextStyle(
+              color: Colors.black,
+            ),
+          ),
+        ),
+      ],
     );
   }
 
@@ -138,7 +156,7 @@ class Tenant extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<TenantList> tenantData =
-        ScopedModel.of<AppModel>(context).tenantListing;
+        ScopedModel.of<AppModel>(context).tenant;
     return Container(
       child: ListView.separated(
         padding: EdgeInsets.only(
@@ -150,7 +168,7 @@ class Tenant extends StatelessWidget {
         },
         separatorBuilder: (context, index) {
           return Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(horizontal: 36),
             child: Divider(
               thickness: 1,
             ),

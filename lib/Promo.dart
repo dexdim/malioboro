@@ -4,31 +4,6 @@ import 'package:scoped_model/scoped_model.dart';
 import 'model/ScopeManage.dart';
 
 class Promo extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    List<PromoList> promoData = ScopedModel.of<AppModel>(context).promoListing;
-
-    return Container(
-      child: ListView.separated(
-        padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).size.height * 0.1,
-        ),
-        itemCount: promoData.length,
-        itemBuilder: (context, index) {
-          return promoList(promoData, index, context);
-        },
-        separatorBuilder: (context, index) {
-          return Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Divider(
-              thickness: 1,
-            ),
-          );
-        },
-      ),
-    );
-  }
-
   Widget promoImage(promoData, index, BuildContext context) {
     return Container(
       margin: EdgeInsets.only(left: 30, right: 20),
@@ -107,6 +82,31 @@ class Promo extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    List<PromoList> promoData = ScopedModel.of<AppModel>(context).promo;
+
+    return Container(
+      child: ListView.separated(
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).size.height * 0.1,
+        ),
+        itemCount: promoData.length,
+        itemBuilder: (context, index) {
+          return promoList(promoData, index, context);
+        },
+        separatorBuilder: (context, index) {
+          return Padding(
+            padding: EdgeInsets.symmetric(horizontal: 36),
+            child: Divider(
+              thickness: 1,
+            ),
+          );
+        },
       ),
     );
   }
