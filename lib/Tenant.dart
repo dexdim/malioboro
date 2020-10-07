@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:malioboromall/Catalog.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'model/ScopeManage.dart';
 
 class Tenant extends StatelessWidget {
-  Widget button(context) {
+  Widget button(tenantData, index, context) {
     return RaisedButton(
       elevation: 3,
       shape: RoundedRectangleBorder(
@@ -24,16 +25,13 @@ class Tenant extends StatelessWidget {
         style: TextStyle(
             fontSize: 20, fontWeight: FontWeight.w400, color: Colors.black),
       ),
-      //onPressed: validateAndSubmit,
       onPressed: () {
-        /*  
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => null,
+            builder: (context) => Catalog(tenantData[index].id),
           ),
         );
-      */
       },
       splashColor: Colors.transparent,
       highlightColor: Colors.orange[100],
@@ -69,7 +67,7 @@ class Tenant extends StatelessWidget {
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.05,
           ),
-          button(context),
+          button(tenantData, index, context),
         ],
       ),
       actions: [
@@ -155,8 +153,7 @@ class Tenant extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<TenantList> tenantData =
-        ScopedModel.of<AppModel>(context).tenant;
+    List<TenantList> tenantData = ScopedModel.of<AppModel>(context).tenant;
     return Container(
       child: ListView.separated(
         padding: EdgeInsets.only(

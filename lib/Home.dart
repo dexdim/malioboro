@@ -50,48 +50,37 @@ class Home extends StatelessWidget {
   Widget carousel(context) {
     List<PromoList> promoData = ScopedModel.of<AppModel>(context).promo;
 
-    final List<String> imgList = [
-      'http://www.malmalioboro.co.id/assets/images/event/c0919d7d65b270c5a5b271879c41dc67.jpg',
-      'http://www.malmalioboro.co.id/assets/images/event/c2c980a5ecf80da90b8892b7c58f3d1c.jpg',
-      'http://www.malmalioboro.co.id/assets/images/event/7496914614f3b8d2fde970d2ba312016.jpg',
-      'http://www.malmalioboro.co.id/assets/images/event/a9065cd8184ade854697311c43b2308a.jpg',
-      'http://www.malmalioboro.co.id/assets/images/event/4cefe1787bcc5f8cae71c2cf768ab395.jpg'
-    ];
-
     return Container(
       width: MediaQuery.of(context).size.width,
-      child: CarouselSlider(
+      child: CarouselSlider.builder(
+        itemCount: 10,
+        itemBuilder: (context, index) => Container(
+          padding: EdgeInsets.symmetric(vertical: 10),
+          child: Material(
+            elevation: 3,
+            borderRadius: BorderRadius.all(
+              Radius.circular(10),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.all(
+                Radius.circular(10.0),
+              ),
+              child: CachedNetworkImage(
+                imageUrl: 'https://malmalioboro.co.id/${promoData[index].logo}',
+                fit: BoxFit.fill,
+              ),
+            ),
+          ),
+        ),
         options: CarouselOptions(
           height: MediaQuery.of(context).size.height * 0.25,
           viewportFraction: 0.5,
           autoPlay: true,
+          enlargeCenterPage: true,
           autoPlayCurve: Curves.fastLinearToSlowEaseIn,
           enableInfiniteScroll: true,
-          //enlargeCenterPage: true,
           pauseAutoPlayOnTouch: true,
         ),
-        items: imgList
-            .map(
-              (url) => Container(
-                padding: EdgeInsets.symmetric(vertical: 10),
-                child: Material(
-                  elevation: 3,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(10.0),
-                    ),
-                    child: CachedNetworkImage(
-                      imageUrl: url,
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                ),
-              ),
-            )
-            .toList(),
       ),
     );
   }
