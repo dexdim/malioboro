@@ -2,22 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'model/ScopeManage.dart';
+import 'model/CatalogScope.dart';
 import 'Cart.dart';
 import 'Details.dart';
 
 class Catalog extends StatefulWidget {
-  static String id;
+  final CatalogModel catalogModel = CatalogModel();
   static final String route = 'Catalog-route';
-
-  Catalog(id);
 
   @override
   CatalogState createState() => CatalogState();
 }
 
 class CatalogState extends State<Catalog> {
-  static String id = Catalog.id;
   static final CatalogModel catalogModel = CatalogModel();
   CatalogState() {
     searchQuery.addListener(() {
@@ -46,76 +43,6 @@ class CatalogState extends State<Catalog> {
   }
 
   // TODO: Implement Build
-  @override
-  Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
-    final double itemHeight = (size.height - kToolbarHeight + 50) / 3.5;
-    final double itemWidth = size.width / 3;
-    final double aspectRatio = itemWidth / itemHeight;
-
-    return ScopedModel<CatalogModel>(
-      model: catalogModel,
-      child: Scaffold(
-        key: scaffoldKey,
-        appBar: appBar(context),
-        body: Container(
-          decoration: BoxDecoration(color: Colors.transparent),
-          child: Padding(
-            padding: EdgeInsets.all(5.0),
-            child: GridView.builder(
-              shrinkWrap: true,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, childAspectRatio: aspectRatio),
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: EdgeInsets.all(5.0),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              Details(detail: searchList[index]),
-                        ),
-                      );
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(5.0),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.rectangle,
-                        border: Border.all(color: Colors.orange[200]),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
-                        ),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          itemImage(index),
-                          itemName(index),
-                          itemPrice(index),
-                        ],
-                      ),
-                    ),
-                  ),
-                );
-              },
-              itemCount: searchList.length,
-            ),
-          ),
-        ),
-        floatingActionButton: Container(
-          margin: EdgeInsets.only(right: 5, bottom: 5),
-          width: 70,
-          height: 70,
-          decoration: BoxDecoration(
-              border: Border.all(color: Colors.black12, width: 3),
-              shape: BoxShape.circle),
-          child: cartButton(),
-        ),
-      ),
-    );
-  }
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final TextEditingController searchQuery = TextEditingController();
@@ -335,5 +262,76 @@ class CatalogState extends State<Catalog> {
         ),
       );
     });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    final double itemHeight = (size.height - kToolbarHeight + 50) / 3.5;
+    final double itemWidth = size.width / 3;
+    final double aspectRatio = itemWidth / itemHeight;
+
+    return ScopedModel<CatalogModel>(
+      model: catalogModel,
+      child: Scaffold(
+        key: scaffoldKey,
+        appBar: appBar(context),
+        body: Container(
+          decoration: BoxDecoration(color: Colors.transparent),
+          child: Padding(
+            padding: EdgeInsets.all(5.0),
+            child: GridView.builder(
+              shrinkWrap: true,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2, childAspectRatio: aspectRatio),
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: EdgeInsets.all(5.0),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              Details(detail: searchList[index]),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(5.0),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.rectangle,
+                        border: Border.all(color: Colors.orange[200]),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          itemImage(index),
+                          itemName(index),
+                          itemPrice(index),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              },
+              itemCount: searchList.length,
+            ),
+          ),
+        ),
+        floatingActionButton: Container(
+          margin: EdgeInsets.only(right: 5, bottom: 5),
+          width: 70,
+          height: 70,
+          decoration: BoxDecoration(
+              border: Border.all(color: Colors.black12, width: 3),
+              shape: BoxShape.circle),
+          child: cartButton(),
+        ),
+      ),
+    );
   }
 }

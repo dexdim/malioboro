@@ -2,57 +2,12 @@ import 'dart:io';
 import 'dart:async';
 import 'dart:convert';
 import 'package:malioboromall/Cart.dart';
-import 'package:malioboromall/Catalog.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:http/http.dart' as http;
-
-class PromoList {
-  dynamic id;
-  String nama;
-  String tglawal;
-  String tglakhir;
-  String jenis;
-  String tenant;
-  String logo;
-
-  PromoList(
-    this.id,
-    this.nama,
-    this.tglawal,
-    this.tglakhir,
-    this.jenis,
-    this.tenant,
-    this.logo,
-  );
-}
-
-class TenantList {
-  dynamic id;
-  String nama;
-  String lokasi;
-  String kategori;
-  String jam;
-  String telp;
-  String logo;
-  String image;
-  String deskripsi;
-
-  TenantList(
-    this.id,
-    this.nama,
-    this.lokasi,
-    this.kategori,
-    this.jam,
-    this.telp,
-    this.logo,
-    this.image,
-    this.deskripsi,
-  );
-}
 
 class Data {
   int id;
@@ -69,68 +24,8 @@ class Data {
 
 List data;
 
-class AppModel extends Model {
-  CartState cartState;
-  List<String> highlight = [];
-  List<PromoList> promo = [];
-  List<TenantList> tenant = [];
-
-  final String promoUrl =
-      'http://www.malmalioboro.co.id/index.php/api/event/get_list_promo_20';
-  final String tenantUrl =
-      'http://www.malmalioboro.co.id/index.php/api/tenant/get_list';
-
-  Future<String> fetchPromo() async {
-    Map body = {'jenis': 'Promo'};
-    http.Response response = await http.post(
-      Uri.encodeFull(promoUrl),
-      body: body,
-    );
-    var parse = json.decode(response.body);
-    parse?.forEach((dynamic p) {
-      final PromoList fetchPromo = PromoList(
-        p['id'],
-        p['nama'],
-        p['tglawal'],
-        p['tglakhir'],
-        p['jenis'],
-        p['tenant'],
-        p['logo'],
-      );
-      promo.add(fetchPromo);
-    });
-    return ('Success!');
-  }
-
-  Future<String> fetchTenant() async {
-    http.Response response = await http.get(
-      Uri.encodeFull(tenantUrl),
-    );
-    var parse = json.decode(response.body);
-    parse?.forEach((dynamic t) {
-      final TenantList fetchTenant = TenantList(
-        t['id'],
-        t['nama'],
-        t['lokasi'],
-        t['kategori'],
-        t['jam'],
-        t['telp'],
-        t['logo'],
-        t['image'],
-        t['deskripsi'],
-      );
-      tenant.add(fetchTenant);
-    });
-    return 'Success!';
-  }
-
-  AppModel() {
-    fetchPromo();
-    fetchTenant();
-  }
-}
-
 class CatalogModel extends Model {
+  CartState cartState;
   List<Data> catalog = [];
   List<Data> cart = [];
   String cartMsg;
@@ -147,8 +42,7 @@ class CatalogModel extends Model {
 
   //Ambil data JSON dari API
   Future<String> fetchData() async {
-    String id = CatalogState.id;
-    Map body = {'idtenan': '$id'};
+    Map body = {'idtenan': '136'};
     http.Response response = await http.post(
       Uri.encodeFull(url),
       body: body,

@@ -5,7 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'auth/Auth.dart';
-import 'model/ScopeManage.dart';
+import 'model/AppScope.dart';
 import 'Login.dart';
 import 'Menu.dart';
 import 'Root.dart';

@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:intl/intl.dart';
-import 'model/ScopeManage.dart';
+import 'model/CatalogScope.dart';
 
 class Details extends StatefulWidget {
   static final String route = 'Details-route';
@@ -23,7 +23,8 @@ class DetailsState extends State<Details> {
   //int active = 0;
 
   Widget button(String title) {
-    return ScopedModelDescendant<CatalogModel>(builder: (context, child, model) {
+    return ScopedModelDescendant<CatalogModel>(
+        builder: (context, child, model) {
       return RaisedButton(
           elevation: 3,
           shape: RoundedRectangleBorder(
@@ -135,7 +136,7 @@ class DetailsState extends State<Details> {
                     color: Colors.grey,
                     fontWeight: FontWeight.w400)),
           ),
-          ScopedModelDescendant<AppModel>(builder: (context, child, model) {
+          ScopedModelDescendant<CatalogModel>(builder: (context, child, model) {
             widget.detail.counter = counter;
             widget.detail.subtotal = counter * widget.detail.harga;
             return Text(

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:malioboromall/Catalog.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'model/ScopeManage.dart';
+import 'model/AppScope.dart';
 
 class Tenant extends StatelessWidget {
   Widget button(tenantData, index, context) {
@@ -29,7 +29,7 @@ class Tenant extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => Catalog(tenantData[index].id),
+            builder: (context) => Catalog(),
           ),
         );
       },

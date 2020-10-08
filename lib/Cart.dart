@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'model/ScopeManage.dart';
+import 'model/CatalogScope.dart';
 import 'Forms.dart';
 
 class Cart extends StatefulWidget {
@@ -17,52 +17,54 @@ class CartState extends State<Cart> {
   static var totalHarga;
 
   Widget button(String title) {
-    return ScopedModelDescendant<CatalogModel>(builder: (context, child, model) {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          RaisedButton(
-            elevation: 3,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-              side: BorderSide(
-                color: Colors.orange[200],
-                width: 1,
+    return ScopedModelDescendant<CatalogModel>(
+      builder: (context, child, model) {
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            RaisedButton(
+              elevation: 3,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+                side: BorderSide(
+                  color: Colors.orange[200],
+                  width: 1,
+                ),
               ),
-            ),
-            color: Colors.white,
-            padding: EdgeInsets.symmetric(
-              vertical: 10,
-              horizontal: 50,
-            ),
-            child: Text(
-              title,
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w400,
-                color: Colors.black,
+              color: Colors.white,
+              padding: EdgeInsets.symmetric(
+                vertical: 10,
+                horizontal: 50,
               ),
-            ),
-            onPressed: () {
-              Timer(Duration(milliseconds: 500), () {
-                if (model.cartListing.length == 0) {
-                  showCartSnak(model.cartEmpty);
-                } else {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Forms(),
-                    ),
-                  );
-                }
-              });
-            },
-            splashColor: Colors.transparent,
-            highlightColor: Colors.orange[100],
-          )
-        ],
-      );
-    });
+              child: Text(
+                title,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black,
+                ),
+              ),
+              onPressed: () {
+                Timer(Duration(milliseconds: 500), () {
+                  if (model.cartListing.length == 0) {
+                    showCartSnak(model.cartEmpty);
+                  } else {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Forms(),
+                      ),
+                    );
+                  }
+                });
+              },
+              splashColor: Colors.transparent,
+              highlightColor: Colors.orange[100],
+            )
+          ],
+        );
+      },
+    );
   }
 
   Widget generateCart(Data d) {
@@ -291,8 +293,8 @@ class CartState extends State<Cart> {
       bottomNavigationBar: BottomAppBar(
         child: Container(
           height: 70,
-          child:
-              ScopedModelDescendant<CatalogModel>(builder: (context, child, model) {
+          child: ScopedModelDescendant<CatalogModel>(
+              builder: (context, child, model) {
             totalHarga = NumberFormat.currency(
               locale: 'id',
               name: 'Rp ',

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'model/ScopeManage.dart';
+import 'model/AppScope.dart';
 
 class Promo extends StatelessWidget {
   Widget promoImage(promoData, index, BuildContext context) {

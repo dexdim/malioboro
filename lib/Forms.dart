@@ -3,7 +3,7 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:flutter_open_whatsapp/flutter_open_whatsapp.dart';
 import 'package:email_validator/email_validator.dart';
 import 'Cart.dart';
-import 'model/ScopeManage.dart';
+import 'model/CatalogScope.dart';
 
 class Forms extends StatefulWidget {
   static final String route = 'Form-route';
