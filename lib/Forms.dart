@@ -3,6 +3,7 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:flutter_open_whatsapp/flutter_open_whatsapp.dart';
 import 'package:email_validator/email_validator.dart';
 import 'Cart.dart';
+import 'model/AppScope.dart';
 import 'model/CatalogScope.dart';
 
 class Forms extends StatefulWidget {
@@ -58,6 +59,8 @@ class FormsState extends State<Forms> {
               ),
             ),
             onPressed: () {
+              List<TenantList> tenantData =
+                  ScopedModel.of<AppModel>(context).tenant;
               if (formKey.currentState.validate()) {
                 var finalprint = '';
                 printItem(Data d) {
@@ -77,7 +80,7 @@ class FormsState extends State<Forms> {
                     '\n\nMohon untuk cek ketersediaan stocknya. Terima kasih.';
 
                 FlutterOpenWhatsapp.sendSingleMessage(
-                    '6282138020366', '${finalprint.toString()}');
+                    '$tenantData', '${finalprint.toString()}');
               }
             },
             splashColor: Colors.transparent,

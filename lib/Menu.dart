@@ -93,31 +93,33 @@ class _MenuState extends State<Menu> {
   }
 
   void pageChanged(int index) {
-    setState(() {
-      if (index == 0) {
-        titleText = 'MALIOBORO MALL';
-        subtitleText = '';
-        visible = false;
-      } else if (index == 1) {
-        titleText = 'PROMOS';
-        subtitleText = 'here is our great deal, grab it fast';
-        visible = true;
-      } else if (index == 2) {
-        titleText = 'TENANTS';
-        subtitleText = 'meet our special tenants';
-        visible = true;
-      } else if (index == 3) {
-        titleText = 'PROFILE';
-        subtitleText = 'hello customer!';
-        visible = true;
-      }
-      selectedIndex = index;
-      pageController.animateToPage(
-        index,
-        duration: Duration(milliseconds: 100),
-        curve: Curves.ease,
-      );
-    });
+    setState(
+      () {
+        if (index == 0) {
+          titleText = 'MALIOBORO MALL';
+          subtitleText = '';
+          visible = false;
+        } else if (index == 1) {
+          titleText = 'PROMOS';
+          subtitleText = 'here is our great deal, grab it fast';
+          visible = true;
+        } else if (index == 2) {
+          titleText = 'TENANTS';
+          subtitleText = 'meet our special tenants';
+          visible = true;
+        } else if (index == 3) {
+          titleText = 'PROFILE';
+          subtitleText = 'hello customer!';
+          visible = true;
+        }
+        selectedIndex = index;
+        pageController.animateToPage(
+          index,
+          duration: Duration(milliseconds: 100),
+          curve: Curves.ease,
+        );
+      },
+    );
   }
 
   @override

@@ -3,7 +3,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'model/AppScope.dart';
 
-class Promo extends StatelessWidget {
+class Promo extends StatefulWidget {
+  @override
+  PromoState createState() => PromoState();
+}
+
+class PromoState extends State<Promo> {
   Widget promoImage(promoData, index, BuildContext context) {
     return Container(
       margin: EdgeInsets.only(left: 30, right: 20),
@@ -89,7 +94,6 @@ class Promo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<PromoList> promoData = ScopedModel.of<AppModel>(context).promo;
-
     return Container(
       child: ListView.separated(
         padding: EdgeInsets.only(
@@ -97,6 +101,7 @@ class Promo extends StatelessWidget {
         ),
         itemCount: promoData.length,
         itemBuilder: (context, index) {
+          print(promoData.length);
           return promoList(promoData, index, context);
         },
         separatorBuilder: (context, index) {

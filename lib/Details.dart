@@ -130,11 +130,13 @@ class DetailsState extends State<Details> {
         children: <Widget>[
           Container(
             width: 140.0,
-            child: Text('Harga subtotal:',
-                style: TextStyle(
-                    fontSize: 20.0,
-                    color: Colors.grey,
-                    fontWeight: FontWeight.w400)),
+            child: Text(
+              'Harga subtotal:',
+              style: TextStyle(
+                  fontSize: 20.0,
+                  color: Colors.grey,
+                  fontWeight: FontWeight.w400),
+            ),
           ),
           ScopedModelDescendant<CatalogModel>(builder: (context, child, model) {
             widget.detail.counter = counter;

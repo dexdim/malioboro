@@ -19,7 +19,12 @@ class Data {
   int counter;
   int subtotal;
 
-  Data({this.nama, this.deskripsi, this.harga, this.gambar});
+  Data({
+    this.nama,
+    this.deskripsi,
+    this.harga,
+    this.gambar,
+  });
 }
 
 List data;
@@ -41,27 +46,26 @@ class CatalogModel extends Model {
   get finalprint => printCart();
 
   //Ambil data JSON dari API
-  Future<String> fetchData() async {
-    Map body = {'idtenan': '136'};
+  Future<String> fetchData(String id) async {
+    Map body = {'idtenan': '$id'};
     http.Response response = await http.post(
       Uri.encodeFull(url),
       body: body,
     );
     var parse = json.decode(response.body);
     data = parse;
-    createDB();
+    createDB(id);
     return 'Success!';
   }
 
   //Create database cart.db
-  createDB() async {
+  createDB(String id) async {
     try {
       Directory documentsDirectory = await getApplicationDocumentsDirectory();
-      String path = join(documentsDirectory.path, 'cart.db');
-
+      String path = join(documentsDirectory.path, 'cart$id.db');
       print(path);
-      //await storage.deleteItem('isFirst');
-      //await this.deleteDB();
+      await storage.deleteItem('isFirst');
+      await this.deleteDB(id);
 
       var database =
           await openDatabase(path, version: 1, onOpen: (Database db) {
@@ -79,9 +83,9 @@ class CatalogModel extends Model {
   }
 
   //Delete database cart.db
-  deleteDB() async {
+  deleteDB(String id) async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path, 'cart.db');
+    String path = join(documentsDirectory.path, 'cart$id.db');
 
     await deleteDatabase(path);
     if (storage.getItem('isFirst') != null) {
@@ -276,8 +280,4 @@ class CatalogModel extends Model {
   }
 
   printCart() {}
-
-  CatalogModel() {
-    fetchData();
-  }
 }

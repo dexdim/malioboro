@@ -72,11 +72,12 @@ class CartState extends State<Cart> {
       padding: EdgeInsets.all(5.0),
       child: Container(
         decoration: BoxDecoration(
-            color: Colors.white12,
-            border: Border(
-              bottom: BorderSide(color: Colors.grey[100], width: 1.0),
-              top: BorderSide(color: Colors.grey[100], width: 1.0),
-            )),
+          color: Colors.white12,
+          border: Border(
+            bottom: BorderSide(color: Colors.grey[100], width: 1.0),
+            top: BorderSide(color: Colors.grey[100], width: 1.0),
+          ),
+        ),
         height: 150.0,
         child: Row(
           children: <Widget>[
@@ -85,13 +86,12 @@ class CartState extends State<Cart> {
               height: 120.0,
               width: 120.0,
               decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(color: Colors.black12, blurRadius: 5.0)
-                  ],
-                  image: DecorationImage(
-                      image: NetworkImage(
-                          'http://www.malmalioboro.co.id/${d.gambar}'),
-                      fit: BoxFit.fill)),
+                boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5.0)],
+                image: DecorationImage(
+                    image: NetworkImage(
+                        'http://www.malmalioboro.co.id/${d.gambar}'),
+                    fit: BoxFit.fill),
+              ),
             ),
             Expanded(
               child: Padding(
@@ -285,7 +285,11 @@ class CartState extends State<Cart> {
           builder: (context, child, model) {
             return ListView(
               shrinkWrap: true,
-              children: model.cartListing.map((d) => generateCart(d)).toList(),
+              children: model.cartListing
+                  .map(
+                    (d) => generateCart(d),
+                  )
+                  .toList(),
             );
           },
         ),
@@ -294,24 +298,25 @@ class CartState extends State<Cart> {
         child: Container(
           height: 70,
           child: ScopedModelDescendant<CatalogModel>(
-              builder: (context, child, model) {
-            totalHarga = NumberFormat.currency(
-              locale: 'id',
-              name: 'Rp ',
-              decimalDigits: 0,
-            ).format(
-              (model.cartListing
-                  .fold(0, (total, current) => total + current.subtotal)),
-            );
+            builder: (context, child, model) {
+              totalHarga = NumberFormat.currency(
+                locale: 'id',
+                name: 'Rp ',
+                decimalDigits: 0,
+              ).format(
+                (model.cartListing
+                    .fold(0, (total, current) => total + current.subtotal)),
+              );
 
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                totalBar(),
-                button('NEXT'),
-              ],
-            );
-          }),
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  totalBar(),
+                  button('NEXT'),
+                ],
+              );
+            },
+          ),
         ),
       ),
     );

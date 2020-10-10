@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:malioboromall/Catalog.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'model/AppScope.dart';
+import 'Catalog.dart';
 
-class Tenant extends StatelessWidget {
-  Widget button(tenantData, index, context) {
+class Tenant extends StatefulWidget {
+  @override
+  TenantState createState() => TenantState();
+}
+
+class TenantState extends State<Tenant> {
+  Widget button(tenantData, index) {
     return RaisedButton(
       elevation: 3,
       shape: RoundedRectangleBorder(
@@ -29,7 +34,9 @@ class Tenant extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => Catalog(),
+            builder: (context) => Catalog(
+              tenantData[index].id,
+            ),
           ),
         );
       },
@@ -38,7 +45,7 @@ class Tenant extends StatelessWidget {
     );
   }
 
-  Widget popupTenant(tenantData, index, BuildContext context) {
+  Widget popupTenant(tenantData, index) {
     return AlertDialog(
       title: Text(
         tenantData[index].nama,
@@ -67,7 +74,7 @@ class Tenant extends StatelessWidget {
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.05,
           ),
-          button(tenantData, index, context),
+          button(tenantData, index),
         ],
       ),
       actions: [
@@ -127,13 +134,12 @@ class Tenant extends StatelessWidget {
     );
   }
 
-  Widget itemList(tenantData, index, context) {
+  Widget itemList(tenantData, index) {
     return GestureDetector(
       onTap: () {
         showDialog(
           context: context,
-          builder: (BuildContext context) =>
-              popupTenant(tenantData, index, context),
+          builder: (BuildContext context) => popupTenant(tenantData, index),
         );
       },
       child: Container(
@@ -161,7 +167,7 @@ class Tenant extends StatelessWidget {
         ),
         itemCount: tenantData.length,
         itemBuilder: (context, index) {
-          return itemList(tenantData, index, context);
+          return itemList(tenantData, index);
         },
         separatorBuilder: (context, index) {
           return Padding(

@@ -65,7 +65,7 @@ class AppModel extends Model {
     );
     var parse = json.decode(response.body);
     parse?.forEach((dynamic p) {
-      final PromoList fetchPromo = PromoList(
+      final PromoList fetch = PromoList(
         p['id'],
         p['nama'],
         p['tglawal'],
@@ -74,7 +74,7 @@ class AppModel extends Model {
         p['tenant'],
         p['logo'],
       );
-      promo.add(fetchPromo);
+      promo.add(fetch);
     });
     return ('Success!');
   }
@@ -84,8 +84,9 @@ class AppModel extends Model {
       Uri.encodeFull(tenantUrl),
     );
     var parse = json.decode(response.body);
+    print(parse.length);
     parse?.forEach((dynamic t) {
-      final TenantList fetchTenant = TenantList(
+      final TenantList fetch = TenantList(
         t['id'],
         t['nama'],
         t['lokasi'],
@@ -96,7 +97,7 @@ class AppModel extends Model {
         t['image'],
         t['deskripsi'],
       );
-      tenant.add(fetchTenant);
+      tenant.add(fetch);
     });
     return 'Success!';
   }

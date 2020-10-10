@@ -1,22 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+//import 'package:cached_network_image/cached_network_image.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'model/CatalogScope.dart';
 import 'Cart.dart';
 import 'Details.dart';
+import 'Forms.dart';
 
-class Catalog extends StatefulWidget {
-  final CatalogModel catalogModel = CatalogModel();
-  static final String route = 'Catalog-route';
+class Catalog extends StatelessWidget {
+  final String id;
+
+  static final CatalogModel catalogModel = CatalogModel();
+  Catalog(this.id);
+
+  final routes = <String, WidgetBuilder>{
+    CList.route: (BuildContext context) => CList(),
+    Details.route: (BuildContext context) => Details(),
+    Cart.route: (BuildContext context) => Cart(),
+    Forms.route: (BuildContext context) => Forms(),
+  };
 
   @override
-  CatalogState createState() => CatalogState();
+  Widget build(BuildContext context) {
+    catalogModel.fetchData(this.id);
+    return ScopedModel(
+      model: catalogModel,
+      child: CList(
+        catalogModel: catalogModel,
+      ),
+    );
+  }
 }
 
-class CatalogState extends State<Catalog> {
-  static final CatalogModel catalogModel = CatalogModel();
-  CatalogState() {
+class CList extends StatefulWidget {
+  final CatalogModel catalogModel;
+  static final String route = 'List-route';
+
+  CList({this.catalogModel});
+
+  @override
+  CListState createState() => CListState();
+}
+
+class CListState extends State<CList> {
+  CListState() {
     searchQuery.addListener(() {
       if (searchQuery.text.isEmpty) {
         setState(() {
@@ -73,8 +100,8 @@ class CatalogState extends State<Catalog> {
         borderRadius: BorderRadius.all(
           Radius.circular(10),
         ),
-        child: CachedNetworkImage(
-          imageUrl: 'http://www.malmalioboro.co.id/${searchList[index].gambar}',
+        child: Image.network(
+          'http://www.malmalioboro.co.id/${searchList[index].gambar}',
           fit: BoxFit.cover,
         ),
       ),
@@ -271,66 +298,63 @@ class CatalogState extends State<Catalog> {
     final double itemWidth = size.width / 3;
     final double aspectRatio = itemWidth / itemHeight;
 
-    return ScopedModel<CatalogModel>(
-      model: catalogModel,
-      child: Scaffold(
-        key: scaffoldKey,
-        appBar: appBar(context),
-        body: Container(
-          decoration: BoxDecoration(color: Colors.transparent),
-          child: Padding(
-            padding: EdgeInsets.all(5.0),
-            child: GridView.builder(
-              shrinkWrap: true,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, childAspectRatio: aspectRatio),
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: EdgeInsets.all(5.0),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              Details(detail: searchList[index]),
-                        ),
-                      );
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(5.0),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.rectangle,
-                        border: Border.all(color: Colors.orange[200]),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
-                        ),
+    return Scaffold(
+      key: scaffoldKey,
+      appBar: appBar(context),
+      body: Container(
+        decoration: BoxDecoration(color: Colors.transparent),
+        child: Padding(
+          padding: EdgeInsets.all(5.0),
+          child: GridView.builder(
+            shrinkWrap: true,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2, childAspectRatio: aspectRatio),
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: EdgeInsets.all(5.0),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            Details(detail: searchList[index]),
                       ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          itemImage(index),
-                          itemName(index),
-                          itemPrice(index),
-                        ],
+                    );
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(5.0),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.rectangle,
+                      border: Border.all(color: Colors.orange[200]),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
                       ),
                     ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        itemImage(index),
+                        itemName(index),
+                        itemPrice(index),
+                      ],
+                    ),
                   ),
-                );
-              },
-              itemCount: searchList.length,
-            ),
+                ),
+              );
+            },
+            itemCount: searchList.length,
           ),
         ),
-        floatingActionButton: Container(
-          margin: EdgeInsets.only(right: 5, bottom: 5),
-          width: 70,
-          height: 70,
-          decoration: BoxDecoration(
-              border: Border.all(color: Colors.black12, width: 3),
-              shape: BoxShape.circle),
-          child: cartButton(),
-        ),
+      ),
+      floatingActionButton: Container(
+        margin: EdgeInsets.only(right: 5, bottom: 5),
+        width: 70,
+        height: 70,
+        decoration: BoxDecoration(
+            border: Border.all(color: Colors.black12, width: 3),
+            shape: BoxShape.circle),
+        child: cartButton(),
       ),
     );
   }

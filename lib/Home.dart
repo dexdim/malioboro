@@ -4,8 +4,14 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'model/AppScope.dart';
+import 'main.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
+  @override
+  HomeState createState() => HomeState();
+}
+
+class HomeState extends State<Home> {
   Widget title() {
     return Text(
       'MALIOBORO MALL',
@@ -23,7 +29,7 @@ class Home extends StatelessWidget {
     );
   }
 
-  Widget news(context) {
+  Widget news() {
     return Container(
       height: MediaQuery.of(context).size.height / 4.5,
       margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -47,43 +53,41 @@ class Home extends StatelessWidget {
     );
   }
 
-  Widget carousel(context) {
-    List<PromoList> promoData = ScopedModel.of<AppModel>(context).promo;
-
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      child: CarouselSlider.builder(
-        itemCount: 10,
-        itemBuilder: (context, index) => Container(
-          padding: EdgeInsets.symmetric(vertical: 10),
-          child: Material(
-            elevation: 3,
-            borderRadius: BorderRadius.all(
-              Radius.circular(10),
+  Widget carousel() => ScopedModelDescendant<AppModel>(
+        builder: (context, child, model) => Container(
+          width: MediaQuery.of(context).size.width,
+          child: CarouselSlider.builder(
+            itemCount: 10,
+            itemBuilder: (context, index) => Container(
+              padding: EdgeInsets.symmetric(vertical: 10),
+              child: Material(
+                elevation: 3,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10.0),
+                  ),
+                  child: Image.network(
+                    'https://malmalioboro.co.id/${model.promo[index].logo}',
+                    fit: BoxFit.fill,
+                  ),
+                ),
+              ),
             ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.all(
-                Radius.circular(10.0),
-              ),
-              child: CachedNetworkImage(
-                imageUrl: 'https://malmalioboro.co.id/${promoData[index].logo}',
-                fit: BoxFit.fill,
-              ),
+            options: CarouselOptions(
+              height: MediaQuery.of(context).size.height * 0.25,
+              viewportFraction: 0.5,
+              autoPlay: true,
+              enlargeCenterPage: true,
+              autoPlayCurve: Curves.fastLinearToSlowEaseIn,
+              enableInfiniteScroll: true,
+              pauseAutoPlayOnTouch: true,
             ),
           ),
         ),
-        options: CarouselOptions(
-          height: MediaQuery.of(context).size.height * 0.25,
-          viewportFraction: 0.5,
-          autoPlay: true,
-          enlargeCenterPage: true,
-          autoPlayCurve: Curves.fastLinearToSlowEaseIn,
-          enableInfiniteScroll: true,
-          pauseAutoPlayOnTouch: true,
-        ),
-      ),
-    );
-  }
+      );
 
   Widget subtitle(String subtitle) {
     return Align(
@@ -166,7 +170,7 @@ class Home extends StatelessWidget {
     );
   }
 
-  Widget listsocial(BuildContext context) {
+  Widget listsocial() {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: 80,
@@ -224,17 +228,17 @@ class Home extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             subtitle('News :'),
-            news(context),
+            news(),
             divider(),
             subtitle('Highlight promos :'),
-            carousel(context),
+            carousel(),
             divider(),
             subtitle('Upcoming events :'),
             SizedBox(height: 5),
             event(),
             divider(),
             subtitle('Find us on :'),
-            listsocial(context)
+            listsocial()
           ],
         ),
       ),
