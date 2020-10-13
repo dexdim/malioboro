@@ -47,7 +47,15 @@ flutter:
   fonts:
     - family: Poppins
       fonts:
-        - asset: assets/font/Poppins-Bold.ttf
-        - asset: assets/font/Poppins-Italic.ttf
-        - asset: assets/font/Poppins-Regular.ttf
-        - asset: assets/font/Poppins-Thin.ttf
+        - asset: assets/font/Poppins/Poppins-Bold.ttf
+        - asset: assets/font/Poppins/Poppins-Italic.ttf
+        - asset: assets/font/Poppins/Poppins-Regular.ttf
+        - asset: assets/font/Poppins/Poppins-Thin.ttf
+
+    - family: Baloo2
+      fonts:
+        - asset: assets/font/Baloo2/Baloo2-Bold.ttf
+        - asset: assets/font/Baloo2/Baloo2-ExtraBold.ttf
+        - asset: assets/font/Baloo2/Baloo2-Medium.ttf
+        - asset: assets/font/Baloo2/Baloo2-Regular.ttf
+        - asset: assets/font/Baloo2/Baloo2-SemiBold.ttf

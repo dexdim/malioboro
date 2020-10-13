@@ -138,12 +138,13 @@ class _MenuState extends State<Menu> {
             Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  begin: Alignment.topRight,
+                  begin: Alignment.topCenter,
                   end: Alignment.bottomLeft,
-                  stops: [0.4, 0.8],
+                  stops: [0.1, 0.6, 1],
                   colors: [
                     Colors.white,
-                    Color(0xffFED8B1),
+                    Color(0xfffee18e),
+                    Color(0xff6e4c1e),
                   ],
                 ),
               ),
@@ -165,9 +166,9 @@ class _MenuState extends State<Menu> {
     return CustomNavigationBar(
       isFloating: true,
       iconSize: 30.0,
-      selectedColor: Colors.orangeAccent,
-      strokeColor: Colors.orangeAccent,
-      unSelectedColor: Colors.grey[600],
+      selectedColor: Color(0xff423528),
+      strokeColor: Color(0xff423528),
+      unSelectedColor: Color(0xfffee18e),
       backgroundColor: Colors.white,
       borderRadius: Radius.circular(20.0),
       currentIndex: selectedIndex,

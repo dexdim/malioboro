@@ -42,7 +42,7 @@ class Main extends StatelessWidget {
         title: 'Malioboro Mall',
         theme: ThemeData(
           primaryColor: Colors.white,
-          fontFamily: 'Poppins',
+          fontFamily: 'Baloo2',
         ),
         //home: Menu(),
         home: Root(
