@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'model/AppScope.dart';
-import 'main.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -12,26 +10,10 @@ class Home extends StatefulWidget {
 }
 
 class HomeState extends State<Home> {
-  Widget title() {
-    return Text(
-      'MALIOBORO MALL',
-      textAlign: TextAlign.center,
-      style: TextStyle(
-        fontSize: 24,
-        shadows: [
-          Shadow(
-            offset: Offset(0.00, 2.00),
-            color: Colors.orangeAccent.withOpacity(0.50),
-            blurRadius: 5,
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget news() {
     return Container(
       height: MediaQuery.of(context).size.height / 4.5,
+      width: MediaQuery.of(context).size.width * 0.8,
       margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Material(
         elevation: 3,
@@ -42,11 +24,9 @@ class HomeState extends State<Home> {
           borderRadius: BorderRadius.all(
             Radius.circular(15.0),
           ),
-          child: CachedNetworkImage(
-            imageUrl:
-                'http://www.malmalioboro.co.id/images/1530614179slide.jpg',
+          child: Image.network(
+            'http://malmalioboro.co.id/images/1530614179slide.jpg',
             fit: BoxFit.cover,
-            width: MediaQuery.of(context).size.width * 0.9,
           ),
         ),
       ),
@@ -93,7 +73,7 @@ class HomeState extends State<Home> {
     return Align(
       alignment: Alignment.centerLeft,
       child: Padding(
-        padding: EdgeInsets.only(left: 20),
+        padding: EdgeInsets.only(left: 40),
         child: Text(
           '$subtitle',
           style: TextStyle(
@@ -227,6 +207,7 @@ class HomeState extends State<Home> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
+            SizedBox(height: 5),
             subtitle('News :'),
             news(),
             divider(),

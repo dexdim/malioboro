@@ -28,11 +28,20 @@ class Main extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    FlutterStatusbarcolor.setStatusBarColor(Colors.white);
-    if (useWhiteForeground(Colors.white)) {
-      FlutterStatusbarcolor.setStatusBarWhiteForeground(true);
-    } else {
+    FlutterStatusbarcolor.setStatusBarColor(Colors.transparent);
+    if (useWhiteForeground(Colors.transparent)) {
       FlutterStatusbarcolor.setStatusBarWhiteForeground(false);
+    } else {
+      FlutterStatusbarcolor.setStatusBarWhiteForeground(true);
+    }
+
+    FlutterStatusbarcolor.setNavigationBarColor(
+      Color(0xfffee18e),
+    );
+    if (useWhiteForeground(Colors.transparent)) {
+      FlutterStatusbarcolor.setStatusBarWhiteForeground(false);
+    } else {
+      FlutterStatusbarcolor.setStatusBarWhiteForeground(true);
     }
 
     return ScopedModel<AppModel>(

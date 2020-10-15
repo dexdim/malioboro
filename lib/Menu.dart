@@ -25,8 +25,7 @@ class _MenuState extends State<Menu> {
 
   int selectedIndex = 0;
   String titleText = 'MALIOBORO MALL';
-  String subtitleText = '';
-  bool visible = false;
+  String subtitleText = 'shop & deals';
   DateTime currentBackPressTime;
 
   PageController pageController = PageController(
@@ -54,18 +53,15 @@ class _MenuState extends State<Menu> {
             shadows: [
               Shadow(
                 offset: Offset(0.00, 2.00),
-                color: Colors.orangeAccent.withOpacity(0.50),
+                color: Colors.brown.withOpacity(0.50),
                 blurRadius: 5,
               ),
             ],
           ),
         ),
-        Visibility(
-          visible: visible,
-          child: Text(
-            subtitleText,
-            style: TextStyle(fontSize: 16),
-          ),
+        Text(
+          subtitleText,
+          style: TextStyle(fontSize: 18),
         ),
         divider(),
       ],
@@ -97,20 +93,16 @@ class _MenuState extends State<Menu> {
       () {
         if (index == 0) {
           titleText = 'MALIOBORO MALL';
-          subtitleText = '';
-          visible = false;
+          subtitleText = 'shop & deals';
         } else if (index == 1) {
           titleText = 'PROMOS';
           subtitleText = 'here is our great deal, grab it fast';
-          visible = true;
         } else if (index == 2) {
           titleText = 'TENANTS';
           subtitleText = 'meet our special tenants';
-          visible = true;
         } else if (index == 3) {
           titleText = 'PROFILE';
           subtitleText = 'hello customer!';
-          visible = true;
         }
         selectedIndex = index;
         pageController.animateToPage(
@@ -139,12 +131,11 @@ class _MenuState extends State<Menu> {
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
-                  end: Alignment.bottomLeft,
-                  stops: [0.1, 0.6, 1],
+                  end: Alignment.bottomCenter,
+                  stops: [0.1, 1],
                   colors: [
                     Colors.white,
                     Color(0xfffee18e),
-                    Color(0xff6e4c1e),
                   ],
                 ),
               ),
@@ -164,10 +155,9 @@ class _MenuState extends State<Menu> {
 
   Widget bottomBar() {
     return CustomNavigationBar(
-      isFloating: true,
       iconSize: 30.0,
-      selectedColor: Color(0xff423528),
-      strokeColor: Color(0xff423528),
+      selectedColor: Colors.brown,
+      strokeColor: Colors.brown,
       unSelectedColor: Color(0xfffee18e),
       backgroundColor: Colors.white,
       borderRadius: Radius.circular(20.0),

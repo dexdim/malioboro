@@ -97,9 +97,9 @@ class TenantState extends State<Tenant> {
     return Container(
       width: MediaQuery.of(context).size.height / 11,
       margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-      child: CachedNetworkImage(
+      child: Image.network(
+        'https://malmalioboro.co.id/${tenantData[index].logo}',
         fit: BoxFit.fill,
-        imageUrl: 'https://malmalioboro.co.id/${tenantData[index].logo}',
       ),
     );
   }
@@ -163,7 +163,7 @@ class TenantState extends State<Tenant> {
     return Container(
       child: ListView.separated(
         padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).size.height * 0.1,
+          bottom: MediaQuery.of(context).size.height * 0.15,
         ),
         itemCount: tenantData.length,
         itemBuilder: (context, index) {

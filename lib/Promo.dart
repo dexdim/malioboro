@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'model/AppScope.dart';
 
@@ -22,9 +21,9 @@ class PromoState extends State<Promo> {
           borderRadius: BorderRadius.all(
             Radius.circular(10.0),
           ),
-          child: CachedNetworkImage(
+          child: Image.network(
+            'http://www.malmalioboro.co.id/${promoData[index].logo}',
             fit: BoxFit.fill,
-            imageUrl: 'http://www.malmalioboro.co.id/${promoData[index].logo}',
           ),
         ),
       ),
@@ -101,7 +100,6 @@ class PromoState extends State<Promo> {
         ),
         itemCount: promoData.length,
         itemBuilder: (context, index) {
-          print(promoData.length);
           return promoList(promoData, index, context);
         },
         separatorBuilder: (context, index) {
