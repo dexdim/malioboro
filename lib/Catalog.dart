@@ -7,43 +7,28 @@ import 'Cart.dart';
 import 'Details.dart';
 import 'Forms.dart';
 
-class Catalog extends StatelessWidget {
+class Catalog extends StatefulWidget {
   final String id;
+  final String title;
 
-  static final CatalogModel catalogModel = CatalogModel();
-  Catalog(this.id);
+  Catalog({this.id, this.title});
+
+  static final String route = 'List-route';
 
   final routes = <String, WidgetBuilder>{
-    CList.route: (BuildContext context) => CList(),
+    Catalog.route: (BuildContext context) => Catalog(),
     Details.route: (BuildContext context) => Details(),
     Cart.route: (BuildContext context) => Cart(),
     Forms.route: (BuildContext context) => Forms(),
   };
 
   @override
-  Widget build(BuildContext context) {
-    catalogModel.fetchData(this.id);
-    return ScopedModel(
-      model: catalogModel,
-      child: CList(
-        catalogModel: catalogModel,
-      ),
-    );
-  }
+  CatalogState createState() => CatalogState();
 }
 
-class CList extends StatefulWidget {
-  final CatalogModel catalogModel;
-  static final String route = 'List-route';
-
-  CList({this.catalogModel});
-
-  @override
-  CListState createState() => CListState();
-}
-
-class CListState extends State<CList> {
-  CListState() {
+class CatalogState extends State<Catalog> {
+  static final CatalogModel catalogModel = CatalogModel();
+  CatalofState() {
     searchQuery.addListener(() {
       if (searchQuery.text.isEmpty) {
         setState(() {
@@ -70,7 +55,6 @@ class CListState extends State<CList> {
   }
 
   // TODO: Implement Build
-
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final TextEditingController searchQuery = TextEditingController();
   DateTime currentBackPressTime;
@@ -151,9 +135,16 @@ class CListState extends State<CList> {
   );
 
   Widget appBarTitle = Text(
-    'SUPERMARKET MALIOBORO MALL',
+    Catalog._title,
     style: TextStyle(
-      fontSize: 20,
+      fontSize: 24,
+      shadows: [
+        Shadow(
+          offset: Offset(0.00, 2.00),
+          color: Colors.brown.withOpacity(0.50),
+          blurRadius: 5,
+        ),
+      ],
     ),
   );
 

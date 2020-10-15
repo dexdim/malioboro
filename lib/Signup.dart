@@ -22,12 +22,11 @@ class _SignUpState extends State<SignUp> {
         child: Row(
           children: <Widget>[
             Container(
-              margin: EdgeInsets.only(top: 3),
               child: Icon(Icons.keyboard_arrow_left, color: Colors.black),
             ),
             Text(
               'Back',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
             ),
           ],
         ),
@@ -63,7 +62,7 @@ class _SignUpState extends State<SignUp> {
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(
-                      color: Colors.orangeAccent,
+                      color: Colors.brown,
                     ),
                   ),
                   filled: true),
@@ -81,7 +80,7 @@ class _SignUpState extends State<SignUp> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
         side: BorderSide(
-          color: Colors.orangeAccent,
+          color: Colors.brown,
           width: 1,
         ),
       ),
@@ -107,7 +106,7 @@ class _SignUpState extends State<SignUp> {
         );
       },
       splashColor: Colors.transparent,
-      highlightColor: Colors.orange[100],
+      highlightColor: Color(0xfffee18e),
     );
   }
 
@@ -137,9 +136,9 @@ class _SignUpState extends State<SignUp> {
             child: Text(
               'Login',
               style: TextStyle(
-                  color: Color(0xfff79c4f),
+                  color: Colors.brown,
                   fontSize: 16,
-                  fontWeight: FontWeight.w400),
+                  fontWeight: FontWeight.w600),
             ),
           )
         ],
@@ -182,17 +181,12 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     String tnc =
-        'Dengan ini saya telah membaca dan menyetujui Malioboro Mall Shop & Deals Privacy Policy, T&C, dan ToS.';
+        'Dengan ini saya telah membaca dan menyetujui Malioboro Mall Shop & Deals Privacy Policy, Term and Conditions, dan Term of Service.';
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: <Widget>[
-          Positioned(
-            top: 40,
-            left: 0,
-            child: backButton(),
-          ),
           Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -228,7 +222,7 @@ class _SignUpState extends State<SignUp> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Checkbox(
-                            activeColor: Colors.orangeAccent,
+                            activeColor: Colors.brown,
                             value: accept,
                             onChanged: (bool value) {
                               setState(() {
@@ -256,6 +250,11 @@ class _SignUpState extends State<SignUp> {
                 ],
               ),
             ),
+          ),
+          Positioned(
+            top: 40,
+            left: 0,
+            child: backButton(),
           ),
         ],
       ),

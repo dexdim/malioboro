@@ -354,7 +354,7 @@ class LoginState extends State<Login> {
           Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                begin: Alignment.topRight,
+                begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 stops: [0.1, 0.8],
                 colors: [

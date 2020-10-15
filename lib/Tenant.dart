@@ -16,7 +16,7 @@ class TenantState extends State<Tenant> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
         side: BorderSide(
-          color: Colors.orange[200],
+          color: Colors.brown,
           width: 1,
         ),
       ),
@@ -35,13 +35,14 @@ class TenantState extends State<Tenant> {
           context,
           MaterialPageRoute(
             builder: (context) => Catalog(
-              tenantData[index].id,
+              id: tenantData[index].id,
+              title: tenantData[index].nama,
             ),
           ),
         );
       },
       splashColor: Colors.transparent,
-      highlightColor: Colors.orange[100],
+      highlightColor: Color(0xfffee18e),
     );
   }
 
