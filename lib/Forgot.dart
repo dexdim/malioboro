@@ -19,12 +19,11 @@ class ForgotState extends State<Forgot> {
         child: Row(
           children: <Widget>[
             Container(
-              padding: EdgeInsets.only(top: 3),
               child: Icon(Icons.keyboard_arrow_left, color: Colors.black),
             ),
             Text(
               'Back',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
             ),
           ],
         ),
@@ -52,10 +51,14 @@ class ForgotState extends State<Forgot> {
                   color: Colors.black,
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey),
+                  borderSide: BorderSide(
+                    color: Colors.grey,
+                  ),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.orangeAccent),
+                  borderSide: BorderSide(
+                    color: Colors.brown,
+                  ),
                 ),
                 filled: true,
               ),
@@ -73,7 +76,7 @@ class ForgotState extends State<Forgot> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
         side: BorderSide(
-          color: Colors.orangeAccent,
+          color: Colors.brown,
           width: 1,
         ),
       ),
@@ -99,7 +102,7 @@ class ForgotState extends State<Forgot> {
         );
       },
       splashColor: Colors.transparent,
-      highlightColor: Colors.orange[100],
+      highlightColor: Color(0xfffee18e),
     );
   }
 
@@ -119,7 +122,7 @@ class ForgotState extends State<Forgot> {
         style: TextStyle(
           fontWeight: FontWeight.w500,
           fontSize: 24,
-          color: Color(0xff333333),
+          color: Colors.black,
           shadows: [
             Shadow(
               offset: Offset(0.00, 2.00),
@@ -135,63 +138,59 @@ class ForgotState extends State<Forgot> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          child: Stack(
-            children: <Widget>[
-              Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topRight,
-                    end: Alignment.bottomLeft,
-                    stops: [0.4, 0.8],
-                    colors: [
-                      Colors.white,
-                      Color(0xffFED8B1),
-                    ],
+      resizeToAvoidBottomInset: false,
+      body: Stack(
+        children: <Widget>[
+          Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomCenter,
+                stops: [0.1, 0.8],
+                colors: [
+                  Colors.white,
+                  Color(0xfffee18e),
+                ],
+              ),
+            ),
+            padding: EdgeInsets.symmetric(horizontal: 30),
+            child: Container(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(
+                    height: 100,
                   ),
-                ),
-                padding: EdgeInsets.symmetric(horizontal: 30),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(
-                      height: 100,
-                    ),
-                    title(),
-                    SizedBox(
-                      height: 50,
-                    ),
-                    resetform(),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 30),
-                      child: Expanded(
-                        child: Text(
-                            'Silakan anda masukkan email yang terdaftar sebagai akun Malioboro Mall.',
-                            textAlign: TextAlign.justify),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    resetButton('RESET'),
-                    Expanded(
-                      flex: 2,
-                      child: SizedBox(),
-                    )
-                  ],
-                ),
+                  title(),
+                  SizedBox(
+                    height: 50,
+                  ),
+                  resetform(),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 30),
+                    child: Text(
+                        'Silakan anda masukkan email yang terdaftar sebagai akun Malioboro Mall.',
+                        textAlign: TextAlign.justify),
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  resetButton('RESET'),
+                  Expanded(
+                    flex: 2,
+                    child: SizedBox(),
+                  )
+                ],
               ),
-              Positioned(
-                top: 40,
-                left: 0,
-                child: backButton(),
-              ),
-            ],
+            ),
           ),
-        ),
+          Positioned(
+            top: 40,
+            left: 0,
+            child: backButton(),
+          ),
+        ],
       ),
     );
   }

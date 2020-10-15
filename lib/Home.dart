@@ -43,11 +43,11 @@ class HomeState extends State<Home> {
               child: Material(
                 elevation: 3,
                 borderRadius: BorderRadius.all(
-                  Radius.circular(10),
+                  Radius.circular(15),
                 ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.all(
-                    Radius.circular(10.0),
+                    Radius.circular(15.0),
                   ),
                   child: Image.network(
                     'https://malmalioboro.co.id/${model.promo[index].logo}',
@@ -78,12 +78,12 @@ class HomeState extends State<Home> {
           '$subtitle',
           style: TextStyle(
             fontWeight: FontWeight.w500,
-            fontSize: 16,
+            fontSize: 18,
             color: Colors.black,
             shadows: [
               Shadow(
                 offset: Offset(0.00, 2.00),
-                color: Color(0xffd97c29).withOpacity(0.50),
+                color: Colors.brown.withOpacity(0.50),
                 blurRadius: 5,
               ),
             ],
@@ -144,7 +144,7 @@ class HomeState extends State<Home> {
         ),
         Text(
           '$title',
-          style: TextStyle(fontSize: 14),
+          style: TextStyle(fontSize: 16),
         ),
       ],
     );
@@ -187,7 +187,7 @@ class HomeState extends State<Home> {
           Text(
             '$eventTitle, $tglawal - $tglakhir',
             style: TextStyle(
-              fontSize: 14,
+              fontSize: 16,
             ),
           )
         ],

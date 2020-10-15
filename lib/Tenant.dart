@@ -113,20 +113,20 @@ class TenantState extends State<Tenant> {
           Text(
             tenantData[index].nama,
             style: TextStyle(
-              fontSize: 16,
+              fontSize: 18,
               fontWeight: FontWeight.w600,
             ),
           ),
           Text(
             'LANTAI ${tenantData[index].lokasi}',
             style: TextStyle(
-              fontSize: 16,
+              fontSize: 18,
             ),
           ),
           Text(
             tenantData[index].kategori,
             style: TextStyle(
-              fontSize: 14,
+              fontSize: 16,
             ),
           ),
         ],
@@ -144,7 +144,7 @@ class TenantState extends State<Tenant> {
       },
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
-        height: MediaQuery.of(context).size.height / 11,
+        height: MediaQuery.of(context).size.height / 9,
         child: Container(
           child: Row(
             children: [
@@ -163,7 +163,7 @@ class TenantState extends State<Tenant> {
     return Container(
       child: ListView.separated(
         padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).size.height * 0.15,
+          bottom: MediaQuery.of(context).size.height * 0.1,
         ),
         itemCount: tenantData.length,
         itemBuilder: (context, index) {

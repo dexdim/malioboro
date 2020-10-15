@@ -166,7 +166,7 @@ class _SignUpState extends State<SignUp> {
         style: TextStyle(
           fontWeight: FontWeight.w500,
           fontSize: 24,
-          color: Color(0xff333333),
+          color: Colors.black,
           shadows: [
             Shadow(
               offset: Offset(0.00, 2.00),
@@ -197,11 +197,11 @@ class _SignUpState extends State<SignUp> {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
-                stops: [0.4, 0.8],
+                end: Alignment.bottomCenter,
+                stops: [0.1, 0.8],
                 colors: [
                   Colors.white,
-                  Color(0xfffed8b1),
+                  Color(0xfffee18e),
                 ],
               ),
             ),

@@ -132,7 +132,7 @@ class _MenuState extends State<Menu> {
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  stops: [0.1, 1],
+                  stops: [0.1, 0.8],
                   colors: [
                     Colors.white,
                     Color(0xfffee18e),

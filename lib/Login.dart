@@ -118,7 +118,7 @@ class LoginState extends State<Login> {
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: Colors.orangeAccent,
+                    color: Colors.brown,
                   ),
                 ),
                 filled: true,
@@ -150,8 +150,8 @@ class LoginState extends State<Login> {
           'Lupa password?',
           style: TextStyle(
             fontSize: 16,
-            fontWeight: FontWeight.w400,
-            color: Colors.orangeAccent,
+            fontWeight: FontWeight.w600,
+            color: Colors.brown,
           ),
         ),
       ),
@@ -164,7 +164,7 @@ class LoginState extends State<Login> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
         side: BorderSide(
-          color: Colors.orange[200],
+          color: Colors.brown,
           width: 1,
         ),
       ),
@@ -188,7 +188,7 @@ class LoginState extends State<Login> {
         );
       },
       splashColor: Colors.transparent,
-      highlightColor: Colors.orange[100],
+      highlightColor: Color(0xfffee18e),
     );
   }
 
@@ -305,9 +305,10 @@ class LoginState extends State<Login> {
             child: Text(
               'Daftar sekarang!',
               style: TextStyle(
-                  color: Colors.orangeAccent,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400),
+                color: Colors.brown,
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           )
         ],
@@ -354,11 +355,11 @@ class LoginState extends State<Login> {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
-                stops: [0.4, 0.8],
+                end: Alignment.bottomCenter,
+                stops: [0.1, 0.8],
                 colors: [
                   Colors.white,
-                  Color(0xffFED8B1),
+                  Color(0xfffee18e),
                 ],
               ),
             ),
