@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:malioboromall/CatalogBase.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'model/AppScope.dart';
-import 'Catalog.dart';
+import 'CatalogBase.dart';
 
 class Tenant extends StatefulWidget {
   @override
@@ -34,7 +35,7 @@ class TenantState extends State<Tenant> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => Catalog(
+            builder: (context) => CatalogBase(
               id: tenantData[index].id,
               title: tenantData[index].nama,
             ),

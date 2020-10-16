@@ -1,34 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-//import 'package:cached_network_image/cached_network_image.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'model/CatalogScope.dart';
 import 'Cart.dart';
 import 'Details.dart';
-import 'Forms.dart';
 
 class Catalog extends StatefulWidget {
-  final String id;
-  final String title;
-
-  Catalog({this.id, this.title});
-
+  final CatalogModel catalogModel;
   static final String route = 'List-route';
 
-  final routes = <String, WidgetBuilder>{
-    Catalog.route: (BuildContext context) => Catalog(),
-    Details.route: (BuildContext context) => Details(),
-    Cart.route: (BuildContext context) => Cart(),
-    Forms.route: (BuildContext context) => Forms(),
-  };
+  Catalog({this.catalogModel});
 
   @override
   CatalogState createState() => CatalogState();
 }
 
 class CatalogState extends State<Catalog> {
-  static final CatalogModel catalogModel = CatalogModel();
-  CatalofState() {
+  CatalogState() {
     searchQuery.addListener(() {
       if (searchQuery.text.isEmpty) {
         setState(() {
@@ -135,7 +123,7 @@ class CatalogState extends State<Catalog> {
   );
 
   Widget appBarTitle = Text(
-    Catalog._title,
+    'CATALOG',
     style: TextStyle(
       fontSize: 24,
       shadows: [
@@ -274,7 +262,7 @@ class CatalogState extends State<Catalog> {
         size: 30,
       );
       this.appBarTitle = Text(
-        'SUPERMARKET MALIOBORO MALL',
+        'CATALOG',
         style: TextStyle(
           fontSize: 20,
         ),

@@ -151,7 +151,7 @@ class CatalogModel extends Model {
             print('ERRR >>>');
             print(e);
           }
-          cart.add(d);
+          catalog.add(d);
           notifyListeners();
         }
         storage.setItem('isFirst', 'true');
