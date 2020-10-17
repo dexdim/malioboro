@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'model/CatalogScope.dart';
+import 'model/AppScope.dart';
 import 'Forms.dart';
 
 class Cart extends StatefulWidget {
@@ -17,7 +17,7 @@ class CartState extends State<Cart> {
   static var totalHarga;
 
   Widget button(String title) {
-    return ScopedModelDescendant<CatalogModel>(
+    return ScopedModelDescendant<AppModel>(
       builder: (context, child, model) {
         return Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -27,7 +27,7 @@ class CartState extends State<Cart> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
                 side: BorderSide(
-                  color: Colors.orange[200],
+                  color: Colors.brown[200],
                   width: 1,
                 ),
               ),
@@ -59,7 +59,7 @@ class CartState extends State<Cart> {
                 });
               },
               splashColor: Colors.transparent,
-              highlightColor: Colors.orange[100],
+              highlightColor: Color(0xfffee18e),
             )
           ],
         );
@@ -111,7 +111,7 @@ class CartState extends State<Cart> {
                         ),
                         Container(
                           alignment: Alignment.bottomRight,
-                          child: ScopedModelDescendant<CatalogModel>(
+                          child: ScopedModelDescendant<AppModel>(
                             builder: (context, child, model) {
                               return InkResponse(
                                 onTap: () {
@@ -193,7 +193,7 @@ class CartState extends State<Cart> {
           padding: const EdgeInsets.all(3.0),
           decoration: BoxDecoration(
             shape: BoxShape.rectangle,
-            border: Border.all(color: Colors.orange[200]),
+            border: Border.all(color: Colors.brown[200]),
           ),
           child: Icon(
             Icons.remove,
@@ -217,7 +217,7 @@ class CartState extends State<Cart> {
           padding: const EdgeInsets.all(3.0),
           decoration: BoxDecoration(
             shape: BoxShape.rectangle,
-            border: Border.all(color: Colors.orange[200]),
+            border: Border.all(color: Colors.brown[200]),
           ),
           child: Icon(
             Icons.add,
@@ -272,7 +272,20 @@ class CartState extends State<Cart> {
       key: _scaffoldKey,
       appBar: AppBar(
         elevation: 1,
-        title: Text('Daftar Keranjang Belanja'),
+        title: Text(
+          'CART LIST',
+          style: TextStyle(
+            fontSize: 24,
+            shadows: [
+              Shadow(
+                offset: Offset(0.00, 2.00),
+                color: Colors.brown.withOpacity(0.50),
+                blurRadius: 5,
+              ),
+            ],
+          ),
+        ),
+        centerTitle: true,
       ),
       backgroundColor: Colors.white,
       body: Container(
@@ -281,7 +294,7 @@ class CartState extends State<Cart> {
             top: BorderSide(color: Colors.grey[300], width: 1.0),
           ),
         ),
-        child: ScopedModelDescendant<CatalogModel>(
+        child: ScopedModelDescendant<AppModel>(
           builder: (context, child, model) {
             return ListView(
               shrinkWrap: true,
@@ -297,7 +310,7 @@ class CartState extends State<Cart> {
       bottomNavigationBar: BottomAppBar(
         child: Container(
           height: 70,
-          child: ScopedModelDescendant<CatalogModel>(
+          child: ScopedModelDescendant<AppModel>(
             builder: (context, child, model) {
               totalHarga = NumberFormat.currency(
                 locale: 'id',

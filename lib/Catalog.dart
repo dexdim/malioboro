@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'model/CatalogScope.dart';
+import 'model/AppScope.dart';
 import 'Cart.dart';
-import 'Details.dart';
+import 'Detail.dart';
 
 class Catalog extends StatefulWidget {
-  final CatalogModel catalogModel;
-  static final String route = 'List-route';
+  final AppModel appModel;
+  static final String route = 'Catalog-route';
 
-  Catalog({this.catalogModel});
+  Catalog({this.appModel});
 
   @override
   CatalogState createState() => CatalogState();
@@ -37,9 +37,9 @@ class CatalogState extends State<Catalog> {
   @override
   void initState() {
     super.initState();
-    isSearching = false;
-    data = ScopedModel.of<CatalogModel>(context).itemListing;
+    data = ScopedModel.of<AppModel>(context).itemListing;
     searchList = data;
+    isSearching = false;
   }
 
   // TODO: Implement Build
@@ -49,9 +49,9 @@ class CatalogState extends State<Catalog> {
   bool isSearching;
   String searchText = '';
   List<Data> data;
-  List<Data> searchList = List();
+  List<Data> searchList = List<Data>();
   List<Data> buildSearchList() {
-    if (searchText.isEmpty) {
+    if (searchText.isEmpty || searchText == '') {
       return searchList = data;
     } else {
       searchList = data
@@ -94,7 +94,7 @@ class CatalogState extends State<Catalog> {
       child: Column(
         children: <Widget>[
           Divider(
-            color: Colors.orange[200],
+            color: Colors.brown[200],
             thickness: 1,
           ),
           Row(
@@ -118,7 +118,7 @@ class CatalogState extends State<Catalog> {
 
   Icon searchIcon = Icon(
     Icons.search,
-    color: Colors.orangeAccent,
+    color: Colors.brown,
     size: 30,
   );
 
@@ -140,7 +140,7 @@ class CatalogState extends State<Catalog> {
     return FloatingActionButton(
       elevation: 0,
       backgroundColor: Colors.white,
-      foregroundColor: Colors.orangeAccent,
+      foregroundColor: Colors.brown,
       onPressed: () {
         Navigator.push(
           context,
@@ -161,7 +161,7 @@ class CatalogState extends State<Catalog> {
           Positioned(
             top: 5,
             left: 30,
-            child: ScopedModelDescendant<CatalogModel>(
+            child: ScopedModelDescendant<AppModel>(
               builder: (context, child, model) {
                 return Container(
                   decoration: new BoxDecoration(
@@ -226,12 +226,12 @@ class CatalogState extends State<Catalog> {
                       hintText: 'Cari di sini...',
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: Colors.orangeAccent,
+                          color: Colors.brown,
                         ),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: Colors.orangeAccent,
+                          color: Colors.brown,
                         ),
                       ),
                     ),
@@ -258,13 +258,20 @@ class CatalogState extends State<Catalog> {
     setState(() {
       this.searchIcon = Icon(
         Icons.search,
-        color: Colors.orangeAccent,
+        color: Colors.brown,
         size: 30,
       );
       this.appBarTitle = Text(
         'CATALOG',
         style: TextStyle(
-          fontSize: 20,
+          fontSize: 24,
+          shadows: [
+            Shadow(
+              offset: Offset(0.00, 2.00),
+              color: Colors.brown.withOpacity(0.50),
+              blurRadius: 5,
+            ),
+          ],
         ),
       );
     });
@@ -280,51 +287,68 @@ class CatalogState extends State<Catalog> {
     return Scaffold(
       key: scaffoldKey,
       appBar: appBar(context),
-      body: Container(
-        decoration: BoxDecoration(color: Colors.transparent),
-        child: Padding(
-          padding: EdgeInsets.all(5.0),
-          child: GridView.builder(
-            shrinkWrap: true,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2, childAspectRatio: aspectRatio),
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: EdgeInsets.all(5.0),
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            Details(detail: searchList[index]),
-                      ),
-                    );
-                  },
-                  child: Container(
-                    padding: EdgeInsets.all(5.0),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.rectangle,
-                      border: Border.all(color: Colors.orange[200]),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
-                      ),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        itemImage(index),
-                        itemName(index),
-                        itemPrice(index),
-                      ],
-                    ),
-                  ),
-                ),
-              );
-            },
-            itemCount: searchList.length,
+      body: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                stops: [0.1, 0.8],
+                colors: [
+                  Colors.white,
+                  Color(0xfffee18e),
+                ],
+              ),
+            ),
           ),
-        ),
+          Container(
+            decoration: BoxDecoration(color: Colors.transparent),
+            child: Padding(
+              padding: EdgeInsets.all(5.0),
+              child: GridView.builder(
+                shrinkWrap: true,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2, childAspectRatio: aspectRatio),
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: EdgeInsets.all(5.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                Detail(detail: searchList[index]),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        padding: EdgeInsets.all(5.0),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          border: Border.all(color: Colors.brown[200]),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(10),
+                          ),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            itemImage(index),
+                            itemName(index),
+                            itemPrice(index),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                },
+                itemCount: searchList.length,
+              ),
+            ),
+          ),
+        ],
       ),
       floatingActionButton: Container(
         margin: EdgeInsets.only(right: 5, bottom: 5),

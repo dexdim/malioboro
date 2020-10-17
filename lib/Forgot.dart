@@ -3,6 +3,7 @@ import 'Login.dart';
 
 class Forgot extends StatefulWidget {
   Forgot({Key key}) : super(key: key);
+  static final String route = 'Forgot-route';
 
   @override
   ForgotState createState() => ForgotState();

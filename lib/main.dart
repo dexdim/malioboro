@@ -7,8 +7,14 @@ import 'package:scoped_model/scoped_model.dart';
 import 'auth/Auth.dart';
 import 'model/AppScope.dart';
 import 'Login.dart';
+import 'Signup.dart';
+import 'Forgot.dart';
 import 'Menu.dart';
 import 'Root.dart';
+import 'Catalog.dart';
+import 'Detail.dart';
+import 'Cart.dart';
+import 'Forms.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +29,13 @@ class Main extends StatelessWidget {
 
   final routes = <String, WidgetBuilder>{
     Login.route: (BuildContext context) => Login(),
+    SignUp.route: (BuildContext context) => SignUp(),
+    Forgot.route: (BuildContext context) => Forgot(),
     Menu.route: (BuildContext context) => Menu(),
+    Catalog.route: (BuildContext context) => Catalog(),
+    Detail.route: (BuildContext context) => Detail(),
+    Cart.route: (BuildContext context) => Cart(),
+    Forms.route: (BuildContext context) => Forms(),
   };
 
   @override

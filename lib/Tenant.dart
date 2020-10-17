@@ -36,7 +36,8 @@ class TenantState extends State<Tenant> {
           context,
           MaterialPageRoute(
             builder: (context) => CatalogBase(
-              id: tenantData[index].id,
+              //id: tenantData[index].id,
+              id: '136',
               title: tenantData[index].nama,
             ),
           ),

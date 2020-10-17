@@ -4,7 +4,6 @@ import 'package:flutter_open_whatsapp/flutter_open_whatsapp.dart';
 import 'package:email_validator/email_validator.dart';
 import 'Cart.dart';
 import 'model/AppScope.dart';
-import 'model/CatalogScope.dart';
 
 class Forms extends StatefulWidget {
   static final String route = 'Form-route';
@@ -31,7 +30,7 @@ class FormsState extends State<Forms> {
   }
 
   Widget button(String title) {
-    return ScopedModelDescendant<CatalogModel>(
+    return ScopedModelDescendant<AppModel>(
         builder: (context, child, model) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -62,25 +61,25 @@ class FormsState extends State<Forms> {
               List<TenantList> tenantData =
                   ScopedModel.of<AppModel>(context).tenant;
               if (formKey.currentState.validate()) {
-                var finalprint = '';
+                var finalPrint = '';
                 printItem(Data d) {
-                  finalprint +=
+                  finalPrint +=
                       '\nNama barang : ${d.nama}\nHarga satuan : Rp ${d.harga}\nKode barcode : ${d.deskripsi}\nJumlah : ${d.counter} , Harga subtotal : Rp ${d.subtotal}\n';
                 }
 
-                finalprint += 'Halo Supermarket Malioboro Mall\n';
-                finalprint += 'Berikut adalah daftar belanja dari,\n';
-                finalprint += 'Nama pemesan: ${namaController.text}\n';
-                finalprint += 'Nomor handphone: ${nomorhpController.text}';
-                finalprint += '\n=================\n\n';
+                finalPrint += 'Halo Supermarket Malioboro Mall\n';
+                finalPrint += 'Berikut adalah daftar belanja dari,\n';
+                finalPrint += 'Nama pemesan: ${namaController.text}\n';
+                finalPrint += 'Nomor handphone: ${nomorhpController.text}';
+                finalPrint += '\n=================\n\n';
                 model.cartListing.map((d) => printItem(d)).toString();
-                finalprint +=
+                finalPrint +=
                     '\n\n=================\nHarga total : Rp ${CartState.totalHarga}';
-                finalprint +=
+                finalPrint +=
                     '\n\nMohon untuk cek ketersediaan stocknya. Terima kasih.';
 
                 FlutterOpenWhatsapp.sendSingleMessage(
-                    '$tenantData', '${finalprint.toString()}');
+                    '$tenantData', '${finalPrint.toString()}');
               }
             },
             splashColor: Colors.transparent,

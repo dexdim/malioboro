@@ -4,6 +4,7 @@ import 'Login.dart';
 
 class SignUp extends StatefulWidget {
   SignUp({Key key}) : super(key: key);
+  static final String route = 'SignUp-route';
 
   @override
   _SignUpState createState() => _SignUpState();

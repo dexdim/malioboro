@@ -2,19 +2,19 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:intl/intl.dart';
-import 'model/CatalogScope.dart';
+import 'model/AppScope.dart';
 
-class Details extends StatefulWidget {
-  static final String route = 'Details-route';
+class Detail extends StatefulWidget {
+  static final String route = 'Detail-route';
   final Data detail;
-  Details({this.detail});
+  Detail({this.detail});
 
   // TODO: implement createState
   @override
-  DetailsState createState() => DetailsState();
+  DetailState createState() => DetailState();
 }
 
-class DetailsState extends State<Details> {
+class DetailState extends State<Detail> {
   int counter = 1;
   int subtotal = 0;
 
@@ -23,38 +23,39 @@ class DetailsState extends State<Details> {
   //int active = 0;
 
   Widget button(String title) {
-    return ScopedModelDescendant<CatalogModel>(
+    return ScopedModelDescendant<AppModel>(
         builder: (context, child, model) {
       return RaisedButton(
-          elevation: 3,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-            side: BorderSide(
-              color: Colors.orange[200],
-              width: 1,
-            ),
+        elevation: 3,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+          side: BorderSide(
+            color: Colors.brown,
+            width: 1,
           ),
-          color: Colors.white,
-          padding: EdgeInsets.symmetric(
-            vertical: 10,
-            horizontal: 50,
+        ),
+        color: Colors.white,
+        padding: EdgeInsets.symmetric(
+          vertical: 10,
+          horizontal: 50,
+        ),
+        child: Text(
+          title,
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w400,
+            color: Colors.black,
           ),
-          child: Text(
-            title,
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w400,
-              color: Colors.black,
-            ),
-          ),
-          onPressed: () {
-            model.addCart(widget.detail);
-            Timer(Duration(milliseconds: 500), () {
-              showDetailSnack(model.cartMsg, model.success);
-            });
-          },
-          splashColor: Colors.transparent,
-          highlightColor: Colors.orange[100]);
+        ),
+        onPressed: () {
+          model.addCart(widget.detail);
+          Timer(Duration(milliseconds: 500), () {
+            showDetailSnack(model.cartMsg, model.success);
+          });
+        },
+        splashColor: Colors.transparent,
+        highlightColor: Color(0xfffee18e),
+      );
     });
   }
 
@@ -75,7 +76,7 @@ class DetailsState extends State<Details> {
           padding: const EdgeInsets.all(3.0),
           decoration: BoxDecoration(
             shape: BoxShape.rectangle,
-            border: Border.all(color: Colors.orange[200]),
+            border: Border.all(color: Colors.brown[200]),
           ),
           child: Icon(
             Icons.remove,
@@ -99,7 +100,7 @@ class DetailsState extends State<Details> {
           padding: const EdgeInsets.all(3.0),
           decoration: BoxDecoration(
             shape: BoxShape.rectangle,
-            border: Border.all(color: Colors.orange[200]),
+            border: Border.all(color: Colors.brown[200]),
           ),
           child: Icon(
             Icons.add,
@@ -138,7 +139,7 @@ class DetailsState extends State<Details> {
                   fontWeight: FontWeight.w400),
             ),
           ),
-          ScopedModelDescendant<CatalogModel>(builder: (context, child, model) {
+          ScopedModelDescendant<AppModel>(builder: (context, child, model) {
             widget.detail.counter = counter;
             widget.detail.subtotal = counter * widget.detail.harga;
             return Text(
@@ -171,7 +172,19 @@ class DetailsState extends State<Details> {
         backgroundColor: Colors.white,
         appBar: AppBar(
           centerTitle: true,
-          title: Text('Detail Item'),
+          title: Text(
+            'DETAIL ITEM',
+            style: TextStyle(
+              fontSize: 24,
+              shadows: [
+                Shadow(
+                  offset: Offset(0.00, 2.00),
+                  color: Colors.brown.withOpacity(0.50),
+                  blurRadius: 5,
+                ),
+              ],
+            ),
+          ),
           elevation: 0,
         ),
         body: Container(
@@ -224,7 +237,7 @@ class DetailsState extends State<Details> {
                       style: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 20.0,
-                          color: Colors.orangeAccent),
+                          color: Colors.brown),
                     ),
                     SizedBox(height: 10),
                     Text(
