@@ -287,25 +287,41 @@ class CartState extends State<Cart> {
         ),
         centerTitle: true,
       ),
-      backgroundColor: Colors.white,
-      body: Container(
-        decoration: BoxDecoration(
-          border: Border(
-            top: BorderSide(color: Colors.grey[300], width: 1.0),
+      body: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                stops: [0.1, 0.8],
+                colors: [
+                  Colors.white,
+                  Color(0xfffee18e),
+                ],
+              ),
+            ),
           ),
-        ),
-        child: ScopedModelDescendant<AppModel>(
-          builder: (context, child, model) {
-            return ListView(
-              shrinkWrap: true,
-              children: model.cartListing
-                  .map(
-                    (d) => generateCart(d),
-                  )
-                  .toList(),
-            );
-          },
-        ),
+          Container(
+            decoration: BoxDecoration(
+              border: Border(
+                top: BorderSide(color: Colors.grey[300], width: 1.0),
+              ),
+            ),
+            child: ScopedModelDescendant<AppModel>(
+              builder: (context, child, model) {
+                return ListView(
+                  shrinkWrap: true,
+                  children: model.cartListing
+                      .map(
+                        (d) => generateCart(d),
+                      )
+                      .toList(),
+                );
+              },
+            ),
+          ),
+        ],
       ),
       bottomNavigationBar: BottomAppBar(
         child: Container(

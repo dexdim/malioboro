@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'auth/Auth.dart';
@@ -60,15 +59,14 @@ class Main extends StatelessWidget {
       model: appModel,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Malioboro Mall',
+        title: 'Malioboro Mall Shop & Deals',
         theme: ThemeData(
           primaryColor: Colors.white,
           fontFamily: 'Baloo2',
         ),
         //home: Menu(),
-        home: Root(
-          auth: Auth(),
-        ),
+        home: Splash(),
+
         routes: routes,
       ),
     );
@@ -88,7 +86,9 @@ class SplashState extends State<Splash> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => Menu(),
+        builder: (context) => Root(
+          auth: Auth(),
+        ),
       ),
     );
   }
@@ -113,7 +113,7 @@ class SplashState extends State<Splash> {
         margin: EdgeInsets.all(30.0),
         width: 300.0,
         child: Image.asset(
-          'assets/logo.png',
+          'assets/icon/coklat.png',
         ),
       ),
     );

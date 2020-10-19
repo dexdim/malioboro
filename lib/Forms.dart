@@ -30,8 +30,7 @@ class FormsState extends State<Forms> {
   }
 
   Widget button(String title) {
-    return ScopedModelDescendant<AppModel>(
-        builder: (context, child, model) {
+    return ScopedModelDescendant<AppModel>(builder: (context, child, model) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -218,8 +217,8 @@ class FormsState extends State<Forms> {
               SizedBox(height: 50),
               formField('Nama Lengkap', namaController),
               formField('Alamat', alamatController),
-              formField('Email', nomorhpController),
-              formField('Nomor Handphone', emailController),
+              formField('Email', emailController),
+              formField('Nomor Handphone', nomorhpController),
             ]),
           ),
         ),

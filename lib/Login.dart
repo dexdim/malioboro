@@ -73,8 +73,8 @@ class LoginState extends State<Login> {
 
   Widget logo() {
     return Image(
-      width: MediaQuery.of(context).size.width * 0.5,
-      image: AssetImage('assets/icon/logomall.png'),
+      height: MediaQuery.of(context).size.height * 0.15,
+      image: AssetImage('assets/icon/coklat.png'),
     );
   }
 

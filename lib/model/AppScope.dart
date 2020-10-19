@@ -1,13 +1,13 @@
 import 'dart:io';
 import 'dart:async';
 import 'dart:convert';
-import '../Cart.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:http/http.dart' as http;
+import '../Cart.dart';
 
 class PromoList {
   dynamic id;
@@ -74,14 +74,37 @@ class Data {
 List data;
 
 class AppModel extends Model {
+  AppModel() {
+    fetchPromo();
+    fetchTenant();
+  }
   List<String> highlight = [];
   List<PromoList> promo = [];
   List<TenantList> tenant = [];
-
+  CartState cartState;
+  List<Data> catalog = [];
+  List<Data> cart = [];
+  String cartMsg = '';
+  String cartEmpty = 'Keranjang belanja anda masih kosong';
+  bool success = false;
+  Database _db;
+  Directory tempDir;
+  String tempPath;
+  final LocalStorage storage = new LocalStorage('app_data');
+  final String url =
+      'http://www.malmalioboro.co.id/index.php/api/produk/get_list';
   final String promoUrl =
       'http://www.malmalioboro.co.id/index.php/api/event/get_list_promo_20';
   final String tenantUrl =
       'http://www.malmalioboro.co.id/index.php/api/tenant/get_list';
+
+  //Item listing to Catalog()
+  List<Data> get itemListing => catalog;
+
+  //Cart listing to Cart()
+  List<Data> get cartListing => cart;
+
+  get finalPrint => printCart();
 
   Future<String> fetchPromo() async {
     Map body = {'jenis': 'Promo'};
@@ -127,27 +150,6 @@ class AppModel extends Model {
     return 'Success!';
   }
 
-  AppModel() {
-    fetchPromo();
-    fetchTenant();
-  }
-
-  CartState cartState;
-  List<Data> catalog = [];
-  List<Data> cart = [];
-  String cartMsg = '';
-  String cartEmpty = 'Keranjang belanja anda masih kosong';
-  bool success = false;
-  Database _db;
-  Directory tempDir;
-  String tempPath;
-  final LocalStorage storage = new LocalStorage('app_data');
-  final String url =
-      'http://www.malmalioboro.co.id/index.php/api/produk/get_list';
-
-  get finalPrint => printCart();
-
-  //Ambil data JSON dari API
   Future<String> fetchData(String id) async {
     Map body = {'idtenan': '$id'};
     http.Response response = await http.post(
@@ -198,7 +200,7 @@ class AppModel extends Model {
   //Buat tabel item_list & cart_list jika belum ada tabel
   createTable() async {
     try {
-      var qry = 'CREATE TABLE IF NOT EXISTS item_list ( '
+      String qry = 'CREATE TABLE IF NOT EXISTS item_list ( '
           'id INTEGER PRIMARY KEY,'
           'nama TEXT,'
           'deskripsi TEXT,'
@@ -340,9 +342,6 @@ class AppModel extends Model {
     }
   }
 
-  //Item listing to Home()
-  List<Data> get itemListing => catalog;
-
   //Tambah item (next implementation)
   void addItem(Data dd) {
     Data d = new Data();
@@ -355,9 +354,6 @@ class AppModel extends Model {
     catalog.add(d);
     notifyListeners();
   }
-
-  //Cart listing to Cart()
-  List<Data> get cartListing => cart;
 
   //Delete record dari tabel cart_list jika ada item yang dihapus
   removeCartDB(Data d) async {
