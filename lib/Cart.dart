@@ -134,7 +134,7 @@ class CartState extends State<Cart> {
                       child: Row(children: <Widget>[
                         Text(
                           'Jumlah : ',
-                          style: TextStyle(fontSize: 15),
+                          style: TextStyle(fontSize: 18),
                         ),
                         counterBar(d.counter),
                       ]),
@@ -142,7 +142,7 @@ class CartState extends State<Cart> {
                     Row(children: <Widget>[
                       Text(
                         'Harga satuan : ',
-                        style: TextStyle(fontSize: 15),
+                        style: TextStyle(fontSize: 18),
                       ),
                       Text(
                         NumberFormat.currency(
@@ -150,13 +150,14 @@ class CartState extends State<Cart> {
                           name: 'Rp ',
                           decimalDigits: 0,
                         ).format(d.harga),
+                        style: TextStyle(fontSize: 18),
                       ),
                     ]),
                     Expanded(
                       child: Row(children: <Widget>[
                         Text(
                           'Harga subtotal : ',
-                          style: TextStyle(fontSize: 15),
+                          style: TextStyle(fontSize: 18),
                         ),
                         Text(
                           NumberFormat.currency(
@@ -164,6 +165,7 @@ class CartState extends State<Cart> {
                             name: 'Rp ',
                             decimalDigits: 0,
                           ).format(d.subtotal),
+                          style: TextStyle(fontSize: 18),
                         ),
                       ]),
                     ),
@@ -238,14 +240,14 @@ class CartState extends State<Cart> {
             child: Text(
               'Harga total:',
               style: TextStyle(
-                  fontSize: 20.0,
-                  color: Colors.grey,
-                  fontWeight: FontWeight.w400),
+                  fontSize: 22.0,
+                  color: Colors.brown,
+                  fontWeight: FontWeight.w600),
             ),
           ),
           Text(
             totalHarga,
-            style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500),
+            style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w500),
           ),
         ],
       ),
@@ -271,7 +273,7 @@ class CartState extends State<Cart> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        elevation: 1,
+        elevation: 0,
         title: Text(
           'CART LIST',
           style: TextStyle(
@@ -324,6 +326,8 @@ class CartState extends State<Cart> {
         ],
       ),
       bottomNavigationBar: BottomAppBar(
+        elevation: 0,
+        color: Color(0xfffee18e),
         child: Container(
           height: 70,
           child: ScopedModelDescendant<AppModel>(

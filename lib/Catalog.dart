@@ -37,7 +37,7 @@ class CatalogState extends State<Catalog> {
   @override
   void initState() {
     super.initState();
-    data = ScopedModel.of<AppModel>(context).itemListing;
+    data = ScopedModel.of<AppModel>(context).catalog;
     searchList = data;
     isSearching = false;
   }

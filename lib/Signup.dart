@@ -13,6 +13,27 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   bool accept = false;
 
+  Widget title() {
+    return RichText(
+      textAlign: TextAlign.center,
+      text: TextSpan(
+        text: "SIGN UP",
+        style: TextStyle(
+          fontWeight: FontWeight.w500,
+          fontSize: 24,
+          color: Colors.black,
+          shadows: [
+            Shadow(
+              offset: Offset(0.00, 2.00),
+              color: Color(0xffd97c29).withOpacity(0.50),
+              blurRadius: 5,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget backButton() {
     return InkWell(
       onTap: () {
@@ -46,7 +67,7 @@ class _SignUpState extends State<SignUp> {
             child: TextFormField(
               onSaved: (value) => title = value,
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 18,
               ),
               obscureText: isPassword,
               decoration: InputDecoration(
@@ -120,7 +141,7 @@ class _SignUpState extends State<SignUp> {
         children: <Widget>[
           Text(
             'Sudah mempunyai akun? ',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
           ),
           InkWell(
             onTap: () {
@@ -138,7 +159,7 @@ class _SignUpState extends State<SignUp> {
               'Login',
               style: TextStyle(
                   color: Colors.brown,
-                  fontSize: 16,
+                  fontSize: 18,
                   fontWeight: FontWeight.w600),
             ),
           )
@@ -155,27 +176,6 @@ class _SignUpState extends State<SignUp> {
         form("Password", isPassword: true),
         form("Konfirmasi Password", isPassword: true),
       ],
-    );
-  }
-
-  Widget title() {
-    return RichText(
-      textAlign: TextAlign.center,
-      text: TextSpan(
-        text: "DAFTAR AKUN",
-        style: TextStyle(
-          fontWeight: FontWeight.w500,
-          fontSize: 24,
-          color: Colors.black,
-          shadows: [
-            Shadow(
-              offset: Offset(0.00, 2.00),
-              color: Color(0xffd97c29).withOpacity(0.50),
-              blurRadius: 5,
-            ),
-          ],
-        ),
-      ),
     );
   }
 
@@ -231,7 +231,11 @@ class _SignUpState extends State<SignUp> {
                               });
                             }),
                         Expanded(
-                          child: Text(tnc, textAlign: TextAlign.justify),
+                          child: Text(
+                            tnc,
+                            style: TextStyle(fontSize: 16),
+                            textAlign: TextAlign.justify,
+                          ),
                         ),
                       ],
                     ),

@@ -78,10 +78,10 @@ class AppModel extends Model {
     fetchPromo();
     fetchTenant();
   }
-  List<String> highlight = [];
+  //CartState cartState;
+  //List<String> highlight = [];
   List<PromoList> promo = [];
   List<TenantList> tenant = [];
-  CartState cartState;
   List<Data> catalog = [];
   List<Data> cart = [];
   String cartMsg = '';
@@ -113,18 +113,20 @@ class AppModel extends Model {
       body: body,
     );
     var parse = json.decode(response.body);
-    parse?.forEach((dynamic p) {
-      final PromoList fetch = PromoList(
-        p['id'],
-        p['nama'],
-        p['tglawal'],
-        p['tglakhir'],
-        p['jenis'],
-        p['tenant'],
-        p['logo'],
-      );
-      promo.add(fetch);
-    });
+    parse?.forEach(
+      (dynamic p) {
+        final PromoList fetch = PromoList(
+          p['id'],
+          p['nama'],
+          p['tglawal'],
+          p['tglakhir'],
+          p['jenis'],
+          p['tenant'],
+          p['logo'],
+        );
+        promo.add(fetch);
+      },
+    );
     return ('Success!');
   }
 
@@ -133,20 +135,22 @@ class AppModel extends Model {
       Uri.encodeFull(tenantUrl),
     );
     var parse = json.decode(response.body);
-    parse?.forEach((dynamic t) {
-      final TenantList fetch = TenantList(
-        t['id'],
-        t['nama'],
-        t['lokasi'],
-        t['kategori'],
-        t['jam'],
-        t['telp'],
-        t['logo'],
-        t['image'],
-        t['deskripsi'],
-      );
-      tenant.add(fetch);
-    });
+    parse?.forEach(
+      (dynamic t) {
+        final TenantList fetch = TenantList(
+          t['id'],
+          t['nama'],
+          t['lokasi'],
+          t['kategori'],
+          t['jam'],
+          t['telp'],
+          t['logo'],
+          t['image'],
+          t['deskripsi'],
+        );
+        tenant.add(fetch);
+      },
+    );
     return 'Success!';
   }
 
@@ -168,18 +172,22 @@ class AppModel extends Model {
       Directory documentsDirectory = await getApplicationDocumentsDirectory();
       String path = join(documentsDirectory.path, 'cart$id.db');
       print(path);
-      await storage.deleteItem('isFirst');
-      await this.deleteDB(id);
+      //await storage.deleteItem('isFirst');
+      //await this.deleteDB(id);
 
-      var database =
-          await openDatabase(path, version: 1, onOpen: (Database db) {
-        this._db = db;
-        print('OPEN DBV');
-        this.createTable();
-      }, onCreate: (Database db, int version) async {
-        this._db = db;
-        print('DB Created');
-      });
+      var database = await openDatabase(
+        path,
+        version: 1,
+        onOpen: (Database db) {
+          this._db = db;
+          print('OPEN DBV');
+          this.createTable();
+        },
+        onCreate: (Database db, int version) async {
+          this._db = db;
+          print('DB Created');
+        },
+      );
     } catch (e) {
       print('ERRR >>>>');
       print(e);
@@ -238,28 +246,30 @@ class AppModel extends Model {
   //Isi data item dari API ke dalam tabel item_list & list array _data
   insertInLocal() async {
     try {
-      await this._db.transaction((tx) async {
-        for (var i = 0; i < data.length; i++) {
-          print('Called insert $i');
-          Data d = new Data();
-          d.id = i + 1;
-          d.nama = data[i]['nama'];
-          d.deskripsi = data[i]['deskripsi'];
-          d.gambar = data[i]['gambar'];
-          d.harga = int.parse(data[i]['harga']);
-          try {
-            var qry =
-                "INSERT INTO item_list(nama, deskripsi, harga, gambar) VALUES('${d.nama}', '${d.deskripsi}', ${d.harga}, '${d.gambar}')";
-            var _res = await tx.rawInsert(qry);
-          } catch (e) {
-            print('ERRR >>>');
-            print(e);
+      await this._db.transaction(
+        (tx) async {
+          for (var i = 0; i < data.length; i++) {
+            print('Called insert $i');
+            Data d = new Data();
+            d.id = i + 1;
+            d.nama = data[i]['nama'];
+            d.deskripsi = data[i]['deskripsi'];
+            d.gambar = data[i]['gambar'];
+            d.harga = int.parse(data[i]['harga']);
+            try {
+              var qry =
+                  "INSERT INTO item_list(nama, deskripsi, harga, gambar) VALUES('${d.nama}', '${d.deskripsi}', ${d.harga}, '${d.gambar}')";
+              var _res = await tx.rawInsert(qry);
+            } catch (e) {
+              print('ERRR >>>');
+              print(e);
+            }
+            catalog.add(d);
+            notifyListeners();
           }
-          catalog.add(d);
-          notifyListeners();
-        }
-        storage.setItem('isFirst', 'true');
-      });
+          storage.setItem('isFirst', 'true');
+        },
+      );
     } catch (e) {
       print('ERRR ## > ');
       print(e);
@@ -270,15 +280,17 @@ class AppModel extends Model {
   fetchLocalData() async {
     try {
       List<Map> list = await this._db.rawQuery('SELECT * FROM item_list');
-      list.map((dd) {
-        Data d = new Data();
-        d.id = dd['id'];
-        d.nama = dd['nama'];
-        d.deskripsi = dd['deskripsi'];
-        d.gambar = dd['gambar'];
-        d.harga = dd['harga'];
-        catalog.add(d);
-      }).toList();
+      list.map(
+        (dd) {
+          Data d = new Data();
+          d.id = dd['id'];
+          d.nama = dd['nama'];
+          d.deskripsi = dd['deskripsi'];
+          d.gambar = dd['gambar'];
+          d.harga = dd['harga'];
+          catalog.add(d);
+        },
+      ).toList();
       notifyListeners();
     } catch (e) {
       print('ERRR %%%');
@@ -304,17 +316,19 @@ class AppModel extends Model {
 
   //Isi tabel cart_list dari list array _data
   insertInCart(Data d) async {
-    await this._db.transaction((tx) async {
-      try {
-        var qry =
-            "INSERT INTO cart_list(shopid, nama, deskripsi, harga, gambar, counter, subtotal) VALUES (${d.id},'${d.nama}', '${d.deskripsi}', ${d.harga},'${d.gambar}', ${d.counter}, ${d.subtotal})";
-        var _res = await tx.execute(qry);
-        this.fetchCartList();
-      } catch (e) {
-        print('ERRR @@ @@');
-        print(e);
-      }
-    });
+    await this._db.transaction(
+      (tx) async {
+        try {
+          var qry =
+              "INSERT INTO cart_list(shopid, nama, deskripsi, harga, gambar, counter, subtotal) VALUES (${d.id},'${d.nama}', '${d.deskripsi}', ${d.harga},'${d.gambar}', ${d.counter}, ${d.subtotal})";
+          var _res = await tx.execute(qry);
+          this.fetchCartList();
+        } catch (e) {
+          print('ERRR @@ @@');
+          print(e);
+        }
+      },
+    );
   }
 
   //Ambil record item dari tabel cart_list
@@ -323,18 +337,20 @@ class AppModel extends Model {
       cart = [];
       List<Map> list = await this._db.rawQuery('SELECT * FROM cart_list');
       print('Cart len ${list.length.toString()}');
-      list.map((dd) {
-        Data d = new Data();
-        d.id = dd['id'];
-        d.nama = dd['nama'];
-        d.deskripsi = dd['deskripsi'];
-        d.harga = dd['harga'];
-        d.gambar = dd['gambar'];
-        d.counter = dd['counter'];
-        d.subtotal = dd['subtotal'];
-        d.shopid = dd['shopid'];
-        cart.add(d);
-      }).toList();
+      list.map(
+        (dd) {
+          Data d = new Data();
+          d.id = dd['id'];
+          d.nama = dd['nama'];
+          d.deskripsi = dd['deskripsi'];
+          d.harga = dd['harga'];
+          d.gambar = dd['gambar'];
+          d.counter = dd['counter'];
+          d.subtotal = dd['subtotal'];
+          d.shopid = dd['shopid'];
+          cart.add(d);
+        },
+      ).toList();
       notifyListeners();
     } catch (e) {
       print('ERRR @##@');
@@ -359,14 +375,18 @@ class AppModel extends Model {
   removeCartDB(Data d) async {
     try {
       var qry = 'DELETE FROM cart_list where id = ${d.id}';
-      this._db.rawDelete(qry).then((data) {
-        print(data);
-        int _index = cart.indexWhere((dd) => dd.id == d.id);
-        cart.removeAt(_index);
-        notifyListeners();
-      }).catchError((e) {
-        print(e);
-      });
+      this._db.rawDelete(qry).then(
+        (data) {
+          print(data);
+          int _index = cart.indexWhere((dd) => dd.id == d.id);
+          cart.removeAt(_index);
+          notifyListeners();
+        },
+      ).catchError(
+        (e) {
+          print(e);
+        },
+      );
     } catch (e) {
       print('ERR rm cart$e');
     }

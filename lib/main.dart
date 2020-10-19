@@ -106,16 +106,32 @@ class SplashState extends State<Splash> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      decoration: BoxDecoration(color: Colors.white),
-      child: Container(
-        margin: EdgeInsets.all(30.0),
-        width: 300.0,
-        child: Image.asset(
-          'assets/icon/coklat.png',
+    return Stack(
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              stops: [0.1, 0.8],
+              colors: [
+                Colors.white,
+                Color(0xfffee18e),
+              ],
+            ),
+          ),
         ),
-      ),
+        Container(
+          alignment: Alignment.center,
+          child: Container(
+            margin: EdgeInsets.all(30.0),
+            width: 200.0,
+            child: Image.asset(
+              'assets/icon/coklat.png',
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

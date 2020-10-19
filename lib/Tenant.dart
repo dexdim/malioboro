@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:malioboromall/CatalogBase.dart';
+import 'package:malioboromall/main.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'model/AppScope.dart';
-import 'CatalogBase.dart';
+import 'Catalog.dart';
 
 class Tenant extends StatefulWidget {
+  //final AppModel appModel = AppModel();
   @override
   TenantState createState() => TenantState();
 }
@@ -35,10 +36,8 @@ class TenantState extends State<Tenant> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => CatalogBase(
-              //id: tenantData[index].id,
-              id: '136',
-              title: tenantData[index].nama,
+            builder: (context) => Catalog(
+              appModel: Main.appModel,
             ),
           ),
         );
@@ -49,6 +48,8 @@ class TenantState extends State<Tenant> {
   }
 
   Widget popupTenant(tenantData, index) {
+    Main.appModel.fetchData(tenantData[index].id);
+
     return AlertDialog(
       title: Text(
         tenantData[index].nama,
@@ -163,6 +164,11 @@ class TenantState extends State<Tenant> {
   @override
   Widget build(BuildContext context) {
     List<TenantList> tenantData = ScopedModel.of<AppModel>(context).tenant;
+
+    tenantData.sort((a, b) {
+      return a.nama.toLowerCase().compareTo(b.nama.toLowerCase());
+    });
+
     return Container(
       child: ListView.separated(
         padding: EdgeInsets.only(

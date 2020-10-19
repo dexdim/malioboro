@@ -42,7 +42,7 @@ class ForgotState extends State<Forgot> {
             height: 50,
             child: TextFormField(
               onSaved: (value) => title = value,
-              style: TextStyle(color: Colors.black, fontSize: 16),
+              style: TextStyle(color: Colors.black, fontSize: 18),
               obscureText: isPassword,
               decoration: InputDecoration(
                 fillColor: Colors.white,
@@ -172,6 +172,7 @@ class ForgotState extends State<Forgot> {
                     padding: EdgeInsets.symmetric(horizontal: 30),
                     child: Text(
                         'Silakan anda masukkan email yang terdaftar sebagai akun Malioboro Mall.',
+                        style: TextStyle(fontSize: 16),
                         textAlign: TextAlign.justify),
                   ),
                   SizedBox(

@@ -71,6 +71,27 @@ class LoginState extends State<Login> {
     super.initState();
   }
 
+  Widget title() {
+    return RichText(
+      textAlign: TextAlign.center,
+      text: TextSpan(
+        text: "SIGN UP",
+        style: TextStyle(
+          fontWeight: FontWeight.w500,
+          fontSize: 24,
+          color: Colors.black,
+          shadows: [
+            Shadow(
+              offset: Offset(0.00, 2.00),
+              color: Color(0xffd97c29).withOpacity(0.50),
+              blurRadius: 5,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget logo() {
     return Image(
       height: MediaQuery.of(context).size.height * 0.15,
@@ -97,7 +118,7 @@ class LoginState extends State<Login> {
             margin: EdgeInsets.symmetric(vertical: 10),
             child: TextFormField(
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 18,
               ),
               maxLines: 1,
               validator: (value) =>
@@ -149,7 +170,7 @@ class LoginState extends State<Login> {
         child: Text(
           'Lupa password?',
           style: TextStyle(
-            fontSize: 16,
+            fontSize: 18,
             fontWeight: FontWeight.w600,
             color: Colors.brown,
           ),
@@ -211,7 +232,7 @@ class LoginState extends State<Login> {
           ),
           Text(
             'atau login dengan',
-            style: TextStyle(fontSize: 16),
+            style: TextStyle(fontSize: 18),
           ),
           Expanded(
             child: Padding(
@@ -251,7 +272,7 @@ class LoginState extends State<Login> {
                   ),
                   Text(
                     'Facebook',
-                    style: TextStyle(fontSize: 16),
+                    style: TextStyle(fontSize: 18),
                   ),
                 ]),
           ),
@@ -269,7 +290,7 @@ class LoginState extends State<Login> {
                 ),
                 Text(
                   'Google',
-                  style: TextStyle(fontSize: 16),
+                  style: TextStyle(fontSize: 18),
                 ),
               ],
             ),
@@ -288,7 +309,7 @@ class LoginState extends State<Login> {
         children: <Widget>[
           Text(
             'Anda belum punya akun? ',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
           ),
           InkWell(
             onTap: () {
@@ -306,7 +327,7 @@ class LoginState extends State<Login> {
               'Daftar sekarang!',
               style: TextStyle(
                 color: Colors.brown,
-                fontSize: 16,
+                fontSize: 18,
                 fontWeight: FontWeight.w600,
               ),
             ),

@@ -39,7 +39,7 @@ class FormsState extends State<Forms> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
               side: BorderSide(
-                color: Colors.orange[200],
+                color: Colors.brown,
                 width: 1,
               ),
             ),
@@ -73,16 +73,16 @@ class FormsState extends State<Forms> {
                 finalPrint += '\n=================\n\n';
                 model.cartListing.map((d) => printItem(d)).toString();
                 finalPrint +=
-                    '\n\n=================\nHarga total : Rp ${CartState.totalHarga}';
+                    '\n\n=================\nHarga total : ${CartState.totalHarga}';
                 finalPrint +=
                     '\n\nMohon untuk cek ketersediaan stocknya. Terima kasih.';
 
                 FlutterOpenWhatsapp.sendSingleMessage(
-                    '$tenantData', '${finalPrint.toString()}');
+                    '6282138020366', '${finalPrint.toString()}');
               }
             },
             splashColor: Colors.transparent,
-            highlightColor: Colors.orange[100],
+            highlightColor: Color(0xfffee18e),
           )
         ],
       );
@@ -104,7 +104,7 @@ class FormsState extends State<Forms> {
     return InputDecoration(
       contentPadding: EdgeInsets.all(10),
       labelText: title,
-      labelStyle: TextStyle(color: Colors.grey[850], fontSize: 16),
+      labelStyle: TextStyle(color: Colors.grey[850], fontSize: 18),
       enabledBorder: OutlineInputBorder(
         borderSide: BorderSide(
           color: Colors.grey,
@@ -112,7 +112,7 @@ class FormsState extends State<Forms> {
       ),
       focusedBorder: OutlineInputBorder(
         borderSide: BorderSide(
-          color: Colors.orangeAccent,
+          color: Colors.brown,
         ),
       ),
       focusedErrorBorder: OutlineInputBorder(
@@ -202,28 +202,59 @@ class FormsState extends State<Forms> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text('Form pemesanan'),
-        elevation: 5,
-      ),
-      body: SingleChildScrollView(
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          child: Form(
-            key: formKey,
-            child: Column(children: <Widget>[
-              SizedBox(height: 50),
-              header(),
-              SizedBox(height: 50),
-              formField('Nama Lengkap', namaController),
-              formField('Alamat', alamatController),
-              formField('Email', emailController),
-              formField('Nomor Handphone', nomorhpController),
-            ]),
+        centerTitle: true,
+        title: Text(
+          'FORM ORDER',
+          style: TextStyle(
+            fontSize: 24,
+            shadows: [
+              Shadow(
+                offset: Offset(0.00, 2.00),
+                color: Colors.brown.withOpacity(0.50),
+                blurRadius: 5,
+              ),
+            ],
           ),
         ),
+        elevation: 0,
+      ),
+      body: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                stops: [0.1, 0.8],
+                colors: [
+                  Colors.white,
+                  Color(0xfffee18e),
+                ],
+              ),
+            ),
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            child: Form(
+              key: formKey,
+              child: Column(children: <Widget>[
+                SizedBox(height: 50),
+                header(),
+                SizedBox(height: 50),
+                formField('Nama Lengkap', namaController),
+                formField('Alamat', alamatController),
+                formField('Email', emailController),
+                formField('Nomor Handphone', nomorhpController),
+              ]),
+            ),
+          ),
+        ],
       ),
       bottomNavigationBar: BottomAppBar(
+        elevation: 0,
+        color: Color(0xfffee18e),
         child: Container(
           height: 70,
           child: button('ORDER VIA WHATSAPP'),
