@@ -57,8 +57,6 @@ class FormsState extends State<Forms> {
               ),
             ),
             onPressed: () {
-              List<TenantList> tenantData =
-                  ScopedModel.of<AppModel>(context).tenant;
               if (formKey.currentState.validate()) {
                 var finalPrint = '';
                 printItem(Data d) {
@@ -129,6 +127,7 @@ class FormsState extends State<Forms> {
   }
 
   Widget formField(String title, controller) {
+    /*
     if (title == 'Email') {
       return Container(
         margin: EdgeInsets.symmetric(vertical: 10),
@@ -150,7 +149,10 @@ class FormsState extends State<Forms> {
               ),
             ]),
       );
-    } else if (title == 'Nomor Handphone') {
+    } else 
+    */
+
+    if (title == 'Nomor Handphone') {
       return Container(
         margin: EdgeInsets.symmetric(vertical: 10),
         width: MediaQuery.of(context).size.width / 1.3,
@@ -244,8 +246,8 @@ class FormsState extends State<Forms> {
                 header(),
                 SizedBox(height: 50),
                 formField('Nama Lengkap', namaController),
-                formField('Alamat', alamatController),
-                formField('Email', emailController),
+                formField('Alamat Pengiriman', alamatController),
+                //formField('Email', emailController),
                 formField('Nomor Handphone', nomorhpController),
               ]),
             ),

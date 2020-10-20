@@ -5,13 +5,13 @@ import 'package:scoped_model/scoped_model.dart';
 import 'model/AppScope.dart';
 import 'Catalog.dart';
 
-class Tenant extends StatefulWidget {
+class Shop extends StatefulWidget {
   //final AppModel appModel = AppModel();
   @override
-  TenantState createState() => TenantState();
+  ShopState createState() => ShopState();
 }
 
-class TenantState extends State<Tenant> {
+class ShopState extends State<Shop> {
   Widget button(tenantData, index) {
     return RaisedButton(
       elevation: 3,

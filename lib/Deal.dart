@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'model/AppScope.dart';
 
-class Promo extends StatefulWidget {
+class Deal extends StatefulWidget {
   @override
-  PromoState createState() => PromoState();
+  DealState createState() => DealState();
 }
 
-class PromoState extends State<Promo> {
+class DealState extends State<Deal> {
   Widget promoImage(promoData, index, BuildContext context) {
     return Container(
       margin: EdgeInsets.only(left: 30, right: 20),

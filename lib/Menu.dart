@@ -2,8 +2,8 @@ import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'Home.dart';
-import 'Promo.dart';
-import 'Tenant.dart';
+import 'Deal.dart';
+import 'Shop.dart';
 import 'Profile.dart';
 import 'auth/Auth.dart';
 
@@ -76,8 +76,8 @@ class _MenuState extends State<Menu> {
       },
       children: <Widget>[
         Home(),
-        Promo(),
-        Tenant(),
+        Shop(),
+        Deal(),
         Profile(),
       ],
     );
@@ -95,11 +95,11 @@ class _MenuState extends State<Menu> {
           titleText = 'MALIOBORO MALL';
           subtitleText = 'shop & deals';
         } else if (index == 1) {
-          titleText = 'PROMOS';
-          subtitleText = 'here is our great deal, grab it fast';
+          titleText = 'SHOPS';
+          subtitleText = 'check our tenants and their hot items';
         } else if (index == 2) {
-          titleText = 'TENANTS';
-          subtitleText = 'meet our special tenants';
+          titleText = 'DEALS';
+          subtitleText = 'special offers for you, grab it fast';
         } else if (index == 3) {
           titleText = 'PROFILE';
           subtitleText = 'hello customer!';

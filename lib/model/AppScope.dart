@@ -7,7 +7,7 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:http/http.dart' as http;
-import '../Cart.dart';
+//import '../Cart.dart';
 
 class PromoList {
   dynamic id;
@@ -94,7 +94,7 @@ class AppModel extends Model {
   final String url =
       'http://www.malmalioboro.co.id/index.php/api/produk/get_list';
   final String promoUrl =
-      'http://www.malmalioboro.co.id/index.php/api/event/get_list_promo_20';
+      'http://www.malmalioboro.co.id/index.php/api/event/get_list_promo_50';
   final String tenantUrl =
       'http://www.malmalioboro.co.id/index.php/api/tenant/get_list';
 
