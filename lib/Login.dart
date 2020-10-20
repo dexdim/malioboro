@@ -308,7 +308,7 @@ class LoginState extends State<Login> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
-            'Anda belum punya akun? ',
+            'Kamu belum punya akun? ',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
           ),
           InkWell(

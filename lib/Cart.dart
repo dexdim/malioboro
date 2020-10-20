@@ -238,7 +238,7 @@ class CartState extends State<Cart> {
           Container(
             width: 110,
             child: Text(
-              'Harga total:',
+              'Total price:',
               style: TextStyle(
                   fontSize: 22.0,
                   color: Colors.brown,
@@ -275,9 +275,9 @@ class CartState extends State<Cart> {
       appBar: AppBar(
         elevation: 0,
         title: Text(
-          'CART LIST',
+          'your cool shopping list!',
           style: TextStyle(
-            fontSize: 24,
+            fontSize: 18,
             shadows: [
               Shadow(
                 offset: Offset(0.00, 2.00),
@@ -334,7 +334,7 @@ class CartState extends State<Cart> {
             builder: (context, child, model) {
               totalHarga = NumberFormat.currency(
                 locale: 'id',
-                name: 'Rp ',
+                name: 'IDR ',
                 decimalDigits: 0,
               ).format(
                 (model.cartListing

@@ -1,11 +1,14 @@
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:scoped_model/scoped_model.dart';
 import 'Home.dart';
 import 'Deal.dart';
-import 'Shop.dart';
+import 'Shops.dart';
+import 'Cart.dart';
 import 'Profile.dart';
 import 'auth/Auth.dart';
+import 'model/AppScope.dart';
 
 class Menu extends StatefulWidget {
   Menu({Key key, this.auth, this.userid, this.logoutCallback})
@@ -24,8 +27,11 @@ class _MenuState extends State<Menu> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   int selectedIndex = 0;
-  String titleText = 'MALIOBORO MALL';
-  String subtitleText = 'shop & deals';
+  dynamic titles = Image.asset(
+    'assets/icon/logo_gold.png',
+    width: 100,
+  );
+  String subtitleText = 'hi User! Welcome to Malioboro Mall - Shop & Deals';
   DateTime currentBackPressTime;
 
   PageController pageController = PageController(
@@ -76,7 +82,7 @@ class _MenuState extends State<Menu> {
       },
       children: <Widget>[
         Home(),
-        Shop(),
+        Shops(),
         Deal(),
         Profile(),
       ],
@@ -92,17 +98,20 @@ class _MenuState extends State<Menu> {
     setState(
       () {
         if (index == 0) {
-          titleText = 'MALIOBORO MALL';
-          subtitleText = 'shop & deals';
+          titles = Image.asset(
+            'assets/icon/logo_gold.png',
+            width: 100,
+          );
+          subtitleText = 'hi User! Welcome to Malioboro Mall - Shop & Deals';
         } else if (index == 1) {
-          titleText = 'SHOPS';
-          subtitleText = 'check our tenants and their hot items';
+          titles = '';
+          subtitleText = 'choose the store & start shopping';
         } else if (index == 2) {
-          titleText = 'DEALS';
-          subtitleText = 'special offers for you, grab it fast';
+          titles = 'DEALS';
+          subtitleText = 'deals spesial buat kamu';
         } else if (index == 3) {
-          titleText = 'PROFILE';
-          subtitleText = 'hello customer!';
+          titles = 'PROFILE';
+          subtitleText = 'hai customer!';
         }
         selectedIndex = index;
         pageController.animateToPage(
@@ -114,13 +123,68 @@ class _MenuState extends State<Menu> {
     );
   }
 
+  Widget cartButton() {
+    return FloatingActionButton(
+      elevation: 0,
+      backgroundColor: Colors.white,
+      foregroundColor: Colors.brown,
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Cart(),
+          ),
+        );
+      },
+      child: Stack(
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.all(10),
+            child: Icon(
+              Icons.shopping_cart,
+              size: 30,
+            ),
+          ),
+          Positioned(
+            top: 5,
+            left: 30,
+            child: ScopedModelDescendant<AppModel>(
+              builder: (context, child, model) {
+                return Container(
+                  decoration: new BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                  constraints: BoxConstraints(
+                    minWidth: 15,
+                    minHeight: 15,
+                  ),
+                  child: Text(
+                    (model.cartListing.length > 0)
+                        ? model.cartListing.length.toString()
+                        : '0',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
         extendBody: true,
         appBar: AppBar(
-          title: title(titleText),
+          title: title(titles),
           automaticallyImplyLeading: false,
           centerTitle: true,
           elevation: 0,
@@ -148,6 +212,15 @@ class _MenuState extends State<Menu> {
               child: bottomBar(),
             ),
           ],
+        ),
+        floatingActionButton: Container(
+          margin: EdgeInsets.only(right: 5, bottom: 60),
+          width: 70,
+          height: 70,
+          decoration: BoxDecoration(
+              border: Border.all(color: Colors.black12, width: 3),
+              shape: BoxShape.circle),
+          child: cartButton(),
         ),
       ),
     );

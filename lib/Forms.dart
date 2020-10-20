@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:flutter_open_whatsapp/flutter_open_whatsapp.dart';
-import 'package:email_validator/email_validator.dart';
+//import 'package:email_validator/email_validator.dart';
 import 'Cart.dart';
 import 'model/AppScope.dart';
 
@@ -91,7 +91,7 @@ class FormsState extends State<Forms> {
     return Container(
       width: MediaQuery.of(context).size.width / 1.3,
       child: Text(
-        'Untuk proses selanjutnya silakan anda melengkapi form pemesanan dengan lengkap',
+        'Untuk proses selanjutnya silakan kamu melengkapi form pemesanannya ya',
         style: TextStyle(fontSize: 20),
         textAlign: TextAlign.center,
       ),
@@ -168,7 +168,7 @@ class FormsState extends State<Forms> {
                   decoration: inputDecoration(title),
                   validator: (value) {
                     if (value.isEmpty) {
-                      return 'Kolom ${title.toLowerCase()} masih kosong!';
+                      return 'Kolom ${title.toLowerCase()} masih kosong nih';
                     }
                     return null;
                   },
@@ -191,7 +191,7 @@ class FormsState extends State<Forms> {
                   decoration: inputDecoration(title),
                   validator: (value) {
                     if (value.isEmpty) {
-                      return 'Kolom ${title.toLowerCase()} masih kosong!';
+                      return 'Kolom ${title.toLowerCase()} masih kosong nih';
                     }
                     return null;
                   },
