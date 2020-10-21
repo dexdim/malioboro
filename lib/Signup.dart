@@ -140,7 +140,7 @@ class _SignUpState extends State<SignUp> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
-            'Sudah mempunyai akun? ',
+            'Already have an account? ',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
           ),
           InkWell(
@@ -156,7 +156,7 @@ class _SignUpState extends State<SignUp> {
               );
             },
             child: Text(
-              'Login',
+              'Login here!',
               style: TextStyle(
                   color: Colors.brown,
                   fontSize: 18,
@@ -171,10 +171,10 @@ class _SignUpState extends State<SignUp> {
   Widget signupform() {
     return Column(
       children: <Widget>[
-        form("Nama Lengkap"),
-        form("Email"),
-        form("Password", isPassword: true),
-        form("Konfirmasi Password", isPassword: true),
+        form('Full Name'),
+        form('Email'),
+        form('Password', isPassword: true),
+        form('Confirm Password', isPassword: true),
       ],
     );
   }
@@ -182,7 +182,7 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     String tnc =
-        'Dengan ini saya telah membaca dan menyetujui Malioboro Mall Shop & Deals Privacy Policy, Term and Conditions, dan Term of Service.';
+        "By clicking 'SUBMIT' you're agree to our Privacy Policy, Term & Conditions, and Term of Service.";
 
     return Scaffold(
       resizeToAvoidBottomInset: false,

@@ -26,6 +26,7 @@ Widget appBar(title) {
         title,
         style: TextStyle(
           fontSize: 20,
+          fontWeight: FontWeight.w600,
           shadows: [
             Shadow(
               offset: Offset(0.00, 2.00),
@@ -160,7 +161,7 @@ class ShopsState extends State<Shops> {
             ),
           ),
           Text(
-            'LANTAI ${element.lokasi}',
+            '${element.lokasi} FLOOR',
             style: TextStyle(
               fontSize: 18,
             ),
@@ -171,6 +172,12 @@ class ShopsState extends State<Shops> {
               fontSize: 16,
             ),
           ),
+          Text(
+            'Phone number : ${element.telp}',
+            style: TextStyle(
+              fontSize: 16,
+            ),
+          )
         ],
       ),
     );
@@ -186,7 +193,7 @@ class ShopsState extends State<Shops> {
       },
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
-        height: MediaQuery.of(context).size.height / 9,
+        height: MediaQuery.of(context).size.height / 7.5,
         child: Container(
           child: Row(
             children: [
@@ -209,7 +216,7 @@ class ShopsState extends State<Shops> {
 
     return Column(
       children: [
-        appBar('Choose the Store & Start Shopping'),
+        appBar('Choose the Store & Start Shopping!'),
         Expanded(
           child: GroupedListView<dynamic, String>(
             elements: tenantData,

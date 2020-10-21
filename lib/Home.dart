@@ -28,6 +28,7 @@ class HomeState extends State<Home> {
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 20,
+            fontWeight: FontWeight.w600,
             shadows: [
               Shadow(
                 offset: Offset(0.00, 2.00),
@@ -235,7 +236,7 @@ class HomeState extends State<Home> {
           SizedBox(
             height: 20,
           ),
-          appBar('Hi User!\nWelcome to Malioboro Mall - Shop & Deals'),
+          appBar('Hi User! Welcome to Malioboro Mall - Shop & Deals'),
           Expanded(
             child: SingleChildScrollView(
               padding: EdgeInsets.only(

@@ -128,7 +128,7 @@ class DealState extends State<Deal> {
     List<PromoList> promoData = ScopedModel.of<AppModel>(context).promo;
     return Column(
       children: [
-        appBar('Get Special Discount & Hot Deals'),
+        appBar('Get Special Discount & Hot Deals!'),
         Expanded(
           child: ListView.separated(
             padding: EdgeInsets.only(

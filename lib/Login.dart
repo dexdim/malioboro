@@ -168,7 +168,7 @@ class LoginState extends State<Login> {
           );
         },
         child: Text(
-          'Lupa password?',
+          'Forgot password?',
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w600,
@@ -231,7 +231,7 @@ class LoginState extends State<Login> {
             ),
           ),
           Text(
-            'atau login dengan',
+            'or login with',
             style: TextStyle(fontSize: 18),
           ),
           Expanded(
@@ -308,7 +308,7 @@ class LoginState extends State<Login> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
-            'Kamu belum punya akun? ',
+            "Don't have an account yet? ",
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
           ),
           InkWell(
@@ -324,7 +324,7 @@ class LoginState extends State<Login> {
               );
             },
             child: Text(
-              'Daftar sekarang!',
+              'Sign up now!',
               style: TextStyle(
                 color: Colors.brown,
                 fontSize: 18,

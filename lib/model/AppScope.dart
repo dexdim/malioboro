@@ -85,7 +85,7 @@ class AppModel extends Model {
   List<Data> catalog = [];
   List<Data> cart = [];
   String cartMsg = '';
-  String cartEmpty = 'Hey it`s still empty! fill your cart.';
+  String cartEmpty = "Hey it's still empty! Fill your cart.";
   bool success = false;
   Database _db;
   Directory tempDir;

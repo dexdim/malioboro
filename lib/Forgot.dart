@@ -119,7 +119,7 @@ class ForgotState extends State<Forgot> {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-        text: "LUPA PASSWORD",
+        text: "FORGOT PASSWORD",
         style: TextStyle(
           fontWeight: FontWeight.w500,
           fontSize: 24,
@@ -171,7 +171,7 @@ class ForgotState extends State<Forgot> {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 30),
                     child: Text(
-                        'Silakan anda masukkan email yang terdaftar sebagai akun Malioboro Mall.',
+                        'Please provide your registered email for recover the password.',
                         style: TextStyle(fontSize: 16),
                         textAlign: TextAlign.justify),
                   ),
