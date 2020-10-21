@@ -10,6 +10,38 @@ class Home extends StatefulWidget {
 }
 
 class HomeState extends State<Home> {
+  Widget appBar(title) {
+    return Column(
+      children: [
+        SizedBox(
+          height: 20,
+        ),
+        Image.asset(
+          'assets/icon/logo_gold.png',
+          height: 50,
+        ),
+        SizedBox(
+          height: 5,
+        ),
+        Text(
+          title,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 20,
+            shadows: [
+              Shadow(
+                offset: Offset(0.00, 2.00),
+                color: Colors.brown.withOpacity(0.50),
+                blurRadius: 5,
+              ),
+            ],
+          ),
+        ),
+        divider(),
+      ],
+    );
+  }
+
   Widget news() {
     return Container(
       height: MediaQuery.of(context).size.height / 4.5,
@@ -198,29 +230,38 @@ class HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height,
-      child: SingleChildScrollView(
-        padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).size.height * 0.05,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            SizedBox(height: 5),
-            news(),
-            divider(),
-            subtitle('Top Picks for You :'),
-            carousel(),
-            divider(),
-            subtitle('Events & Exhibitions :'),
-            SizedBox(height: 5),
-            event(),
-            divider(),
-            subtitle('Connect with Us :'),
-            listsocial()
-          ],
-        ),
+      child: Column(
+        children: [
+          SizedBox(
+            height: 20,
+          ),
+          appBar('Hi User!\nWelcome to Malioboro Mall - Shop & Deals'),
+          Expanded(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).size.height * 0.05,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  SizedBox(height: 5),
+                  news(),
+                  divider(),
+                  subtitle('Top Picks for You :'),
+                  carousel(),
+                  divider(),
+                  subtitle('Events & Exhibitions :'),
+                  SizedBox(height: 5),
+                  event(),
+                  divider(),
+                  subtitle('Connect with Us :'),
+                  listsocial()
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

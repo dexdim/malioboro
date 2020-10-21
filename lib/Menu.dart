@@ -1,6 +1,7 @@
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'Home.dart';
 import 'Deal.dart';
@@ -27,11 +28,6 @@ class _MenuState extends State<Menu> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   int selectedIndex = 0;
-  dynamic titles = Image.asset(
-    'assets/icon/logo_gold.png',
-    width: 100,
-  );
-  String subtitleText = 'hi User! Welcome to Malioboro Mall - Shop & Deals';
   DateTime currentBackPressTime;
 
   PageController pageController = PageController(
@@ -45,32 +41,6 @@ class _MenuState extends State<Menu> {
       child: Divider(
         thickness: 1,
       ),
-    );
-  }
-
-  Widget title(titleText) {
-    return Column(
-      children: [
-        Text(
-          titleText,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 24,
-            shadows: [
-              Shadow(
-                offset: Offset(0.00, 2.00),
-                color: Colors.brown.withOpacity(0.50),
-                blurRadius: 5,
-              ),
-            ],
-          ),
-        ),
-        Text(
-          subtitleText,
-          style: TextStyle(fontSize: 18),
-        ),
-        divider(),
-      ],
     );
   }
 
@@ -97,22 +67,6 @@ class _MenuState extends State<Menu> {
   void pageChanged(int index) {
     setState(
       () {
-        if (index == 0) {
-          titles = Image.asset(
-            'assets/icon/logo_gold.png',
-            width: 100,
-          );
-          subtitleText = 'hi User! Welcome to Malioboro Mall - Shop & Deals';
-        } else if (index == 1) {
-          titles = '';
-          subtitleText = 'choose the store & start shopping';
-        } else if (index == 2) {
-          titles = 'DEALS';
-          subtitleText = 'deals spesial buat kamu';
-        } else if (index == 3) {
-          titles = 'PROFILE';
-          subtitleText = 'hai customer!';
-        }
         selectedIndex = index;
         pageController.animateToPage(
           index,
@@ -183,12 +137,6 @@ class _MenuState extends State<Menu> {
     return Container(
       child: Scaffold(
         extendBody: true,
-        appBar: AppBar(
-          title: title(titles),
-          automaticallyImplyLeading: false,
-          centerTitle: true,
-          elevation: 0,
-        ),
         body: Stack(
           children: [
             Container(
@@ -205,16 +153,21 @@ class _MenuState extends State<Menu> {
               ),
             ),
             pageView(),
-            Positioned(
-              left: 10,
-              bottom: 10,
-              right: 10,
-              child: bottomBar(),
-            ),
           ],
         ),
+        bottomNavigationBar: Container(
+          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+          child: Material(
+            elevation: 5,
+            color: Colors.white,
+            borderRadius: BorderRadius.all(
+              Radius.circular(25.0),
+            ),
+            child: bottomBar(),
+          ),
+        ),
         floatingActionButton: Container(
-          margin: EdgeInsets.only(right: 5, bottom: 60),
+          margin: EdgeInsets.only(right: 5),
           width: 70,
           height: 70,
           decoration: BoxDecoration(
@@ -226,7 +179,7 @@ class _MenuState extends State<Menu> {
     );
   }
 
-  Widget bottomBar() {
+  Widget abc() {
     return CustomNavigationBar(
       iconSize: 30.0,
       selectedColor: Colors.brown,
@@ -248,6 +201,44 @@ class _MenuState extends State<Menu> {
         CustomNavigationBarItem(icon: Icons.local_mall_outlined),
         CustomNavigationBarItem(icon: Icons.storefront_outlined),
         CustomNavigationBarItem(icon: Icons.account_box_outlined),
+      ],
+    );
+  }
+
+  Widget bottomBar() {
+    return SalomonBottomBar(
+      unselectedItemColor: Colors.black,
+      selectedItemColor: Colors.brown,
+      currentIndex: selectedIndex,
+      onTap: (index) {
+        setState(() {
+          selectedIndex = index;
+          pageController.jumpToPage(
+            index,
+          );
+        });
+      },
+      items: [
+        SalomonBottomBarItem(
+          icon: Icon(Icons.home_outlined),
+          title: Text('Home'),
+        ),
+        SalomonBottomBarItem(
+          icon: Icon(Icons.local_mall_outlined),
+          title: Text('Shops'),
+        ),
+        SalomonBottomBarItem(
+          icon: ImageIcon(
+            AssetImage(
+              'assets/icon/deals.png',
+            ),
+          ),
+          title: Text('Deals'),
+        ),
+        SalomonBottomBarItem(
+          icon: Icon(Icons.account_circle_outlined),
+          title: Text('Profile'),
+        ),
       ],
     );
   }

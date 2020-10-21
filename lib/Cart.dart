@@ -133,7 +133,7 @@ class CartState extends State<Cart> {
                     Expanded(
                       child: Row(children: <Widget>[
                         Text(
-                          'Jumlah : ',
+                          'Total : ',
                           style: TextStyle(fontSize: 18),
                         ),
                         counterBar(d.counter),
@@ -141,13 +141,13 @@ class CartState extends State<Cart> {
                     ),
                     Row(children: <Widget>[
                       Text(
-                        'Harga satuan : ',
+                        'Price per piece : ',
                         style: TextStyle(fontSize: 18),
                       ),
                       Text(
                         NumberFormat.currency(
                           locale: 'id',
-                          name: 'Rp ',
+                          name: 'IDR ',
                           decimalDigits: 0,
                         ).format(d.harga),
                         style: TextStyle(fontSize: 18),
@@ -156,13 +156,13 @@ class CartState extends State<Cart> {
                     Expanded(
                       child: Row(children: <Widget>[
                         Text(
-                          'Harga subtotal : ',
+                          'Subtotal price : ',
                           style: TextStyle(fontSize: 18),
                         ),
                         Text(
                           NumberFormat.currency(
                             locale: 'id',
-                            name: 'Rp ',
+                            name: 'IDR ',
                             decimalDigits: 0,
                           ).format(d.subtotal),
                           style: TextStyle(fontSize: 18),
@@ -275,9 +275,9 @@ class CartState extends State<Cart> {
       appBar: AppBar(
         elevation: 0,
         title: Text(
-          'your cool shopping list!',
+          'Your Cool Shopping List!',
           style: TextStyle(
-            fontSize: 18,
+            fontSize: 20,
             shadows: [
               Shadow(
                 offset: Offset(0.00, 2.00),
@@ -345,7 +345,7 @@ class CartState extends State<Cart> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   totalBar(),
-                  button('NEXT'),
+                  button('ORDER'),
                 ],
               );
             },

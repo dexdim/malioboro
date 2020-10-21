@@ -135,7 +135,7 @@ class DetailState extends State<Detail> {
           Container(
             width: 140.0,
             child: Text(
-              'Harga subtotal:',
+              'Subtotal price:',
               style: TextStyle(
                   fontSize: 22.0,
                   color: Colors.brown,
@@ -148,7 +148,7 @@ class DetailState extends State<Detail> {
             return Text(
               NumberFormat.currency(
                 locale: 'id',
-                name: 'Rp ',
+                name: 'IDR ',
                 decimalDigits: 0,
               ).format(widget.detail.subtotal),
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
@@ -163,7 +163,7 @@ class DetailState extends State<Detail> {
   Widget build(BuildContext context) {
     String hargaSatuan = NumberFormat.currency(
       locale: 'id',
-      name: 'Rp ',
+      name: 'IDR ',
       decimalDigits: 0,
     ).format(widget.detail.harga);
     // TODO: implement build
@@ -172,7 +172,7 @@ class DetailState extends State<Detail> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'DETAIL ITEM',
+          'ITEM DETAIL',
           style: TextStyle(
             fontSize: 24,
             shadows: [
@@ -243,17 +243,25 @@ class DetailState extends State<Detail> {
                       ),
                       SizedBox(height: 10),
                       Text(
-                        'Harga satuan : $hargaSatuan',
+                        'Price per piece : $hargaSatuan',
                         style: TextStyle(
                             fontWeight: FontWeight.w600,
-                            fontSize: 22.0,
+                            fontSize: 20.0,
                             color: Colors.brown),
                       ),
                       SizedBox(height: 10),
                       Text(
-                        'Kode barcode : ${widget.detail.deskripsi}',
+                        'Barcode : ${widget.detail.deskripsi}',
                         style: TextStyle(
-                            fontWeight: FontWeight.w500, fontSize: 18),
+                            fontWeight: FontWeight.w500, fontSize: 20),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        '*The price is subject to change.',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w400, fontSize: 20),
                       ),
                     ],
                   ),
@@ -272,7 +280,7 @@ class DetailState extends State<Detail> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               subtotalBar(),
-              button('BELI'),
+              button('ADD TO CART'),
             ],
           ),
         ),

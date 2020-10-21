@@ -8,6 +8,39 @@ class Deal extends StatefulWidget {
 }
 
 class DealState extends State<Deal> {
+  Widget appBar(title) {
+    return Column(
+      children: [
+        SizedBox(
+          height: 40,
+        ),
+        Text(
+          title,
+          style: TextStyle(
+            fontSize: 20,
+            shadows: [
+              Shadow(
+                offset: Offset(0.00, 2.00),
+                color: Colors.brown.withOpacity(0.50),
+                blurRadius: 5,
+              ),
+            ],
+          ),
+        ),
+        divider(),
+      ],
+    );
+  }
+
+  Widget divider() {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 36),
+      child: Divider(
+        thickness: 1,
+      ),
+    );
+  }
+
   Widget promoImage(promoData, index, BuildContext context) {
     return Container(
       margin: EdgeInsets.only(left: 30, right: 20),
@@ -93,24 +126,29 @@ class DealState extends State<Deal> {
   @override
   Widget build(BuildContext context) {
     List<PromoList> promoData = ScopedModel.of<AppModel>(context).promo;
-    return Container(
-      child: ListView.separated(
-        padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).size.height * 0.1,
-        ),
-        itemCount: promoData.length,
-        itemBuilder: (context, index) {
-          return promoList(promoData, index, context);
-        },
-        separatorBuilder: (context, index) {
-          return Padding(
-            padding: EdgeInsets.symmetric(horizontal: 36),
-            child: Divider(
-              thickness: 1,
+    return Column(
+      children: [
+        appBar('Get Special Discount & Hot Deals'),
+        Expanded(
+          child: ListView.separated(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).size.height * 0.1,
             ),
-          );
-        },
-      ),
+            itemCount: promoData.length,
+            itemBuilder: (context, index) {
+              return promoList(promoData, index, context);
+            },
+            separatorBuilder: (context, index) {
+              return Padding(
+                padding: EdgeInsets.symmetric(horizontal: 36),
+                child: Divider(
+                  thickness: 1,
+                ),
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }

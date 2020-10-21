@@ -85,7 +85,7 @@ class AppModel extends Model {
   List<Data> catalog = [];
   List<Data> cart = [];
   String cartMsg = '';
-  String cartEmpty = 'Keranjang belanja kamu masih kosong!';
+  String cartEmpty = 'Hey it`s still empty! fill your cart.';
   bool success = false;
   Database _db;
   Directory tempDir;
@@ -305,12 +305,11 @@ class AppModel extends Model {
     int _index = cart.indexWhere((d) => d.shopid == dd.id);
     if (_index > -1) {
       success = false;
-      cartMsg = '${dd.nama.toUpperCase()} sudah ada di keranjang belanja.';
+      cartMsg = '${dd.nama.toUpperCase()} already in your cart.';
     } else {
       this.insertInCart(dd);
       success = true;
-      cartMsg =
-          '${dd.nama.toUpperCase()} berhasil ditambahkan ke keranjang belanja.';
+      cartMsg = '${dd.nama.toUpperCase()} successfully added to your cart.';
     }
   }
 

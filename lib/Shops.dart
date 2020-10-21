@@ -16,6 +16,39 @@ class Shops extends StatefulWidget {
   ShopsState createState() => ShopsState();
 }
 
+Widget appBar(title) {
+  return Column(
+    children: [
+      SizedBox(
+        height: 40,
+      ),
+      Text(
+        title,
+        style: TextStyle(
+          fontSize: 20,
+          shadows: [
+            Shadow(
+              offset: Offset(0.00, 2.00),
+              color: Colors.brown.withOpacity(0.50),
+              blurRadius: 5,
+            ),
+          ],
+        ),
+      ),
+      divider(),
+    ],
+  );
+}
+
+Widget divider() {
+  return Padding(
+    padding: EdgeInsets.symmetric(horizontal: 36),
+    child: Divider(
+      thickness: 1,
+    ),
+  );
+}
+
 class ShopsState extends State<Shops> {
   Widget button(element) {
     return RaisedButton(
@@ -174,26 +207,31 @@ class ShopsState extends State<Shops> {
       return a.nama.toLowerCase().compareTo(b.nama.toLowerCase());
     });
 
-    return Container(
-      child: GroupedListView<dynamic, String>(
-        elements: tenantData,
-        groupBy: (element) => element.kategori,
-        groupComparator: (value1, value2) => value2.compareTo(value1),
-        itemComparator: (item1, item2) => item1.nama.compareTo(item2.nama),
-        order: GroupedListOrder.ASC,
-        useStickyGroupSeparators: true,
-        groupSeparatorBuilder: (String value) => Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            value,
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 20),
+    return Column(
+      children: [
+        appBar('Choose the Store & Start Shopping'),
+        Expanded(
+          child: GroupedListView<dynamic, String>(
+            elements: tenantData,
+            groupBy: (element) => element.kategori,
+            groupComparator: (value1, value2) => value2.compareTo(value1),
+            itemComparator: (item1, item2) => item2.nama.compareTo(item1.nama),
+            order: GroupedListOrder.DESC,
+            useStickyGroupSeparators: true,
+            groupSeparatorBuilder: (String value) => Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                value,
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
+            itemBuilder: (c, element) {
+              return itemList(element);
+            },
           ),
         ),
-        itemBuilder: (c, element) {
-          return itemList(element);
-        },
-      ),
+      ],
     );
   }
 }

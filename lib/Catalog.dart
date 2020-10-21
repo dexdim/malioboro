@@ -97,19 +97,16 @@ class CatalogState extends State<Catalog> {
             color: Colors.brown[200],
             thickness: 1,
           ),
-          Row(
-            children: <Widget>[
-              Text(
-                NumberFormat.currency(
-                  locale: 'id',
-                  name: 'Rp ',
-                  decimalDigits: 0,
-                ).format(searchList[index].harga),
-                style: TextStyle(
-                  fontSize: 18,
-                ),
-              ),
-            ],
+          Text(
+            NumberFormat.currency(
+              locale: 'id',
+              name: 'IDR ',
+              decimalDigits: 0,
+            ).format(searchList[index].harga),
+            style: TextStyle(
+              fontSize: 18,
+            ),
+            textAlign: TextAlign.center,
           ),
         ],
       ),
@@ -123,9 +120,9 @@ class CatalogState extends State<Catalog> {
   );
 
   Widget appBarTitle = Text(
-    'CATALOG',
+    'Catalogue',
     style: TextStyle(
-      fontSize: 24,
+      fontSize: 20,
       shadows: [
         Shadow(
           offset: Offset(0.00, 2.00),
@@ -262,9 +259,9 @@ class CatalogState extends State<Catalog> {
         size: 30,
       );
       this.appBarTitle = Text(
-        'CATALOG',
+        'Catalogue',
         style: TextStyle(
-          fontSize: 24,
+          fontSize: 20,
           shadows: [
             Shadow(
               offset: Offset(0.00, 2.00),
