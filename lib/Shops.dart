@@ -25,8 +25,8 @@ Widget appBar(title) {
       Text(
         title,
         style: TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.w600,
+          fontSize: 22,
+          fontWeight: FontWeight.w500,
           shadows: [
             Shadow(
               offset: Offset(0.00, 2.00),
@@ -138,8 +138,8 @@ class ShopsState extends State<Shops> {
 
   Widget itemImage(element, context) {
     return Container(
-      width: MediaQuery.of(context).size.height / 11,
-      margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+      width: MediaQuery.of(context).size.height / 9,
+      margin: EdgeInsets.fromLTRB(20, 0, 10, 0),
       child: Image.network(
         'https://malmalioboro.co.id/${element.logo}',
         fit: BoxFit.fill,
@@ -149,8 +149,8 @@ class ShopsState extends State<Shops> {
 
   Widget itemDetail(element) {
     return Expanded(
-      flex: 5,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
@@ -172,12 +172,34 @@ class ShopsState extends State<Shops> {
               fontSize: 16,
             ),
           ),
-          Text(
-            'Phone number : ${element.telp}',
-            style: TextStyle(
-              fontSize: 16,
-            ),
-          )
+          Row(
+            children: [
+              Icon(
+                Icons.local_phone_outlined,
+                size: 16,
+              ),
+              Text(
+                ' : ${element.telp2}',
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              ImageIcon(
+                AssetImage('assets/icon/whatsapp.png'),
+                size: 16,
+              ),
+              Text(
+                ' : ${element.telp}',
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );
@@ -185,19 +207,26 @@ class ShopsState extends State<Shops> {
 
   Widget itemList(element) {
     return GestureDetector(
-      onTap: () {
-        showDialog(
-          context: context,
-          builder: (BuildContext context) => popupTenant(element),
-        );
-      },
+      onTap: () => showDialog(
+        context: context,
+        builder: (BuildContext context) => popupTenant(element),
+      ),
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
-        height: MediaQuery.of(context).size.height / 7.5,
-        child: Container(
+        height: MediaQuery.of(context).size.height / 7,
+        child: Material(
+          borderRadius: BorderRadius.all(
+            Radius.circular(15.0),
+          ),
+          color: Colors.white,
+          elevation: 2,
           child: Row(
             children: [
               itemImage(element, context),
+              VerticalDivider(),
+              SizedBox(
+                width: 10,
+              ),
               itemDetail(element),
             ],
           ),

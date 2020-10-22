@@ -64,16 +64,16 @@ class FormsState extends State<Forms> {
                       '\nNama barang : ${d.nama}\nHarga satuan : Rp ${d.harga}\nKode barcode : ${d.deskripsi}\nJumlah : ${d.counter} , Harga subtotal : Rp ${d.subtotal}\n';
                 }
 
-                finalPrint += 'Halo Supermarket Malioboro Mall\n';
-                finalPrint += 'Berikut adalah daftar belanja dari,\n';
-                finalPrint += 'Nama pemesan: ${namaController.text}\n';
-                finalPrint += 'Nomor handphone: ${nomorhpController.text}';
+                finalPrint += 'Hi Supermarket Malioboro Mall\n';
+                finalPrint +=
+                    'Berikut daftar belanja saya dari Shop & Deals,\n';
+                finalPrint += 'Nama : ${namaController.text}\n';
+                finalPrint += 'HP: ${nomorhpController.text}';
                 finalPrint += '\n=================\n\n';
                 model.cartListing.map((d) => printItem(d)).toString();
                 finalPrint +=
                     '\n\n=================\nHarga total : ${CartState.totalHarga}';
-                finalPrint +=
-                    '\n\nMohon untuk cek ketersediaan stocknya. Terima kasih.';
+                finalPrint += '\n\nTolong ketersediaan stocknya. Terima kasih.';
 
                 FlutterOpenWhatsapp.sendSingleMessage(
                     '6282138020366', '${finalPrint.toString()}');
@@ -91,7 +91,7 @@ class FormsState extends State<Forms> {
     return Container(
       width: MediaQuery.of(context).size.width / 1.3,
       child: Text(
-        'Untuk proses selanjutnya silakan kamu melengkapi form pemesanannya ya',
+        'Kindly fill in the blanks to order',
         style: TextStyle(fontSize: 20),
         textAlign: TextAlign.center,
       ),
@@ -152,7 +152,7 @@ class FormsState extends State<Forms> {
     } else 
     */
 
-    if (title == 'Nomor Handphone') {
+    if (title == 'Mobile Number') {
       return Container(
         margin: EdgeInsets.symmetric(vertical: 10),
         width: MediaQuery.of(context).size.width / 1.3,
@@ -168,7 +168,7 @@ class FormsState extends State<Forms> {
                   decoration: inputDecoration(title),
                   validator: (value) {
                     if (value.isEmpty) {
-                      return 'Kolom ${title.toLowerCase()} masih kosong nih';
+                      return '${title.toLowerCase()} still empty!';
                     }
                     return null;
                   },
@@ -191,7 +191,7 @@ class FormsState extends State<Forms> {
                   decoration: inputDecoration(title),
                   validator: (value) {
                     if (value.isEmpty) {
-                      return 'Kolom ${title.toLowerCase()} masih kosong nih';
+                      return '${title.toLowerCase()} still empty!';
                     }
                     return null;
                   },
@@ -208,9 +208,9 @@ class FormsState extends State<Forms> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'FORM ORDER',
+          'Order Form',
           style: TextStyle(
-            fontSize: 24,
+            fontSize: 22,
             shadows: [
               Shadow(
                 offset: Offset(0.00, 2.00),
@@ -245,10 +245,10 @@ class FormsState extends State<Forms> {
                 SizedBox(height: 50),
                 header(),
                 SizedBox(height: 50),
-                formField('Nama Lengkap', namaController),
-                formField('Alamat Pengiriman', alamatController),
+                formField('Full Name', namaController),
+                formField('Shipping Address', alamatController),
                 //formField('Email', emailController),
-                formField('Nomor Handphone', nomorhpController),
+                formField('Mobile Number', nomorhpController),
               ]),
             ),
           ),

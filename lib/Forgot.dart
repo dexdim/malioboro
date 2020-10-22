@@ -155,36 +155,37 @@ class ForgotState extends State<Forgot> {
               ),
             ),
             padding: EdgeInsets.symmetric(horizontal: 30),
-            child: Container(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  SizedBox(
-                    height: 100,
-                  ),
-                  title(),
-                  SizedBox(
-                    height: 50,
-                  ),
-                  resetform(),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 30),
-                    child: Text(
-                        'Please provide your registered email for recover the password.',
-                        style: TextStyle(fontSize: 16),
-                        textAlign: TextAlign.justify),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  resetButton('RESET'),
-                  Expanded(
-                    flex: 2,
-                    child: SizedBox(),
-                  )
-                ],
-              ),
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                SizedBox(
+                  height: 100,
+                ),
+                title(),
+                SizedBox(
+                  height: 50,
+                ),
+                resetform(),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 30),
+                  child: Text(
+                      'Please provide your registered email for recover the password.',
+                      style: TextStyle(fontSize: 16),
+                      textAlign: TextAlign.justify),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                resetButton('RESET'),
+                Expanded(
+                  flex: 2,
+                  child: SizedBox(),
+                )
+              ],
             ),
           ),
           Positioned(

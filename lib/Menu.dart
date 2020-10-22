@@ -1,4 +1,3 @@
-import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
@@ -132,79 +131,6 @@ class _MenuState extends State<Menu> {
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Scaffold(
-        extendBody: true,
-        body: Stack(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  stops: [0.1, 0.8],
-                  colors: [
-                    Colors.white,
-                    Color(0xfffee18e),
-                  ],
-                ),
-              ),
-            ),
-            pageView(),
-          ],
-        ),
-        bottomNavigationBar: Container(
-          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-          child: Material(
-            elevation: 5,
-            color: Colors.white,
-            borderRadius: BorderRadius.all(
-              Radius.circular(25.0),
-            ),
-            child: bottomBar(),
-          ),
-        ),
-        floatingActionButton: Container(
-          margin: EdgeInsets.only(right: 5),
-          width: 70,
-          height: 70,
-          decoration: BoxDecoration(
-              border: Border.all(color: Colors.black12, width: 3),
-              shape: BoxShape.circle),
-          child: cartButton(),
-        ),
-      ),
-    );
-  }
-
-  Widget abc() {
-    return CustomNavigationBar(
-      iconSize: 30.0,
-      selectedColor: Colors.brown,
-      strokeColor: Colors.brown,
-      unSelectedColor: Color(0xfffee18e),
-      backgroundColor: Colors.white,
-      borderRadius: Radius.circular(20.0),
-      currentIndex: selectedIndex,
-      onTap: (index) {
-        setState(() {
-          selectedIndex = index;
-          pageController.jumpToPage(
-            index,
-          );
-        });
-      },
-      items: [
-        CustomNavigationBarItem(icon: Icons.home_outlined),
-        CustomNavigationBarItem(icon: Icons.local_mall_outlined),
-        CustomNavigationBarItem(icon: Icons.storefront_outlined),
-        CustomNavigationBarItem(icon: Icons.account_box_outlined),
-      ],
-    );
-  }
-
   Widget bottomBar() {
     return SalomonBottomBar(
       unselectedItemColor: Colors.black,
@@ -256,5 +182,52 @@ class _MenuState extends State<Menu> {
       return Future.value(false);
     }
     return Future.value(true);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Scaffold(
+        extendBody: true,
+        body: Stack(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  stops: [0.1, 0.8],
+                  colors: [
+                    Colors.white,
+                    Color(0xfffee18e),
+                  ],
+                ),
+              ),
+            ),
+            pageView(),
+          ],
+        ),
+        bottomNavigationBar: Container(
+          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+          child: Material(
+            elevation: 5,
+            color: Colors.white,
+            borderRadius: BorderRadius.all(
+              Radius.circular(25.0),
+            ),
+            child: bottomBar(),
+          ),
+        ),
+        floatingActionButton: Container(
+          margin: EdgeInsets.only(right: 5),
+          width: 70,
+          height: 70,
+          decoration: BoxDecoration(
+              border: Border.all(color: Colors.black12, width: 3),
+              shape: BoxShape.circle),
+          child: cartButton(),
+        ),
+      ),
+    );
   }
 }

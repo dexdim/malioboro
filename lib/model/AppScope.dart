@@ -9,6 +9,24 @@ import 'package:localstorage/localstorage.dart';
 import 'package:http/http.dart' as http;
 //import '../Cart.dart';
 
+class NewsList {
+  dynamic id;
+  String nama;
+  String jenis;
+  String image;
+  String deskripsi;
+  String akuntgl;
+
+  NewsList(
+    this.id,
+    this.nama,
+    this.jenis,
+    this.image,
+    this.deskripsi,
+    this.akuntgl,
+  );
+}
+
 class PromoList {
   dynamic id;
   String nama;
@@ -36,6 +54,7 @@ class TenantList {
   String kategori;
   String jam;
   String telp;
+  String telp2;
   String logo;
   String image;
   String deskripsi;
@@ -47,6 +66,7 @@ class TenantList {
     this.kategori,
     this.jam,
     this.telp,
+    this.telp2,
     this.logo,
     this.image,
     this.deskripsi,
@@ -75,11 +95,12 @@ List data;
 
 class AppModel extends Model {
   AppModel() {
+    fetchNews();
     fetchPromo();
     fetchTenant();
   }
   //CartState cartState;
-  //List<String> highlight = [];
+  List<NewsList> news = [];
   List<PromoList> promo = [];
   List<TenantList> tenant = [];
   List<Data> catalog = [];
@@ -91,8 +112,11 @@ class AppModel extends Model {
   Directory tempDir;
   String tempPath;
   final LocalStorage storage = new LocalStorage('app_data');
+
   final String url =
       'http://www.malmalioboro.co.id/index.php/api/produk/get_list';
+  final String newsUrl =
+      'http://www.malmalioboro.co.id/index.php/api/news/get_list';
   final String promoUrl =
       'http://www.malmalioboro.co.id/index.php/api/event/get_list_promo_50';
   final String tenantUrl =
@@ -105,6 +129,27 @@ class AppModel extends Model {
   List<Data> get cartListing => cart;
 
   get finalPrint => printCart();
+
+  Future<String> fetchNews() async {
+    http.Response response = await http.get(
+      Uri.encodeFull(newsUrl),
+    );
+    var parse = json.decode(response.body);
+    parse?.forEach(
+      (dynamic t) {
+        final NewsList fetch = NewsList(
+          t['id'],
+          t['nama'],
+          t['jenis'],
+          t['image'],
+          t['deskripsi'],
+          t['akuntgl'],
+        );
+        news.add(fetch);
+      },
+    );
+    return 'Success!';
+  }
 
   Future<String> fetchPromo() async {
     Map body = {'jenis': 'Promo'};
@@ -144,6 +189,7 @@ class AppModel extends Model {
           t['kategori'],
           t['jam'],
           t['telp'],
+          t['telp2'],
           t['logo'],
           t['image'],
           t['deskripsi'],

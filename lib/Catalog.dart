@@ -122,7 +122,7 @@ class CatalogState extends State<Catalog> {
   Widget appBarTitle = Text(
     'Catalogue',
     style: TextStyle(
-      fontSize: 20,
+      fontSize: 22,
       shadows: [
         Shadow(
           offset: Offset(0.00, 2.00),

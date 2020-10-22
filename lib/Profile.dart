@@ -1,10 +1,38 @@
 import 'package:flutter/material.dart';
 
 class Profile extends StatelessWidget {
-  Widget text(context, String title) {
-    return Text(
-      title,
-      style: TextStyle(fontSize: 22),
+  Widget text(context, String title, String value) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          flex: 4,
+          child: Text(
+            title,
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+        Container(
+          child: Text(
+            ':  ',
+            style: TextStyle(
+              fontSize: 22,
+            ),
+          ),
+        ),
+        Expanded(
+          flex: 7,
+          child: Text(
+            value,
+            style: TextStyle(
+              fontSize: 22,
+            ),
+          ),
+        ),
+      ],
     );
   }
 
@@ -13,18 +41,34 @@ class Profile extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       padding: EdgeInsets.symmetric(
         vertical: 20,
-        horizontal: MediaQuery.of(context).size.width * 0.2,
+        horizontal: MediaQuery.of(context).size.width * 0.05,
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          text(context, 'Full Name :'),
-          text(context, 'Email :'),
-          text(context, 'Phone Number :'),
-          text(context, 'Address :'),
-          text(context, 'Birthdate :'),
-          text(context, 'Gender :'),
+          Align(
+            alignment: Alignment.topRight,
+            child: GestureDetector(
+              child: Text(
+                'Edit profile',
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.brown,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height / 10,
+          ),
+          text(context, 'Full Name', 'Alexander Adimas'),
+          text(context, 'Email', 'alexanderadimas@gmail.com'),
+          text(context, 'Mobile Number', '0888060605032'),
+          text(context, 'Address', 'Perumahan Pondok Intan Permai 3'),
+          text(context, 'Birthdate', '11 July 1992'),
+          text(context, 'Gender', 'Male'),
         ],
       ),
     );
@@ -40,7 +84,7 @@ class Profile extends StatelessWidget {
               Container(
                 width: MediaQuery.of(context).size.width,
                 child: Image.asset(
-                  'assets/profile.png',
+                  'assets/profile.jpg',
                 ),
               ),
               Expanded(
@@ -52,13 +96,19 @@ class Profile extends StatelessWidget {
             alignment: Alignment.topCenter,
             child: Container(
               margin: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height / 5,
+                top: MediaQuery.of(context).size.height / 6,
               ),
-              width: MediaQuery.of(context).size.width / 2.5,
-              height: MediaQuery.of(context).size.width / 2.5,
+              width: MediaQuery.of(context).size.width / 3,
+              height: MediaQuery.of(context).size.width / 3,
               decoration: BoxDecoration(
-                color: Colors.white,
                 shape: BoxShape.circle,
+              ),
+              child: Material(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(90),
+                ),
+                elevation: 3,
+                child: Image.asset('assets/icon/profpic.png'),
               ),
             ),
           )

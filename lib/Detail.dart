@@ -36,7 +36,7 @@ class DetailState extends State<Detail> {
         color: Colors.white,
         padding: EdgeInsets.symmetric(
           vertical: 10,
-          horizontal: 50,
+          horizontal: 30,
         ),
         child: Text(
           title,
@@ -172,9 +172,9 @@ class DetailState extends State<Detail> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'ITEM DETAIL',
+          'Item Detail',
           style: TextStyle(
-            fontSize: 24,
+            fontSize: 22,
             shadows: [
               Shadow(
                 offset: Offset(0.00, 2.00),
@@ -275,6 +275,7 @@ class DetailState extends State<Detail> {
         elevation: 0,
         color: Color(0xfffee18e),
         child: Container(
+          width: MediaQuery.of(context).size.width,
           height: 70.0,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'DealDetail.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'model/AppScope.dart';
 
@@ -17,7 +18,8 @@ class DealState extends State<Deal> {
         Text(
           title,
           style: TextStyle(
-            fontSize: 20,
+            fontSize: 22,
+            fontWeight: FontWeight.w500,
             shadows: [
               Shadow(
                 offset: Offset(0.00, 2.00),
@@ -107,7 +109,14 @@ class DealState extends State<Deal> {
 
   Widget promoList(promoData, index, BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => DealDetail(
+            index: index,
+          ),
+        ),
+      ),
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         height: MediaQuery.of(context).size.height / 6,

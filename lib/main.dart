@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
+import 'package:malioboromall/DealDetail.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'auth/Auth.dart';
 import 'model/AppScope.dart';
@@ -31,6 +32,7 @@ class Main extends StatelessWidget {
     SignUp.route: (BuildContext context) => SignUp(),
     Forgot.route: (BuildContext context) => Forgot(),
     Menu.route: (BuildContext context) => Menu(),
+    DealDetail.route: (BuildContext context) => DealDetail(),
     Catalog.route: (BuildContext context) => Catalog(),
     Detail.route: (BuildContext context) => Detail(),
     Cart.route: (BuildContext context) => Cart(),
@@ -39,13 +41,6 @@ class Main extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    FlutterStatusbarcolor.setStatusBarColor(Colors.transparent);
-    if (useWhiteForeground(Colors.transparent)) {
-      FlutterStatusbarcolor.setStatusBarWhiteForeground(false);
-    } else {
-      FlutterStatusbarcolor.setStatusBarWhiteForeground(true);
-    }
-
     FlutterStatusbarcolor.setNavigationBarColor(
       Color(0xfffee18e),
     );
@@ -64,9 +59,7 @@ class Main extends StatelessWidget {
           primaryColor: Colors.white,
           fontFamily: 'Baloo2',
         ),
-        //home: Menu(),
         home: Splash(),
-
         routes: routes,
       ),
     );

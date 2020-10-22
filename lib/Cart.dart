@@ -277,7 +277,7 @@ class CartState extends State<Cart> {
         title: Text(
           'Your Cool Shopping List!',
           style: TextStyle(
-            fontSize: 20,
+            fontSize: 22,
             shadows: [
               Shadow(
                 offset: Offset(0.00, 2.00),
