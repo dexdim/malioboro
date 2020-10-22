@@ -34,6 +34,13 @@ class _MenuState extends State<Menu> {
     keepPage: true,
   );
 
+  final List<Widget> body = [
+    Home(),
+    Shops(),
+    Deal(),
+    Profile(),
+  ];
+
   Widget divider() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20),
@@ -139,9 +146,11 @@ class _MenuState extends State<Menu> {
       onTap: (index) {
         setState(() {
           selectedIndex = index;
+          /*
           pageController.jumpToPage(
             index,
           );
+          */
         });
       },
       items: [
@@ -204,7 +213,7 @@ class _MenuState extends State<Menu> {
                 ),
               ),
             ),
-            pageView(),
+            body[selectedIndex],
           ],
         ),
         bottomNavigationBar: Container(

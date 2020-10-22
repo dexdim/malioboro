@@ -45,6 +45,54 @@ class HomeState extends State<Home> {
     );
   }
 
+  Widget newsCarousel() {
+    List<String> image = [
+      'assets/news.jpg',
+      'assets/news2.jpg',
+      'assets/news3.jpg',
+    ];
+    return CarouselSlider(
+      items: image
+          .map(
+            (item) => GestureDetector(
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => News(),
+                ),
+              ),
+              child: Container(
+                height: MediaQuery.of(context).size.height / 4.5,
+                width: MediaQuery.of(context).size.width * 0.8,
+                margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                child: Material(
+                  elevation: 3,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(15.0),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(15.0),
+                    ),
+                    child: Image.asset(
+                      item,
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          )
+          .toList(),
+      options: CarouselOptions(
+        autoPlay: true,
+        autoPlayInterval: Duration(seconds: 10),
+        aspectRatio: 21 / 9,
+        viewportFraction: 1,
+      ),
+    );
+  }
+
   Widget news() {
     return GestureDetector(
       onTap: () => Navigator.push(
@@ -325,7 +373,7 @@ class HomeState extends State<Home> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   SizedBox(height: 5),
-                  news(),
+                  newsCarousel(),
                   divider(),
                   subtitle('Top Picks for You :'),
                   carousel(),
