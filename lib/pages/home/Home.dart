@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:malioboromall/pages/deal/DealDetail.dart';
+import 'package:malioboromall/pages/home/News.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'model/AppScope.dart';
-import 'News.dart';
-import 'DealDetail.dart';
+import 'package:malioboromall/model/AppScope.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -45,7 +45,7 @@ class HomeState extends State<Home> {
     );
   }
 
-  Widget newsCarousel() {
+  Widget news() {
     List<String> image = [
       'assets/news.jpg',
       'assets/news2.jpg',
@@ -89,37 +89,6 @@ class HomeState extends State<Home> {
         autoPlayInterval: Duration(seconds: 10),
         aspectRatio: 21 / 9,
         viewportFraction: 1,
-      ),
-    );
-  }
-
-  Widget news() {
-    return GestureDetector(
-      onTap: () => Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => News(),
-        ),
-      ),
-      child: Container(
-        height: MediaQuery.of(context).size.height / 4.5,
-        width: MediaQuery.of(context).size.width * 0.8,
-        margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        child: Material(
-          elevation: 3,
-          borderRadius: BorderRadius.all(
-            Radius.circular(15.0),
-          ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.all(
-              Radius.circular(15.0),
-            ),
-            child: Image.asset(
-              'assets/news.jpg',
-              fit: BoxFit.fill,
-            ),
-          ),
-        ),
       ),
     );
   }
@@ -373,7 +342,7 @@ class HomeState extends State<Home> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   SizedBox(height: 5),
-                  newsCarousel(),
+                  news(),
                   divider(),
                   subtitle('Top Picks for You :'),
                   carousel(),

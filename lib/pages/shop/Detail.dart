@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:intl/intl.dart';
-import 'model/AppScope.dart';
+import 'package:malioboromall/model/AppScope.dart';
 
 class Detail extends StatefulWidget {
   static final String route = 'Detail-route';

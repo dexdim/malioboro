@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'model/AppScope.dart';
+import 'package:malioboromall/model/AppScope.dart';
 import 'Cart.dart';
 import 'Detail.dart';
 

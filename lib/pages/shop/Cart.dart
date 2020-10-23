@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'model/AppScope.dart';
+import 'package:malioboromall/model/AppScope.dart';
 import 'Forms.dart';
 
 class Cart extends StatefulWidget {
@@ -329,6 +329,7 @@ class CartState extends State<Cart> {
         elevation: 0,
         color: Color(0xfffee18e),
         child: Container(
+          width: MediaQuery.of(context).size.width,
           height: 70,
           child: ScopedModelDescendant<AppModel>(
             builder: (context, child, model) {

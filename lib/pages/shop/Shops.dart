@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:malioboromall/main.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'model/AppScope.dart';
+import 'package:malioboromall/model/AppScope.dart';
 import 'Catalog.dart';
 import 'package:grouped_list/grouped_list.dart';
 
@@ -191,6 +191,7 @@ class ShopsState extends State<Shops> {
               ImageIcon(
                 AssetImage('assets/icon/whatsapp.png'),
                 size: 16,
+                color: Colors.green,
               ),
               Text(
                 ' : ${element.telp}',
@@ -214,22 +215,15 @@ class ShopsState extends State<Shops> {
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
         height: MediaQuery.of(context).size.height / 7,
-        child: Material(
-          borderRadius: BorderRadius.all(
-            Radius.circular(15.0),
-          ),
-          color: Colors.white,
-          elevation: 2,
-          child: Row(
-            children: [
-              itemImage(element, context),
-              VerticalDivider(),
-              SizedBox(
-                width: 10,
-              ),
-              itemDetail(element),
-            ],
-          ),
+        child: Row(
+          children: [
+            itemImage(element, context),
+            VerticalDivider(),
+            SizedBox(
+              width: 10,
+            ),
+            itemDetail(element),
+          ],
         ),
       ),
     );
@@ -248,23 +242,33 @@ class ShopsState extends State<Shops> {
         appBar('Choose the Store & Start Shopping!'),
         Expanded(
           child: GroupedListView<dynamic, String>(
+            shrinkWrap: true,
             elements: tenantData,
             groupBy: (element) => element.kategori,
             groupComparator: (value1, value2) => value2.compareTo(value1),
             itemComparator: (item1, item2) => item2.nama.compareTo(item1.nama),
             order: GroupedListOrder.DESC,
-            useStickyGroupSeparators: true,
-            groupSeparatorBuilder: (String value) => Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                value,
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 20),
+            groupSeparatorBuilder: (String value) => Container(
+              margin: EdgeInsets.symmetric(horizontal: 100, vertical: 10),
+              child: Material(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(15),
+                ),
+                elevation: 5,
+                child: Padding(
+                  padding: EdgeInsets.all(5),
+                  child: Text(
+                    value,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ),
               ),
             ),
             itemBuilder: (c, element) {
               return itemList(element);
             },
+            separator: divider(),
           ),
         ),
       ],

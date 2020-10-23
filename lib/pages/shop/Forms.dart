@@ -3,7 +3,7 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:flutter_open_whatsapp/flutter_open_whatsapp.dart';
 //import 'package:email_validator/email_validator.dart';
 import 'Cart.dart';
-import 'model/AppScope.dart';
+import 'package:malioboromall/model/AppScope.dart';
 
 class Forms extends StatefulWidget {
   static final String route = 'Form-route';
@@ -258,6 +258,7 @@ class FormsState extends State<Forms> {
         elevation: 0,
         color: Color(0xfffee18e),
         child: Container(
+          width: MediaQuery.of(context).size.width,
           height: 70,
           child: button('ORDER VIA WHATSAPP'),
         ),

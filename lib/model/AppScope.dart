@@ -33,6 +33,7 @@ class PromoList {
   String tglawal;
   String tglakhir;
   String jenis;
+  String deskripsi;
   String tenant;
   String logo;
 
@@ -42,6 +43,7 @@ class PromoList {
     this.tglawal,
     this.tglakhir,
     this.jenis,
+    this.deskripsi,
     this.tenant,
     this.logo,
   );
@@ -166,6 +168,7 @@ class AppModel extends Model {
           p['tglawal'],
           p['tglakhir'],
           p['jenis'],
+          p['deskripsi'],
           p['tenant'],
           p['logo'],
         );

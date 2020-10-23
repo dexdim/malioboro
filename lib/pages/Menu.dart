@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:malioboromall/auth/Auth.dart';
+import 'package:malioboromall/pages/deal/Deal.dart';
+import 'package:malioboromall/pages/profile/Profile.dart';
+import 'package:malioboromall/pages/shop/Cart.dart';
+import 'package:malioboromall/pages/shop/Shops.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'Home.dart';
-import 'Deal.dart';
-import 'Shops.dart';
-import 'Cart.dart';
-import 'Profile.dart';
-import 'auth/Auth.dart';
-import 'model/AppScope.dart';
+import 'home/Home.dart';
+import 'package:malioboromall/model/AppScope.dart';
 
 class Menu extends StatefulWidget {
   Menu({Key key, this.auth, this.userid, this.logoutCallback})
@@ -27,6 +27,7 @@ class _MenuState extends State<Menu> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   int selectedIndex = 0;
+  bool visible = false;
   DateTime currentBackPressTime;
 
   PageController pageController = PageController(
@@ -50,37 +51,9 @@ class _MenuState extends State<Menu> {
     );
   }
 
-  Widget pageView() {
-    return PageView(
-      controller: pageController,
-      onPageChanged: (index) {
-        pageChanged(index);
-      },
-      children: <Widget>[
-        Home(),
-        Shops(),
-        Deal(),
-        Profile(),
-      ],
-    );
-  }
-
   @override
   void initState() {
     super.initState();
-  }
-
-  void pageChanged(int index) {
-    setState(
-      () {
-        selectedIndex = index;
-        pageController.animateToPage(
-          index,
-          duration: Duration(milliseconds: 100),
-          curve: Curves.ease,
-        );
-      },
-    );
   }
 
   Widget cartButton() {
@@ -217,7 +190,7 @@ class _MenuState extends State<Menu> {
           ],
         ),
         bottomNavigationBar: Container(
-          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+          padding: EdgeInsets.fromLTRB(15, 0, 15, 15),
           child: Material(
             elevation: 5,
             color: Colors.white,
@@ -227,14 +200,17 @@ class _MenuState extends State<Menu> {
             child: bottomBar(),
           ),
         ),
-        floatingActionButton: Container(
-          margin: EdgeInsets.only(right: 5),
-          width: 70,
-          height: 70,
-          decoration: BoxDecoration(
-              border: Border.all(color: Colors.black12, width: 3),
-              shape: BoxShape.circle),
-          child: cartButton(),
+        floatingActionButton: Visibility(
+          visible: visible,
+          child: Container(
+            margin: EdgeInsets.only(right: 5),
+            width: 70,
+            height: 70,
+            decoration: BoxDecoration(
+                border: Border.all(color: Colors.black12, width: 3),
+                shape: BoxShape.circle),
+            child: cartButton(),
+          ),
         ),
       ),
     );

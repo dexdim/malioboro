@@ -2,19 +2,18 @@ import 'dart:async';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
-import 'package:malioboromall/DealDetail.dart';
+import 'package:malioboromall/pages/shop/Cart.dart';
+import 'package:malioboromall/pages/shop/Catalog.dart';
+import 'package:malioboromall/pages/shop/Detail.dart';
+import 'package:malioboromall/pages/shop/Forms.dart';
+import 'package:malioboromall/pages/user/Forgot.dart';
+import 'package:malioboromall/pages/user/Login.dart';
+import 'package:malioboromall/pages/user/Signup.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'auth/Auth.dart';
 import 'model/AppScope.dart';
-import 'Login.dart';
-import 'Signup.dart';
-import 'Forgot.dart';
-import 'Menu.dart';
-import 'Root.dart';
-import 'Catalog.dart';
-import 'Detail.dart';
-import 'Cart.dart';
-import 'Forms.dart';
+import 'pages/Menu.dart';
+import 'auth/Root.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,7 +31,6 @@ class Main extends StatelessWidget {
     SignUp.route: (BuildContext context) => SignUp(),
     Forgot.route: (BuildContext context) => Forgot(),
     Menu.route: (BuildContext context) => Menu(),
-    DealDetail.route: (BuildContext context) => DealDetail(),
     Catalog.route: (BuildContext context) => Catalog(),
     Detail.route: (BuildContext context) => Detail(),
     Cart.route: (BuildContext context) => Cart(),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'model/AppScope.dart';
+import 'package:malioboromall/model/AppScope.dart';
 
 class DealDetail extends StatelessWidget {
   final int index;
@@ -81,7 +81,7 @@ class DealDetail extends StatelessWidget {
                           height: 30,
                         ),
                         Text(
-                          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam a tincidunt elit. Aenean id feugiat metus. Suspendisse nulla leo, semper ut mauris quis, fringilla fringilla odio. Vivamus ac posuere diam. Nunc vel sagittis enim. Vivamus sed diam eu dui pulvinar egestas bibendum vel urna. Nullam et enim vel lectus posuere varius nec lobortis erat. Morbi maximus nulla eu venenatis varius. Fusce ac tempus lorem, quis rhoncus orci. Sed vel dictum mi, et vestibulum libero. Aenean a odio diam.',
+                          '${promoData[index].deskripsi} ',
                           style: TextStyle(
                             fontSize: 16,
                           ),

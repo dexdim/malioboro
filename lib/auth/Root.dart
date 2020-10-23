@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'auth/Auth.dart';
-import 'Login.dart';
-import 'Menu.dart';
+import 'package:malioboromall/pages/Menu.dart';
+import 'package:malioboromall/pages/user/Login.dart';
+import 'Auth.dart';
 
 enum AuthStatus {
   NOT_DETERMINED,

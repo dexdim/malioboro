@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:malioboromall/auth/Auth.dart';
+import 'package:malioboromall/pages/Menu.dart';
 import 'package:page_transition/page_transition.dart';
-import 'auth/Auth.dart';
 import 'Signup.dart';
 import 'Forgot.dart';
-import 'Menu.dart';
 
 class Login extends StatefulWidget {
   Login({Key key, this.auth, this.loginCallback}) : super(key: key);

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'model/AppScope.dart';
+import 'package:malioboromall/model/AppScope.dart';
 
 class News extends StatelessWidget {
   Widget divider() {
