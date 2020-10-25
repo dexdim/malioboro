@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:malioboromall/main.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:malioboromall/model/AppScope.dart';
@@ -107,8 +106,8 @@ class ShopsState extends State<Shops> {
                 borderRadius: BorderRadius.all(
                   Radius.circular(10),
                 ),
-                child: CachedNetworkImage(
-                  imageUrl: 'https://malmalioboro.co.id/${element.image}',
+                child: Image.network(
+                  'https://malmalioboro.co.id/${element.image}',
                   fit: BoxFit.fill,
                 ),
               ),
