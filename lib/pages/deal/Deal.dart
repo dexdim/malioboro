@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:malioboromall/pages/deal/DealDetail.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:/malioboromall/model/AppScope.dart';
+import 'package:malioboromall/model/AppScope.dart';
 
 class Deal extends StatefulWidget {
   @override

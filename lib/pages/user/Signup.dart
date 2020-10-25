@@ -143,7 +143,7 @@ class _SignUpState extends State<SignUp> {
             'Already have an account? ',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
           ),
-          InkWell(
+          GestureDetector(
             onTap: () {
               Navigator.push(
                 context,

@@ -131,11 +131,21 @@ class News extends StatelessWidget {
                           context: context,
                           builder: (BuildContext context) => popupNews(index),
                         ),
-                        child: Container(
-                          height: 50,
-                          child: Text(
-                            '${index + 1}. ${newsData[index].nama}',
-                            style: TextStyle(fontSize: 20),
+                        child: Card(
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                '${index + 1}. ',
+                                style: TextStyle(fontSize: 20),
+                              ),
+                              Expanded(
+                                child: Text(
+                                  newsData[index].nama,
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       );

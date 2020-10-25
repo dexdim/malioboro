@@ -119,6 +119,11 @@ class _MenuState extends State<Menu> {
       onTap: (index) {
         setState(() {
           selectedIndex = index;
+          if (selectedIndex == 1) {
+            visible = true;
+          } else {
+            visible = false;
+          }
           /*
           pageController.jumpToPage(
             index,

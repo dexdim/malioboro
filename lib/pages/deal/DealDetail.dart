@@ -32,9 +32,9 @@ class DealDetail extends StatelessWidget {
             Column(
               children: [
                 Container(
-                  width: MediaQuery.of(context).size.width,
                   child: Image.network(
                     'http://www.malmalioboro.co.id/${promoData[this.index].logo}',
+                    width: MediaQuery.of(context).size.width,
                   ),
                 ),
                 SizedBox(

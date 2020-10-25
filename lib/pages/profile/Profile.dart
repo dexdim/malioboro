@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:malioboromall/pages/profile/EditProfile.dart';
+import 'package:malioboromall/pages/user/Change.dart';
 import 'package:malioboromall/pages/user/Login.dart';
+import 'package:page_transition/page_transition.dart';
 
 class Profile extends StatelessWidget {
   Widget text(context, String title, String value) {
@@ -57,6 +60,17 @@ class Profile extends StatelessWidget {
           Align(
             alignment: Alignment.topRight,
             child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  PageTransition(
+                    child: EditProfile(),
+                    type: PageTransitionType.fade,
+                    inheritTheme: true,
+                    ctx: context,
+                  ),
+                );
+              },
               child: Text(
                 'Edit profile',
                 style: TextStyle(
@@ -70,18 +84,29 @@ class Profile extends StatelessWidget {
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.05,
           ),
-          text(context, 'Full Name', 'Alexander Adimas'),
-          text(context, 'Address', 'Perumahan Pondok Intan Permai 3'),
-          text(context, 'Birthdate', '11 July 1992'),
+          text(context, 'Full Name', 'Joko Widodo'),
+          text(context, 'Address', 'Istana Negara Bogor'),
+          text(context, 'Birthdate', '21 June 1961'),
           text(context, 'Gender', 'Male'),
-          text(context, 'Mobile Number', '0888060605032'),
-          text(context, 'Email', 'alexanderadimas@gmail.com'),
+          text(context, 'Mobile Number', '08123456789'),
+          text(context, 'Email', 'jokowi@gmail.com'),
           Expanded(
             child: Container(),
           ),
           Align(
             alignment: Alignment.bottomCenter,
             child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  PageTransition(
+                    child: Change(),
+                    type: PageTransitionType.fade,
+                    inheritTheme: true,
+                    ctx: context,
+                  ),
+                );
+              },
               child: Text(
                 'Change password',
                 style: TextStyle(

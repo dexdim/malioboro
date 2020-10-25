@@ -11,6 +11,7 @@ import 'package:http/http.dart' as http;
 
 class NewsList {
   dynamic id;
+  dynamic idtenan;
   String nama;
   String jenis;
   String image;
@@ -77,6 +78,7 @@ class TenantList {
 
 class Data {
   int id;
+  int idtenan;
   String nama;
   String deskripsi;
   int harga;
@@ -86,6 +88,7 @@ class Data {
   int subtotal;
 
   Data({
+    this.idtenan,
     this.nama,
     this.deskripsi,
     this.harga,
@@ -221,8 +224,8 @@ class AppModel extends Model {
       Directory documentsDirectory = await getApplicationDocumentsDirectory();
       String path = join(documentsDirectory.path, 'cart$id.db');
       print(path);
-      //await storage.deleteItem('isFirst');
-      //await this.deleteDB(id);
+      await storage.deleteItem('isFirst');
+      await this.deleteDB(id);
 
       var database = await openDatabase(
         path,
@@ -230,7 +233,7 @@ class AppModel extends Model {
         onOpen: (Database db) {
           this._db = db;
           print('OPEN DBV');
-          this.createTable();
+          this.createTable(id);
         },
         onCreate: (Database db, int version) async {
           this._db = db;
@@ -255,17 +258,18 @@ class AppModel extends Model {
   }
 
   //Buat tabel item_list & cart_list jika belum ada tabel
-  createTable() async {
+  createTable(id) async {
     try {
-      String qry = 'CREATE TABLE IF NOT EXISTS item_list ( '
+      String qry = 'CREATE TABLE IF NOT EXISTS item_list_$id ( '
           'id INTEGER PRIMARY KEY,'
+          'idtenan INTEGER,'
           'nama TEXT,'
           'deskripsi TEXT,'
           'harga INT,'
           'gambar TEXT,'
           'datetime DATETIME)';
       await this._db.execute(qry);
-      qry = 'CREATE TABLE IF NOT EXISTS cart_list ( '
+      qry = 'CREATE TABLE IF NOT EXISTS cart_list_$id ( '
           'id INTEGER PRIMARY KEY,'
           'shopid INTEGER,'
           'nama TEXT,'
@@ -281,10 +285,10 @@ class AppModel extends Model {
       var _flag = storage.getItem('isFirst');
       print('FLAG IS FIRST $_flag');
       if (_flag == 'true') {
-        this.fetchLocalData();
-        this.fetchCartList();
+        this.fetchLocalData(id);
+        this.fetchCartList(id);
       } else {
-        this.insertInLocal();
+        this.insertInLocal(id);
       }
     } catch (e) {
       print('ERRR ^^^');
@@ -293,7 +297,7 @@ class AppModel extends Model {
   }
 
   //Isi data item dari API ke dalam tabel item_list & list array _data
-  insertInLocal() async {
+  insertInLocal(id) async {
     try {
       await this._db.transaction(
         (tx) async {
@@ -301,13 +305,14 @@ class AppModel extends Model {
             print('Called insert $i');
             Data d = new Data();
             d.id = i + 1;
+            d.idtenan = int.parse(data[i]['idtenan']);
             d.nama = data[i]['nama'];
             d.deskripsi = data[i]['deskripsi'];
             d.gambar = data[i]['gambar'];
             d.harga = int.parse(data[i]['harga']);
             try {
               var qry =
-                  "INSERT INTO item_list(nama, deskripsi, harga, gambar) VALUES('${d.nama}', '${d.deskripsi}', ${d.harga}, '${d.gambar}')";
+                  "INSERT INTO item_list_$id (idtenan, nama, deskripsi, harga, gambar) VALUES('${d.idtenan}', '${d.nama}', '${d.deskripsi}', ${d.harga}, '${d.gambar}')";
               var _res = await tx.rawInsert(qry);
             } catch (e) {
               print('ERRR >>>');
@@ -326,13 +331,14 @@ class AppModel extends Model {
   }
 
   //Ambil record item dari tabel item_list
-  fetchLocalData() async {
+  fetchLocalData(id) async {
     try {
-      List<Map> list = await this._db.rawQuery('SELECT * FROM item_list');
+      List<Map> list = await this._db.rawQuery('SELECT * FROM item_list_$id');
       list.map(
         (dd) {
           Data d = new Data();
           d.id = dd['id'];
+          d.idtenan = dd['idtenan'];
           d.nama = dd['nama'];
           d.deskripsi = dd['deskripsi'];
           d.gambar = dd['gambar'];
@@ -348,29 +354,29 @@ class AppModel extends Model {
   }
 
   //Isi tambah list array _cart dari list array _data
-  void addCart(Data dd) {
+  void addCart(Data dd, id) {
     print(dd);
     print(cart);
     int _index = cart.indexWhere((d) => d.shopid == dd.id);
     if (_index > -1) {
       success = false;
-      cartMsg = '${dd.nama.toUpperCase()} already in your cart.';
+      cartMsg = '${dd.nama.toUpperCase()} is already in your cart.';
     } else {
-      this.insertInCart(dd);
+      this.insertInCart(dd, id);
       success = true;
-      cartMsg = '${dd.nama.toUpperCase()} successfully added to your cart.';
+      cartMsg = '${dd.nama.toUpperCase()} is successfully added to your cart.';
     }
   }
 
   //Isi tabel cart_list dari list array _data
-  insertInCart(Data d) async {
+  insertInCart(Data d, id) async {
     await this._db.transaction(
       (tx) async {
         try {
           var qry =
-              "INSERT INTO cart_list(shopid, nama, deskripsi, harga, gambar, counter, subtotal) VALUES (${d.id},'${d.nama}', '${d.deskripsi}', ${d.harga},'${d.gambar}', ${d.counter}, ${d.subtotal})";
+              "INSERT INTO cart_list_$id (shopid, nama, deskripsi, harga, gambar, counter, subtotal) VALUES (${d.id},'${d.nama}', '${d.deskripsi}', ${d.harga},'${d.gambar}', ${d.counter}, ${d.subtotal})";
           var _res = await tx.execute(qry);
-          this.fetchCartList();
+          this.fetchCartList(id);
         } catch (e) {
           print('ERRR @@ @@');
           print(e);
@@ -380,10 +386,10 @@ class AppModel extends Model {
   }
 
   //Ambil record item dari tabel cart_list
-  fetchCartList() async {
+  fetchCartList(id) async {
     try {
       cart = [];
-      List<Map> list = await this._db.rawQuery('SELECT * FROM cart_list');
+      List<Map> list = await this._db.rawQuery('SELECT * FROM cart_list_$id');
       print('Cart len ${list.length.toString()}');
       list.map(
         (dd) {

@@ -141,15 +141,15 @@ class CartState extends State<Cart> {
                     ),
                     Row(children: <Widget>[
                       Text(
-                        'Price per piece : ',
+                        'Price : ',
                         style: TextStyle(fontSize: 18),
                       ),
                       Text(
-                        NumberFormat.currency(
+                        '${NumberFormat.currency(
                           locale: 'id',
-                          name: 'IDR ',
+                          name: 'Rp ',
                           decimalDigits: 0,
-                        ).format(d.harga),
+                        ).format(d.harga)},-',
                         style: TextStyle(fontSize: 18),
                       ),
                     ]),
@@ -160,11 +160,11 @@ class CartState extends State<Cart> {
                           style: TextStyle(fontSize: 18),
                         ),
                         Text(
-                          NumberFormat.currency(
+                          '${NumberFormat.currency(
                             locale: 'id',
-                            name: 'IDR ',
+                            name: 'Rp ',
                             decimalDigits: 0,
-                          ).format(d.subtotal),
+                          ).format(d.subtotal)},-',
                           style: TextStyle(fontSize: 18),
                         ),
                       ]),
@@ -238,7 +238,7 @@ class CartState extends State<Cart> {
           Container(
             width: 110,
             child: Text(
-              'Total price:',
+              'Total price :',
               style: TextStyle(
                   fontSize: 22.0,
                   color: Colors.brown,
@@ -246,7 +246,7 @@ class CartState extends State<Cart> {
             ),
           ),
           Text(
-            totalHarga,
+            '$totalHarga,-',
             style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w500),
           ),
         ],
@@ -275,7 +275,7 @@ class CartState extends State<Cart> {
       appBar: AppBar(
         elevation: 0,
         title: Text(
-          'Your Cool Shopping List!',
+          'Your Shopping List!',
           style: TextStyle(
             fontSize: 22,
             shadows: [
@@ -335,7 +335,7 @@ class CartState extends State<Cart> {
             builder: (context, child, model) {
               totalHarga = NumberFormat.currency(
                 locale: 'id',
-                name: 'IDR ',
+                name: 'Rp ',
                 decimalDigits: 0,
               ).format(
                 (model.cartListing

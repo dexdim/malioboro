@@ -174,49 +174,66 @@ class HomeState extends State<Home> {
 
   Widget popupEvent() {
     return AlertDialog(
-      title: Text(
-        'EVENT NAME',
-        textAlign: TextAlign.center,
-      ),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
+      content: Stack(
         children: [
-          Container(
-            child: Material(
-              elevation: 3,
-              borderRadius: BorderRadius.all(
-                Radius.circular(10),
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(10),
-                ),
-                child: Image.network(
-                  'http://www.malmalioboro.co.id/assets/images/event/97d152b3604f064c937e8a7b1432fc58.jpg',
-                  fit: BoxFit.fill,
+          Positioned(
+            top: 0,
+            right: 0,
+            child: FlatButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                'X',
+                style: TextStyle(
+                  fontSize: 24,
+                  color: Colors.black,
                 ),
               ),
             ),
           ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.05,
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'SHOPPING WITH LOVE',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                child: Material(
+                  elevation: 3,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10),
+                    ),
+                    child: Image.network(
+                      'http://www.malmalioboro.co.id/assets/images/event/97d152b3604f064c937e8a7b1432fc58.jpg',
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.05,
+              ),
+              Text('Detail event here...'),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.05,
+              ),
+            ],
           ),
-          Text('Detail event here...')
         ],
       ),
-      actions: [
-        FlatButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          child: Text(
-            'Close',
-            style: TextStyle(
-              color: Colors.black,
-            ),
-          ),
-        ),
-      ],
     );
   }
 
@@ -331,7 +348,7 @@ class HomeState extends State<Home> {
           SizedBox(
             height: 20,
           ),
-          appBar('Hi User! Welcome to Malioboro Mall - Shop & Deals'),
+          appBar('Hi User!\nWelcome to Malioboro Mall - Shop & Deals'),
           Expanded(
             child: SingleChildScrollView(
               padding: EdgeInsets.only(

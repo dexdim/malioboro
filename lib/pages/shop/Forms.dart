@@ -66,14 +66,15 @@ class FormsState extends State<Forms> {
 
                 finalPrint += 'Hi Supermarket Malioboro Mall\n';
                 finalPrint +=
-                    'Berikut daftar belanja saya dari Shop & Deals,\n';
+                    'Ini daftar belanja saya dari Malioboro Mall Shop and Deals\n';
                 finalPrint += 'Nama : ${namaController.text}\n';
                 finalPrint += 'HP: ${nomorhpController.text}';
-                finalPrint += '\n=================\n\n';
+                finalPrint += '\n-----=\n\n';
                 model.cartListing.map((d) => printItem(d)).toString();
                 finalPrint +=
                     '\n\n=================\nHarga total : ${CartState.totalHarga}';
-                finalPrint += '\n\nTolong ketersediaan stocknya. Terima kasih.';
+                finalPrint +=
+                    '\n\nTolong cek ketersediaan stocknya. Terima kasih.';
 
                 FlutterOpenWhatsapp.sendSingleMessage(
                     '6282138020366', '${finalPrint.toString()}');
@@ -91,7 +92,7 @@ class FormsState extends State<Forms> {
     return Container(
       width: MediaQuery.of(context).size.width / 1.3,
       child: Text(
-        'Kindly fill in the blanks to order',
+        'Please fill in the blanks to order',
         style: TextStyle(fontSize: 20),
         textAlign: TextAlign.center,
       ),
@@ -245,10 +246,11 @@ class FormsState extends State<Forms> {
                 SizedBox(height: 50),
                 header(),
                 SizedBox(height: 50),
-                formField('Full Name', namaController),
-                formField('Shipping Address', alamatController),
+                formField('Full Name / Nama Lengkap', namaController),
+                formField(
+                    'Shipping Address / Alamat Pengiriman', alamatController),
                 //formField('Email', emailController),
-                formField('Mobile Number', nomorhpController),
+                formField('Mobile Number / Nomor Handphone', nomorhpController),
               ]),
             ),
           ),
@@ -260,7 +262,7 @@ class FormsState extends State<Forms> {
         child: Container(
           width: MediaQuery.of(context).size.width,
           height: 70,
-          child: button('ORDER VIA WHATSAPP'),
+          child: button('CLICK HERE TO BUY'),
         ),
       ),
     );

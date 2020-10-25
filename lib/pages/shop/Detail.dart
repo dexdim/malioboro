@@ -47,7 +47,7 @@ class DetailState extends State<Detail> {
           ),
         ),
         onPressed: () {
-          model.addCart(widget.detail);
+          model.addCart(widget.detail, widget.detail.idtenan);
           Timer(Duration(milliseconds: 500), () {
             showDetailSnack(model.cartMsg, model.success);
           });
@@ -119,10 +119,10 @@ class DetailState extends State<Detail> {
       SnackBar(
         content: Text(
           msg,
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.white, fontSize: 18),
         ),
         backgroundColor: (flag) ? Colors.green : Colors.red[500],
-        duration: Duration(seconds: 2),
+        duration: Duration(seconds: 5),
       ),
     );
   }
@@ -135,7 +135,7 @@ class DetailState extends State<Detail> {
           Container(
             width: 140.0,
             child: Text(
-              'Subtotal price:',
+              'Subtotal price :',
               style: TextStyle(
                   fontSize: 22.0,
                   color: Colors.brown,
@@ -146,11 +146,11 @@ class DetailState extends State<Detail> {
             widget.detail.counter = counter;
             widget.detail.subtotal = counter * widget.detail.harga;
             return Text(
-              NumberFormat.currency(
+              '${NumberFormat.currency(
                 locale: 'id',
-                name: 'IDR ',
+                name: 'Rp ',
                 decimalDigits: 0,
-              ).format(widget.detail.subtotal),
+              ).format(widget.detail.subtotal)},-',
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
             );
           }),
@@ -163,7 +163,7 @@ class DetailState extends State<Detail> {
   Widget build(BuildContext context) {
     String hargaSatuan = NumberFormat.currency(
       locale: 'id',
-      name: 'IDR ',
+      name: 'Rp ',
       decimalDigits: 0,
     ).format(widget.detail.harga);
     // TODO: implement build
@@ -243,7 +243,7 @@ class DetailState extends State<Detail> {
                       ),
                       SizedBox(height: 10),
                       Text(
-                        'Price per piece : $hargaSatuan',
+                        'Price : $hargaSatuan,-',
                         style: TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 20.0,
@@ -259,9 +259,9 @@ class DetailState extends State<Detail> {
                         height: 10,
                       ),
                       Text(
-                        '*The price is subject to change.',
+                        '*The price may be changed without notice.',
                         style: TextStyle(
-                            fontWeight: FontWeight.w400, fontSize: 20),
+                            fontWeight: FontWeight.w400, fontSize: 16),
                       ),
                     ],
                   ),
@@ -278,6 +278,7 @@ class DetailState extends State<Detail> {
           width: MediaQuery.of(context).size.width,
           height: 70.0,
           child: Row(
+            mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               subtotalBar(),
