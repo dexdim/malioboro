@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
+
 import 'Login.dart';
 
 class Forgot extends StatefulWidget {
@@ -97,8 +99,13 @@ class ForgotState extends State<Forgot> {
       onPressed: () {
         Navigator.push(
           context,
-          MaterialPageRoute(
-            builder: (context) => Login(),
+          PageTransition(
+            curve: Curves.easeIn,
+            duration: Duration(milliseconds: 500),
+            child: Login(),
+            type: PageTransitionType.fade,
+            inheritTheme: true,
+            ctx: context,
           ),
         );
       },
@@ -116,22 +123,20 @@ class ForgotState extends State<Forgot> {
   }
 
   Widget title() {
-    return RichText(
+    return Text(
+      'Oops, I Forgot My Password!',
       textAlign: TextAlign.center,
-      text: TextSpan(
-        text: "Oops! I Forgot My Password!",
-        style: TextStyle(
-          fontWeight: FontWeight.w500,
-          fontSize: 20,
-          color: Colors.black,
-          shadows: [
-            Shadow(
-              offset: Offset(0.00, 2.00),
-              color: Color(0xffd97c29).withOpacity(0.50),
-              blurRadius: 5,
-            ),
-          ],
-        ),
+      style: TextStyle(
+        fontWeight: FontWeight.w500,
+        fontSize: 26,
+        color: Colors.black,
+        shadows: [
+          Shadow(
+            offset: Offset(0.00, 2.00),
+            color: Colors.brown.withOpacity(0.50),
+            blurRadius: 5,
+          ),
+        ],
       ),
     );
   }

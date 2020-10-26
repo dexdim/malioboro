@@ -17,7 +17,6 @@ class FormsState extends State<Forms> {
   final namaController = TextEditingController();
   final alamatController = TextEditingController();
   final nomorhpController = TextEditingController();
-  final emailController = TextEditingController();
   String namapemesan;
   String nomorhp;
   bool validate = false;
@@ -69,10 +68,10 @@ class FormsState extends State<Forms> {
                     'Ini daftar belanja saya dari Malioboro Mall Shop and Deals\n';
                 finalPrint += 'Nama : ${namaController.text}\n';
                 finalPrint += 'HP: ${nomorhpController.text}';
-                finalPrint += '\n-----=\n\n';
+                finalPrint += '\n---------------\n\n';
                 model.cartListing.map((d) => printItem(d)).toString();
                 finalPrint +=
-                    '\n\n=================\nHarga total : ${CartState.totalHarga}';
+                    '\n\n---------------\nHarga total : ${CartState.totalHarga}';
                 finalPrint +=
                     '\n\nTolong cek ketersediaan stocknya. Terima kasih.';
 
@@ -211,7 +210,7 @@ class FormsState extends State<Forms> {
         title: Text(
           'Order Form',
           style: TextStyle(
-            fontSize: 22,
+            fontSize: 26,
             shadows: [
               Shadow(
                 offset: Offset(0.00, 2.00),

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:malioboromall/pages/Menu.dart';
 import 'package:page_transition/page_transition.dart';
-import 'Profile.dart';
+
+enum Gender { male, female }
 
 class EditProfile extends StatefulWidget {
-  EditProfile({Key key}) : super(key: key);
   static final String route = 'EditProfile-route';
 
   @override
@@ -11,25 +12,38 @@ class EditProfile extends StatefulWidget {
 }
 
 class EditProfileState extends State<EditProfile> {
+  DateTime selectedDate = DateTime.now();
+  Gender gender = Gender.male;
   bool accept = false;
 
+  _selectDate(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate, // Refer step 1
+      firstDate: DateTime(1901),
+      lastDate: DateTime.now(),
+    );
+    if (picked != null && picked != selectedDate)
+      setState(() {
+        selectedDate = picked;
+      });
+  }
+
   Widget title() {
-    return RichText(
+    return Text(
+      'Edit Profile',
       textAlign: TextAlign.center,
-      text: TextSpan(
-        text: "EDIT PROFILE",
-        style: TextStyle(
-          fontWeight: FontWeight.w500,
-          fontSize: 24,
-          color: Colors.black,
-          shadows: [
-            Shadow(
-              offset: Offset(0.00, 2.00),
-              color: Color(0xffd97c29).withOpacity(0.50),
-              blurRadius: 5,
-            ),
-          ],
-        ),
+      style: TextStyle(
+        fontWeight: FontWeight.w500,
+        fontSize: 24,
+        color: Colors.black,
+        shadows: [
+          Shadow(
+            offset: Offset(0.00, 2.00),
+            color: Colors.brown.withOpacity(0.50),
+            blurRadius: 5,
+          ),
+        ],
       ),
     );
   }
@@ -96,6 +110,152 @@ class EditProfileState extends State<EditProfile> {
     );
   }
 
+  Widget birthdate() {
+    return Container(
+      margin: EdgeInsets.only(bottom: 10),
+      width: MediaQuery.of(context).size.width * 0.7,
+      child: Container(
+        height: 50,
+        child: Row(
+          children: <Widget>[
+            Expanded(
+              flex: 2,
+              child: Padding(
+                padding: EdgeInsets.only(left: 10),
+                child: Text(
+                  'Birthdate',
+                  style: TextStyle(
+                    fontSize: 18,
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              child: Text(
+                ':',
+                style: TextStyle(
+                  fontSize: 18,
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 5,
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 15),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Text(
+                      "${selectedDate.toLocal()}".split(' ')[0],
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 20.0,
+                    ),
+                    RaisedButton(
+                      onPressed: () => _selectDate(context),
+                      child: Text(
+                        'Select date',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.white,
+                        ),
+                      ),
+                      color: Colors.brown,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget genderList() {
+    return Container(
+      margin: EdgeInsets.only(bottom: 10),
+      width: MediaQuery.of(context).size.width * 0.7,
+      child: Container(
+        height: 50,
+        child: Row(
+          children: <Widget>[
+            Expanded(
+              flex: 2,
+              child: Padding(
+                padding: EdgeInsets.only(left: 10),
+                child: Text(
+                  'Gender',
+                  style: TextStyle(
+                    fontSize: 18,
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              child: Text(
+                ':',
+                style: TextStyle(
+                  fontSize: 18,
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 5,
+              child: Row(children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Radio(
+                      activeColor: Colors.brown,
+                      value: Gender.male,
+                      groupValue: gender,
+                      onChanged: (Gender value) {
+                        setState(() {
+                          gender = value;
+                        });
+                      },
+                    ),
+                    Text(
+                      'Male',
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Radio(
+                      activeColor: Colors.brown,
+                      value: Gender.female,
+                      groupValue: gender,
+                      onChanged: (Gender value) {
+                        setState(() {
+                          gender = value;
+                        });
+                      },
+                    ),
+                    Text(
+                      'Female',
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
+                  ],
+                ),
+              ]),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget submitButton(String title) {
     return RaisedButton(
       elevation: 3,
@@ -123,7 +283,9 @@ class EditProfileState extends State<EditProfile> {
         Navigator.push(
           context,
           PageTransition(
-            child: Profile(),
+            curve: Curves.easeIn,
+            duration: Duration(milliseconds: 500),
+            child: Menu(),
             type: PageTransitionType.fade,
             inheritTheme: true,
             ctx: context,
@@ -140,8 +302,8 @@ class EditProfileState extends State<EditProfile> {
       children: <Widget>[
         form('Full Name'),
         form('Address'),
-        form('Birthdate'),
-        form('Gender'),
+        birthdate(),
+        genderList(),
         form('Phone Number'),
         form('Email'),
       ],

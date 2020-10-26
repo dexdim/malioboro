@@ -2,17 +2,20 @@ import 'dart:async';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:malioboromall/model/AppScope.dart';
+import 'package:malioboromall/pages/Menu.dart';
+import 'package:malioboromall/pages/profile/EditProfile.dart';
 import 'package:malioboromall/pages/shop/Cart.dart';
 import 'package:malioboromall/pages/shop/Catalog.dart';
 import 'package:malioboromall/pages/shop/Detail.dart';
 import 'package:malioboromall/pages/shop/Forms.dart';
+import 'package:malioboromall/pages/user/Change.dart';
 import 'package:malioboromall/pages/user/Forgot.dart';
 import 'package:malioboromall/pages/user/Login.dart';
 import 'package:malioboromall/pages/user/Signup.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'auth/Auth.dart';
-import 'model/AppScope.dart';
-import 'pages/Menu.dart';
 import 'auth/Root.dart';
 
 void main() async {
@@ -35,6 +38,8 @@ class Main extends StatelessWidget {
     Detail.route: (BuildContext context) => Detail(),
     Cart.route: (BuildContext context) => Cart(),
     Forms.route: (BuildContext context) => Forms(),
+    EditProfile.route: (BuildContext context) => EditProfile(),
+    Change.route: (BuildContext context) => Change(),
   };
 
   @override
@@ -55,7 +60,9 @@ class Main extends StatelessWidget {
         title: 'Malioboro Mall Shop & Deals',
         theme: ThemeData(
           primaryColor: Colors.white,
-          fontFamily: 'Baloo2',
+          textTheme: GoogleFonts.nunitoTextTheme(
+            Theme.of(context).textTheme,
+          ),
         ),
         home: Splash(),
         routes: routes,

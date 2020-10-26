@@ -116,7 +116,7 @@ class CatalogState extends State<Catalog> {
   Icon searchIcon = Icon(
     Icons.search,
     color: Colors.brown,
-    size: 30,
+    size: 26,
   );
 
   Widget appBarTitle = Text(
@@ -195,7 +195,7 @@ class CatalogState extends State<Catalog> {
       automaticallyImplyLeading: false,
       centerTitle: true,
       title: appBarTitle,
-      actions: <Widget>[
+      actions: [
         Padding(
           padding: EdgeInsets.only(right: 15),
           child: InkResponse(
@@ -205,7 +205,7 @@ class CatalogState extends State<Catalog> {
                 this.searchIcon = Icon(
                   Icons.close,
                   color: Colors.redAccent,
-                  size: 25,
+                  size: 26,
                 );
                 this.appBarTitle = Container(
                   margin: EdgeInsets.only(right: 5),
@@ -220,7 +220,7 @@ class CatalogState extends State<Catalog> {
                     decoration: InputDecoration(
                       contentPadding:
                           EdgeInsets.symmetric(horizontal: 10, vertical: 1),
-                      hintText: 'Cari di sini...',
+                      hintText: 'Search here...',
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: Colors.brown,
@@ -256,7 +256,7 @@ class CatalogState extends State<Catalog> {
       this.searchIcon = Icon(
         Icons.search,
         color: Colors.brown,
-        size: 30,
+        size: 26,
       );
       this.appBarTitle = Text(
         'Catalogue',

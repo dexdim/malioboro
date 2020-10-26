@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:malioboromall/pages/profile/Profile.dart';
+import 'package:malioboromall/pages/Menu.dart';
 import 'package:page_transition/page_transition.dart';
 
 class Change extends StatefulWidget {
@@ -12,22 +12,20 @@ class Change extends StatefulWidget {
 
 class ChangeState extends State<Change> {
   Widget title() {
-    return RichText(
+    return Text(
+      'Change Password',
       textAlign: TextAlign.center,
-      text: TextSpan(
-        text: "Change Password",
-        style: TextStyle(
-          fontWeight: FontWeight.w500,
-          fontSize: 20,
-          color: Colors.black,
-          shadows: [
-            Shadow(
-              offset: Offset(0.00, 2.00),
-              color: Color(0xffd97c29).withOpacity(0.50),
-              blurRadius: 5,
-            ),
-          ],
-        ),
+      style: TextStyle(
+        fontWeight: FontWeight.w500,
+        fontSize: 24,
+        color: Colors.black,
+        shadows: [
+          Shadow(
+            offset: Offset(0.00, 2.00),
+            color: Colors.brown.withOpacity(0.50),
+            blurRadius: 5,
+          ),
+        ],
       ),
     );
   }
@@ -121,7 +119,9 @@ class ChangeState extends State<Change> {
         Navigator.push(
           context,
           PageTransition(
-            child: Profile(),
+            curve: Curves.easeIn,
+            duration: Duration(milliseconds: 500),
+            child: Menu(),
             type: PageTransitionType.fade,
             inheritTheme: true,
             ctx: context,

@@ -160,6 +160,8 @@ class LoginState extends State<Login> {
           Navigator.push(
             context,
             PageTransition(
+              curve: Curves.easeIn,
+              duration: Duration(milliseconds: 500),
               child: Forgot(),
               type: PageTransitionType.fade,
               inheritTheme: true,
@@ -203,8 +205,13 @@ class LoginState extends State<Login> {
       onPressed: () {
         Navigator.push(
           context,
-          MaterialPageRoute(
-            builder: (context) => Menu(),
+          PageTransition(
+            curve: Curves.easeIn,
+            duration: Duration(milliseconds: 500),
+            child: Menu(),
+            type: PageTransitionType.fade,
+            inheritTheme: true,
+            ctx: context,
           ),
         );
       },
@@ -316,6 +323,8 @@ class LoginState extends State<Login> {
               Navigator.push(
                 context,
                 PageTransition(
+                  curve: Curves.easeIn,
+                  duration: Duration(milliseconds: 500),
                   child: SignUp(),
                   type: PageTransitionType.fade,
                   inheritTheme: true,

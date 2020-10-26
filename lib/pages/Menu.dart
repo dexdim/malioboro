@@ -24,7 +24,8 @@ class Menu extends StatefulWidget {
 }
 
 class _MenuState extends State<Menu> {
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   int selectedIndex = 0;
   bool visible = false;
@@ -175,6 +176,7 @@ class _MenuState extends State<Menu> {
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
+        key: scaffoldKey,
         extendBody: true,
         body: Stack(
           children: [

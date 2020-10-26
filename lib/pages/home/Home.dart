@@ -177,30 +177,37 @@ class HomeState extends State<Home> {
       content: Stack(
         children: [
           Positioned(
-            top: 0,
-            right: 0,
+            top: -15,
+            right: -35,
             child: FlatButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text(
-                'X',
-                style: TextStyle(
-                  fontSize: 24,
-                  color: Colors.black,
-                ),
+              child: Icon(
+                Icons.close,
+                color: Colors.brown,
               ),
             ),
           ),
           Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              SizedBox(
+                height: 10,
+              ),
               Text(
                 'SHOPPING WITH LOVE',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w500,
+                  shadows: [
+                    Shadow(
+                      offset: Offset(0.00, 2.00),
+                      color: Colors.brown.withOpacity(0.50),
+                      blurRadius: 5,
+                    ),
+                  ],
                 ),
               ),
               SizedBox(
@@ -226,7 +233,10 @@ class HomeState extends State<Home> {
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.05,
               ),
-              Text('Detail event here...'),
+              Text(
+                'Event detail here...',
+                style: TextStyle(fontSize: 18),
+              ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.05,
               ),

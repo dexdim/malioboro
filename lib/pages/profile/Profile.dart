@@ -4,7 +4,12 @@ import 'package:malioboromall/pages/user/Change.dart';
 import 'package:malioboromall/pages/user/Login.dart';
 import 'package:page_transition/page_transition.dart';
 
-class Profile extends StatelessWidget {
+class Profile extends StatefulWidget {
+  @override
+  ProfileState createState() => ProfileState();
+}
+
+class ProfileState extends State<Profile> {
   Widget text(context, String title, String value) {
     return Padding(
       padding: EdgeInsets.symmetric(
@@ -64,6 +69,8 @@ class Profile extends StatelessWidget {
                 Navigator.push(
                   context,
                   PageTransition(
+                    curve: Curves.easeIn,
+                    duration: Duration(milliseconds: 500),
                     child: EditProfile(),
                     type: PageTransitionType.fade,
                     inheritTheme: true,
@@ -100,6 +107,8 @@ class Profile extends StatelessWidget {
                 Navigator.push(
                   context,
                   PageTransition(
+                    curve: Curves.easeIn,
+                    duration: Duration(milliseconds: 500),
                     child: Change(),
                     type: PageTransitionType.fade,
                     inheritTheme: true,
@@ -158,8 +167,13 @@ class Profile extends StatelessWidget {
       onPressed: () {
         Navigator.push(
           context,
-          MaterialPageRoute(
-            builder: (context) => Login(),
+          PageTransition(
+            curve: Curves.easeIn,
+            duration: Duration(milliseconds: 500),
+            child: Login(),
+            type: PageTransitionType.fade,
+            inheritTheme: true,
+            ctx: context,
           ),
         );
       },
@@ -180,7 +194,7 @@ class Profile extends StatelessWidget {
                 child: Material(
                   elevation: 5,
                   child: Image.asset(
-                    'assets/profile.jpg',
+                    'assets/profile.png',
                   ),
                 ),
               ),

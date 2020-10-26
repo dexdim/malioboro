@@ -14,22 +14,20 @@ class _SignUpState extends State<SignUp> {
   bool accept = false;
 
   Widget title() {
-    return RichText(
+    return Text(
+      'Sign Up',
       textAlign: TextAlign.center,
-      text: TextSpan(
-        text: "SIGN UP",
-        style: TextStyle(
-          fontWeight: FontWeight.w500,
-          fontSize: 24,
-          color: Colors.black,
-          shadows: [
-            Shadow(
-              offset: Offset(0.00, 2.00),
-              color: Color(0xffd97c29).withOpacity(0.50),
-              blurRadius: 5,
-            ),
-          ],
-        ),
+      style: TextStyle(
+        fontWeight: FontWeight.w500,
+        fontSize: 26,
+        color: Colors.black,
+        shadows: [
+          Shadow(
+            offset: Offset(0.00, 2.00),
+            color: Colors.brown.withOpacity(0.50),
+            blurRadius: 5,
+          ),
+        ],
       ),
     );
   }
@@ -122,8 +120,13 @@ class _SignUpState extends State<SignUp> {
       onPressed: () {
         Navigator.push(
           context,
-          MaterialPageRoute(
-            builder: (context) => Login(),
+          PageTransition(
+            curve: Curves.easeIn,
+            duration: Duration(milliseconds: 500),
+            child: Login(),
+            type: PageTransitionType.fade,
+            inheritTheme: true,
+            ctx: context,
           ),
         );
       },
@@ -148,6 +151,8 @@ class _SignUpState extends State<SignUp> {
               Navigator.push(
                 context,
                 PageTransition(
+                  curve: Curves.easeIn,
+                  duration: Duration(milliseconds: 500),
                   child: Login(),
                   type: PageTransitionType.fade,
                   inheritTheme: true,

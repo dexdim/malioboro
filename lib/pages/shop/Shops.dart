@@ -15,41 +15,160 @@ class Shops extends StatefulWidget {
   ShopsState createState() => ShopsState();
 }
 
-Widget appBar(title) {
-  return Column(
-    children: [
-      SizedBox(
-        height: 40,
-      ),
-      Text(
-        title,
-        style: TextStyle(
-          fontSize: 22,
-          fontWeight: FontWeight.w500,
-          shadows: [
-            Shadow(
-              offset: Offset(0.00, 2.00),
-              color: Colors.brown.withOpacity(0.50),
-              blurRadius: 5,
+class ShopsState extends State<Shops> {
+  ShopsState() {
+    searchQuery.addListener(
+      () {
+        if (searchQuery.text.isEmpty) {
+          setState(
+            () {
+              searchText = '';
+              isSearching = false;
+              buildSearchList();
+            },
+          );
+        } else {
+          setState(
+            () {
+              searchText = searchQuery.text;
+              isSearching = true;
+              buildSearchList();
+            },
+          );
+        }
+      },
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    tenantData = ScopedModel.of<AppModel>(context).tenant;
+    searchList = tenantData;
+    isSearching = false;
+  }
+
+  final TextEditingController searchQuery = TextEditingController();
+  DateTime currentBackPressTime;
+  bool isSearching;
+  String searchText = '';
+  List<TenantList> tenantData;
+  List<TenantList> searchList = List<TenantList>();
+  List<TenantList> buildSearchList() {
+    if (searchText.isEmpty || searchText == '') {
+      return searchList = tenantData;
+    } else {
+      searchList = tenantData
+          .where(
+            (element) => element.nama.toLowerCase().contains(
+                  searchText.toLowerCase(),
+                ),
+          )
+          .toList();
+      print('${searchList.length} item found!');
+      return searchList;
+    }
+  }
+
+  Icon searchIcon = Icon(
+    Icons.search,
+    color: Colors.brown,
+    size: 30,
+  );
+
+  Widget appBarTitle = Text(
+    'Choose the Store & Start Shopping!',
+    style: TextStyle(
+      fontSize: 22,
+      shadows: [
+        Shadow(
+          offset: Offset(0.00, 2.00),
+          color: Colors.brown.withOpacity(0.50),
+          blurRadius: 5,
+        ),
+      ],
+    ),
+  );
+
+  Widget appBar() {
+    return Column(
+      children: [
+        SizedBox(
+          height: 40,
+        ),
+        Stack(
+          alignment: AlignmentDirectional.center,
+          children: [
+            Align(
+              alignment: Alignment.center,
+              child: appBarTitle,
+            ),
+            Align(
+              alignment: Alignment.centerRight,
+              child: Padding(
+                padding: EdgeInsets.only(
+                  right: 20,
+                ),
+                child: InkResponse(
+                  child: searchIcon,
+                  onTap: () {
+                    if (this.searchIcon.icon == Icons.search) {
+                      this.searchIcon = Icon(
+                        Icons.close,
+                        color: Colors.redAccent,
+                        size: 26,
+                      );
+                      this.appBarTitle = Container(
+                        margin: EdgeInsets.only(right: 5),
+                        padding: EdgeInsets.symmetric(vertical: 5),
+                        height: 50,
+                        width: MediaQuery.of(context).size.width * 0.80,
+                        child: TextField(
+                          controller: searchQuery,
+                          style: TextStyle(
+                            fontSize: 18,
+                          ),
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 1),
+                            hintText: 'Search here...',
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.brown,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.brown,
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                      handleSearchStart();
+                    } else {
+                      handleSearchEnd();
+                    }
+                  },
+                ),
+              ),
             ),
           ],
         ),
+        divider(),
+      ],
+    );
+  }
+
+  Widget divider() {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 36),
+      child: Divider(
+        thickness: 1,
       ),
-      divider(),
-    ],
-  );
-}
+    );
+  }
 
-Widget divider() {
-  return Padding(
-    padding: EdgeInsets.symmetric(horizontal: 36),
-    child: Divider(
-      thickness: 1,
-    ),
-  );
-}
-
-class ShopsState extends State<Shops> {
   Widget button(element) {
     return RaisedButton(
       elevation: 3,
@@ -89,49 +208,70 @@ class ShopsState extends State<Shops> {
     Main.appModel.fetchData(element.id);
 
     return AlertDialog(
-      title: Text(
-        element.nama,
-        textAlign: TextAlign.center,
-      ),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
+      content: Stack(
         children: [
-          Container(
-            child: Material(
-              elevation: 3,
-              borderRadius: BorderRadius.all(
-                Radius.circular(10),
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(10),
-                ),
-                child: Image.network(
-                  'https://malmalioboro.co.id/${element.image}',
-                  fit: BoxFit.fill,
-                ),
+          Positioned(
+            top: -15,
+            right: -35,
+            child: FlatButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Icon(
+                Icons.close,
+                color: Colors.brown,
               ),
             ),
           ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.05,
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                element.nama,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w500,
+                  shadows: [
+                    Shadow(
+                      offset: Offset(0.00, 2.00),
+                      color: Colors.brown.withOpacity(0.50),
+                      blurRadius: 5,
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                child: Material(
+                  elevation: 3,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10),
+                    ),
+                    child: Image.network(
+                      'https://malmalioboro.co.id/${element.image}',
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.05,
+              ),
+              button(element),
+            ],
           ),
-          button(element),
         ],
       ),
-      actions: [
-        FlatButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          child: Text(
-            'Close',
-            style: TextStyle(
-              color: Colors.black,
-            ),
-          ),
-        ),
-      ],
     );
   }
 
@@ -228,21 +368,48 @@ class ShopsState extends State<Shops> {
     );
   }
 
+  void handleSearchStart() {
+    setState(() {
+      isSearching = true;
+    });
+  }
+
+  void handleSearchEnd() {
+    setState(() {
+      this.searchIcon = Icon(
+        Icons.search,
+        color: Colors.brown,
+        size: 26,
+      );
+      this.appBarTitle = Text(
+        'Choose the Store & Start Shopping!',
+        style: TextStyle(
+          fontSize: 22,
+          shadows: [
+            Shadow(
+              offset: Offset(0.00, 2.00),
+              color: Colors.brown.withOpacity(0.50),
+              blurRadius: 5,
+            ),
+          ],
+        ),
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    List<TenantList> tenantData = ScopedModel.of<AppModel>(context).tenant;
-
     tenantData.sort((a, b) {
       return a.nama.toLowerCase().compareTo(b.nama.toLowerCase());
     });
 
     return Column(
       children: [
-        appBar('Choose the Store & Start Shopping!'),
+        appBar(),
         Expanded(
           child: GroupedListView<dynamic, String>(
             shrinkWrap: true,
-            elements: tenantData,
+            elements: searchList,
             groupBy: (element) => element.kategori,
             groupComparator: (value1, value2) => value2.compareTo(value1),
             itemComparator: (item1, item2) => item2.nama.compareTo(item1.nama),

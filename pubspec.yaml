@@ -19,6 +19,7 @@ dependencies:
   flutter_open_whatsapp: ^0.1.2
   flutter_statusbarcolor: ^0.2.3
   fluttertoast: ^7.0.4
+  google_fonts: ^1.1.1
   grouped_list: ^3.5.0
   http: ^0.12.2
   localstorage: ^3.0.2+5
@@ -43,12 +44,3 @@ flutter:
     - assets/icon/
 
   uses-material-design: true
-
-  fonts:
-    - family: Baloo2
-      fonts:
-        - asset: assets/font/Baloo2-Bold.ttf
-        - asset: assets/font/Baloo2-ExtraBold.ttf
-        - asset: assets/font/Baloo2-Medium.ttf
-        - asset: assets/font/Baloo2-Regular.ttf
-        - asset: assets/font/Baloo2-SemiBold.ttf
