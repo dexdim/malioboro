@@ -8,18 +8,18 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:909704441528:android:560beb575b83bcdd364e4d",
+        "mobilesdk_app_id": "1:909704441528:android:4a0c72b87879ecd1364e4d",
         "android_client_info": {
           "package_name": "id.co.malmalioboro.app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "909704441528-tldegrgm10ve9ccangopv8f9kk32ahup.apps.googleusercontent.com",
+          "client_id": "909704441528-vohgnnhf559l5a0grja339t81sfibfd8.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "id.co.malmalioboro.app",
-            "certificate_hash": "2c8692e88f114884345c0589bf13e5f1a2d39f82"
+            "certificate_hash": "78731d16b3da9027d9f391399c31ac369640ceef"
           }
         },
         {

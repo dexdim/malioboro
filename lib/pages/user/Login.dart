@@ -8,7 +8,7 @@ import 'Forgot.dart';
 class Login extends StatefulWidget {
   Login({Key key, this.auth, this.loginCallback}) : super(key: key);
 
-  final BaseAuth auth;
+  final Auth auth;
   final VoidCallback loginCallback;
   static final String route = 'Login-route';
 
@@ -44,7 +44,7 @@ class LoginState extends State<Login> {
     if (validateAndSave()) {
       String userid = "";
       try {
-        userid = await widget.auth.signIn(email, password);
+        //userid = await widget.auth.signIn(email: email, password: password);
 
         setState(() {
           isLoading = false;

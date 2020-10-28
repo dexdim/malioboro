@@ -415,14 +415,19 @@ class ShopsState extends State<Shops> {
             itemComparator: (item1, item2) => item2.nama.compareTo(item1.nama),
             order: GroupedListOrder.DESC,
             groupSeparatorBuilder: (String value) => Container(
-              margin: EdgeInsets.symmetric(horizontal: 100, vertical: 10),
+              margin: EdgeInsets.symmetric(
+                horizontal: MediaQuery.of(context).size.width * 0.2,
+                vertical: 10,
+              ),
               child: Material(
                 borderRadius: BorderRadius.all(
                   Radius.circular(15),
                 ),
                 elevation: 5,
                 child: Padding(
-                  padding: EdgeInsets.all(5),
+                  padding: EdgeInsets.symmetric(
+                    vertical: 10,
+                  ),
                   child: Text(
                     value,
                     textAlign: TextAlign.center,

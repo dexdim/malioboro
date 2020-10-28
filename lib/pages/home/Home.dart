@@ -196,7 +196,7 @@ class HomeState extends State<Home> {
                 height: 10,
               ),
               Text(
-                'SHOPPING WITH LOVE',
+                'Malioboro Mall Foodstival',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 24,
@@ -224,7 +224,7 @@ class HomeState extends State<Home> {
                       Radius.circular(10),
                     ),
                     child: Image.network(
-                      'http://www.malmalioboro.co.id/assets/images/event/97d152b3604f064c937e8a7b1432fc58.jpg',
+                      'http://www.malmalioboro.co.id/assets/images/event/8d887a83900a3d80f797e2d08d4bb63f.jpg',
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -234,7 +234,7 @@ class HomeState extends State<Home> {
                 height: MediaQuery.of(context).size.height * 0.05,
               ),
               Text(
-                'Event detail here...',
+                'Event date : 14 July 2020 - 31 July 2020',
                 style: TextStyle(fontSize: 18),
               ),
               SizedBox(
@@ -283,11 +283,11 @@ class HomeState extends State<Home> {
   Widget event() {
     return Column(
       children: <Widget>[
-        listevent('Event 1', 'Maret 2020', 'April 2020'),
-        listevent('Event 2', 'Maret 2020', 'April 2020'),
-        listevent('Event 3', 'Maret 2020', 'April 2020'),
-        listevent('Event 4', 'Maret 2020', 'April 2020'),
-        listevent('Event 5', 'Maret 2020', 'April 2020'),
+        listevent('Malioboro Mall Foodstival', '14 July 2020', '31 July 2020'),
+        listevent('Event 2', 'Oktober 2020', 'November 2020'),
+        listevent('Event 3', 'Oktober 2020', 'November 2020'),
+        listevent('Event 4', 'Oktober 2020', 'November 2020'),
+        listevent('Event 5', 'Oktober 2020', 'November 2020'),
       ],
     );
   }

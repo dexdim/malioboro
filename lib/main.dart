@@ -28,6 +28,7 @@ void main() async {
 
 class Main extends StatelessWidget {
   static final AppModel appModel = AppModel();
+  final Future<FirebaseApp> initialize = Firebase.initializeApp();
 
   final routes = <String, WidgetBuilder>{
     Login.route: (BuildContext context) => Login(),
@@ -42,6 +43,27 @@ class Main extends StatelessWidget {
     Change.route: (BuildContext context) => Change(),
   };
 
+  Widget error() {
+    return Scaffold(
+      body: Container(
+        alignment: Alignment.center,
+        child: Text(
+          'Something went wrong, please contact developers.',
+          style: TextStyle(fontSize: 18),
+        ),
+      ),
+    );
+  }
+
+  Widget loading() {
+    return Scaffold(
+      body: Container(
+        alignment: Alignment.center,
+        child: CircularProgressIndicator(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     FlutterStatusbarcolor.setNavigationBarColor(
@@ -53,20 +75,31 @@ class Main extends StatelessWidget {
       FlutterStatusbarcolor.setStatusBarWhiteForeground(true);
     }
 
-    return ScopedModel<AppModel>(
-      model: appModel,
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Malioboro Mall Shop & Deals',
-        theme: ThemeData(
-          primaryColor: Colors.white,
-          textTheme: GoogleFonts.nunitoTextTheme(
-            Theme.of(context).textTheme,
-          ),
-        ),
-        home: Splash(),
-        routes: routes,
-      ),
+    return FutureBuilder(
+      future: initialize,
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return error();
+        }
+        if (snapshot.connectionState == ConnectionState.done) {
+          return ScopedModel<AppModel>(
+            model: appModel,
+            child: MaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: 'Malioboro Mall Shop & Deals',
+              theme: ThemeData(
+                primaryColor: Colors.white,
+                textTheme: GoogleFonts.nunitoTextTheme(
+                  Theme.of(context).textTheme,
+                ),
+              ),
+              home: Splash(),
+              routes: routes,
+            ),
+          );
+        }
+        return loading();
+      },
     );
   }
 }

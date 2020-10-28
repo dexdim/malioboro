@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:flutter_open_whatsapp/flutter_open_whatsapp.dart';
-//import 'package:email_validator/email_validator.dart';
 import 'Cart.dart';
 import 'package:malioboromall/model/AppScope.dart';
 
@@ -127,31 +126,6 @@ class FormsState extends State<Forms> {
   }
 
   Widget formField(String title, controller) {
-    /*
-    if (title == 'Email') {
-      return Container(
-        margin: EdgeInsets.symmetric(vertical: 10),
-        width: MediaQuery.of(context).size.width / 1.3,
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                child: TextFormField(
-                  keyboardType: TextInputType.emailAddress,
-                  controller: controller,
-                  onSaved: (value) => title = value,
-                  style: TextStyle(color: Colors.grey[850], fontSize: 16),
-                  decoration: inputDecoration(title),
-                  validator: (value) => !EmailValidator.validate(value, true)
-                      ? 'Email tidak valid / masih kosong!'
-                      : null,
-                ),
-              ),
-            ]),
-      );
-    } else 
-    */
-
     if (title == 'Mobile Number') {
       return Container(
         margin: EdgeInsets.symmetric(vertical: 10),
@@ -168,7 +142,7 @@ class FormsState extends State<Forms> {
                   decoration: inputDecoration(title),
                   validator: (value) {
                     if (value.isEmpty) {
-                      return '${title.toLowerCase()} still empty!';
+                      return '${title.toLowerCase()} is still empty!';
                     }
                     return null;
                   },
@@ -191,7 +165,7 @@ class FormsState extends State<Forms> {
                   decoration: inputDecoration(title),
                   validator: (value) {
                     if (value.isEmpty) {
-                      return '${title.toLowerCase()} still empty!';
+                      return '${title.toLowerCase()} is still empty!';
                     }
                     return null;
                   },

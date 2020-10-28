@@ -1,53 +1,58 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 
-abstract class BaseAuth {
-  Future<String> signIn(String email, String password);
+class SignInSignUpResult {
+  final User user;
+  final String message;
 
-  Future<String> signUp(String email, String password);
-
-  Future<User> getCurrentUser();
-
-  Future<void> sendEmailVerification();
-
-  Future<void> signOut();
-
-  Future<bool> isEmailVerified();
+  SignInSignUpResult({this.user, this.message});
 }
 
-class Auth implements BaseAuth {
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+class Auth {
+  static final FirebaseAuth auth = FirebaseAuth.instance;
 
-  Future<String> signIn(String email, String password) async {
-    UserCredential result = await _firebaseAuth.signInWithEmailAndPassword(
-        email: email, password: password);
-    User user = result.user;
-    return user.uid;
+  static Future<SignInSignUpResult> signUp(
+      {String email, String password}) async {
+    try {
+      UserCredential result = await auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      return SignInSignUpResult(user: result.user);
+    } catch (e) {
+      return SignInSignUpResult(
+        message: e.toString(),
+      );
+    }
   }
 
-  Future<String> signUp(String email, String password) async {
-    UserCredential result = await _firebaseAuth.createUserWithEmailAndPassword(
-        email: email, password: password);
-    User user = result.user;
-    return user.uid;
+  static Future<SignInSignUpResult> signIn(
+      {String email, String password}) async {
+    try {
+      UserCredential result = await auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      return SignInSignUpResult(user: result.user);
+    } catch (e) {
+      return SignInSignUpResult(
+        message: e.toString(),
+      );
+    }
   }
 
   Future<User> getCurrentUser() async {
-    User user = _firebaseAuth.currentUser;
+    User user = auth.currentUser;
     return user;
   }
 
-  Future<void> signOut() async {
-    return _firebaseAuth.signOut();
+  static Future<void> signOut() async {
+    return auth.signOut();
   }
 
   Future<void> sendEmailVerification() async {
-    User user = _firebaseAuth.currentUser;
+    User user = auth.currentUser;
     user.sendEmailVerification();
   }
 
   Future<bool> isEmailVerified() async {
-    User user = _firebaseAuth.currentUser;
+    User user = auth.currentUser;
     return user.emailVerified;
   }
 }

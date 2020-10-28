@@ -1,4 +1,6 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:malioboromall/auth/Auth.dart';
 import 'package:page_transition/page_transition.dart';
 import 'Login.dart';
 
@@ -12,6 +14,12 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   bool accept = false;
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmController = TextEditingController();
+
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   Widget title() {
     return Text(
@@ -54,44 +62,68 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
-  Widget form(String title, {bool isPassword = false}) {
-    return Container(
-      width: MediaQuery.of(context).size.width * 0.7,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Container(
-            height: 50,
-            child: TextFormField(
-              onSaved: (value) => title = value,
-              style: TextStyle(
-                fontSize: 18,
-              ),
-              obscureText: isPassword,
-              decoration: InputDecoration(
-                  fillColor: Colors.white,
-                  contentPadding: EdgeInsets.symmetric(horizontal: 10),
-                  labelText: title,
-                  labelStyle: TextStyle(
-                    color: Colors.black,
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.grey,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.brown,
-                    ),
-                  ),
-                  filled: true),
-            ),
-          ),
-          SizedBox(height: 10),
-        ],
+  inputDecoration(String title) {
+    return InputDecoration(
+      contentPadding: EdgeInsets.all(10),
+      labelText: title,
+      labelStyle: TextStyle(color: Colors.grey[850], fontSize: 18),
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: Colors.grey,
+        ),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: Colors.brown,
+        ),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: Colors.redAccent,
+        ),
+      ),
+      errorBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: Colors.redAccent,
+        ),
       ),
     );
+  }
+
+  Widget form(String title, controller, {bool isPassword = false}) {
+    if (title == 'Email') {
+      return Container(
+        margin: EdgeInsets.only(bottom: 10),
+        height: 50,
+        child: TextFormField(
+          keyboardType: TextInputType.emailAddress,
+          controller: controller,
+          onSaved: (value) => title = value,
+          decoration: inputDecoration(title),
+          validator: (value) => !EmailValidator.validate(value, true)
+              ? "Email isn't valid / still empty!"
+              : null,
+        ),
+      );
+    } else
+      return Container(
+        margin: EdgeInsets.only(bottom: 10),
+        height: 50,
+        child: TextFormField(
+            controller: controller,
+            onSaved: (value) => title = value,
+            style: TextStyle(
+              fontSize: 18,
+            ),
+            obscureText: isPassword,
+            decoration: inputDecoration(title),
+            validator: (value) {
+              if (value.isEmpty) {
+                return '${title.toLowerCase()} is still empty!';
+              }
+              return null;
+            }),
+      );
   }
 
   Widget submitButton(String title) {
@@ -117,7 +149,8 @@ class _SignUpState extends State<SignUp> {
           color: Colors.black,
         ),
       ),
-      onPressed: () {
+      onPressed: () async {
+        SignInSignUpResult result = await Auth.signUp(email: emailController.text, password: passwordController.text) ;
         Navigator.push(
           context,
           PageTransition(
@@ -173,14 +206,21 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
-  Widget signupform() {
-    return Column(
-      children: <Widget>[
-        form('Full Name'),
-        form('Email'),
-        form('Password', isPassword: true),
-        form('Confirm Password', isPassword: true),
-      ],
+  Widget signupForm() {
+    return Container(
+      width: MediaQuery.of(context).size.width * 0.7,
+      child: Form(
+        key: formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            form('Full Name', nameController),
+            form('Email', emailController),
+            form('Password', passwordController, isPassword: true),
+            form('Confirm Password', confirmController, isPassword: true),
+          ],
+        ),
+      ),
     );
   }
 
@@ -218,7 +258,7 @@ class _SignUpState extends State<SignUp> {
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.05,
                   ),
-                  signupform(),
+                  signupForm(),
                   Container(
                     width: MediaQuery.of(context).size.width * 0.75,
                     padding: EdgeInsets.only(

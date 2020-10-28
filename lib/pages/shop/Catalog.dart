@@ -98,11 +98,11 @@ class CatalogState extends State<Catalog> {
             thickness: 1,
           ),
           Text(
-            NumberFormat.currency(
+            '${NumberFormat.currency(
               locale: 'id',
-              name: 'IDR ',
+              name: 'Rp ',
               decimalDigits: 0,
-            ).format(searchList[index].harga),
+            ).format(searchList[index].harga)},-',
             style: TextStyle(
               fontSize: 18,
             ),

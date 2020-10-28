@@ -14,7 +14,7 @@ class Menu extends StatefulWidget {
   Menu({Key key, this.auth, this.userid, this.logoutCallback})
       : super(key: key);
 
-  final BaseAuth auth;
+  final Auth auth;
   final String userid;
   final VoidCallback logoutCallback;
   static final String route = 'Menu-route';
@@ -202,7 +202,7 @@ class _MenuState extends State<Menu> {
             elevation: 5,
             color: Colors.white,
             borderRadius: BorderRadius.all(
-              Radius.circular(25.0),
+              Radius.circular(30.0),
             ),
             child: bottomBar(),
           ),

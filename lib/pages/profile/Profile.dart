@@ -194,7 +194,7 @@ class ProfileState extends State<Profile> {
                 child: Material(
                   elevation: 5,
                   child: Image.asset(
-                    'assets/profile.png',
+                    'assets/profile.jpg',
                   ),
                 ),
               ),

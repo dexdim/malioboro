@@ -12,7 +12,7 @@ enum AuthStatus {
 class Root extends StatefulWidget {
   Root({this.auth});
 
-  final BaseAuth auth;
+  final Auth auth;
 
   @override
   State<StatefulWidget> createState() => new RootState();
