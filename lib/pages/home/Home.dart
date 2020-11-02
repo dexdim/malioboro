@@ -368,7 +368,6 @@ class HomeState extends State<Home> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                  SizedBox(height: 5),
                   news(),
                   divider(),
                   subtitle('Top Picks for You :'),

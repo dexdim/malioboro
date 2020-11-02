@@ -14,7 +14,6 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   bool accept = false;
-  TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmController = TextEditingController();
@@ -64,6 +63,8 @@ class _SignUpState extends State<SignUp> {
 
   inputDecoration(String title) {
     return InputDecoration(
+      filled: true,
+      fillColor: Colors.white,
       contentPadding: EdgeInsets.all(10),
       labelText: title,
       labelStyle: TextStyle(color: Colors.grey[850], fontSize: 18),
@@ -105,24 +106,49 @@ class _SignUpState extends State<SignUp> {
               : null,
         ),
       );
+    } else if (title == 'Password') {
+      return Container(
+        margin: EdgeInsets.only(bottom: 10),
+        height: 50,
+        child: TextFormField(
+          controller: controller,
+          onSaved: (value) => title = value,
+          style: TextStyle(
+            fontSize: 18,
+          ),
+          obscureText: isPassword,
+          decoration: inputDecoration(title),
+          validator: (value) {
+            if (value.isEmpty) {
+              return '${title.toLowerCase()} is still empty!';
+            } else if (value.length < 8) {
+              return 'Passwords must have at lease 8 characters';
+            }
+            return null;
+          },
+        ),
+      );
     } else
       return Container(
         margin: EdgeInsets.only(bottom: 10),
         height: 50,
         child: TextFormField(
-            controller: controller,
-            onSaved: (value) => title = value,
-            style: TextStyle(
-              fontSize: 18,
-            ),
-            obscureText: isPassword,
-            decoration: inputDecoration(title),
-            validator: (value) {
-              if (value.isEmpty) {
-                return '${title.toLowerCase()} is still empty!';
-              }
+          controller: controller,
+          onSaved: (value) => title = value,
+          style: TextStyle(
+            fontSize: 18,
+          ),
+          obscureText: isPassword,
+          decoration: inputDecoration(title),
+          validator: (value) {
+            if (value.isEmpty) {
+              return '${title.toLowerCase()} is still empty!';
+            } else if (value != passwordController.text) {
+              return "Passwords doesn't match";
+            } else
               return null;
-            }),
+          },
+        ),
       );
   }
 
@@ -150,7 +176,8 @@ class _SignUpState extends State<SignUp> {
         ),
       ),
       onPressed: () async {
-        SignInSignUpResult result = await Auth.signUp(email: emailController.text, password: passwordController.text) ;
+        SignInSignUpResult result = await Auth.signUp(
+            email: emailController.text, password: passwordController.text);
         Navigator.push(
           context,
           PageTransition(
@@ -214,7 +241,6 @@ class _SignUpState extends State<SignUp> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            form('Full Name', nameController),
             form('Email', emailController),
             form('Password', passwordController, isPassword: true),
             form('Confirm Password', confirmController, isPassword: true),
