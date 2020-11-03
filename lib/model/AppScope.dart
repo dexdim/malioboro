@@ -119,7 +119,7 @@ class AppModel extends Model {
   final LocalStorage storage = new LocalStorage('app_data');
 
   final String url =
-      'http://www.malmalioboro.co.id/index.php/api/produk/get_list';
+      'https://www.malmalioboro.co.id/index.php/api/produk/get_list';
   final String newsUrl =
       'http://www.malmalioboro.co.id/index.php/api/news/get_list';
   final String promoUrl =
