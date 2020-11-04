@@ -6,6 +6,9 @@ import 'package:malioboromall/model/AppScope.dart';
 
 class Forms extends StatefulWidget {
   static final String route = 'Form-route';
+  final int id;
+
+  Forms({this.id});
 
   @override
   FormsState createState() => FormsState();
@@ -27,7 +30,9 @@ class FormsState extends State<Forms> {
     super.dispose();
   }
 
-  Widget button(String title) {
+  Widget button(String title, id) {
+    List<TenantList> tenantData = ScopedModel.of<AppModel>(context).tenant;
+
     return ScopedModelDescendant<AppModel>(builder: (context, child, model) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -55,6 +60,9 @@ class FormsState extends State<Forms> {
               ),
             ),
             onPressed: () {
+              print(widget.id);
+              print(tenantData[id].nama);
+              print('a');
               if (formKey.currentState.validate()) {
                 var finalPrint = '';
                 printItem(Data d) {
@@ -62,7 +70,7 @@ class FormsState extends State<Forms> {
                       '\nNama barang : ${d.nama}\nHarga satuan : Rp ${d.harga}\nKode barcode : ${d.deskripsi}\nJumlah : ${d.counter} , Harga subtotal : Rp ${d.subtotal}\n';
                 }
 
-                finalPrint += 'Hi Supermarket Malioboro Mall\n';
+                finalPrint += 'Hi ${tenantData[id].nama}\n';
                 finalPrint +=
                     'Ini daftar belanja saya dari Malioboro Mall Shop and Deals\n';
                 finalPrint += 'Nama : ${namaController.text}\n';
@@ -75,7 +83,7 @@ class FormsState extends State<Forms> {
                     '\n\nTolong cek ketersediaan stocknya. Terima kasih.';
 
                 FlutterOpenWhatsapp.sendSingleMessage(
-                    '6282138020366', '${finalPrint.toString()}');
+                    '${tenantData[id].telp}', '${finalPrint.toString()}');
               }
             },
             splashColor: Colors.transparent,
@@ -176,6 +184,7 @@ class FormsState extends State<Forms> {
     }
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -235,7 +244,7 @@ class FormsState extends State<Forms> {
         child: Container(
           width: MediaQuery.of(context).size.width,
           height: 70,
-          child: button('CLICK HERE TO BUY'),
+          child: button('CLICK HERE TO BUY', widget.id),
         ),
       ),
     );

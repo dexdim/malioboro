@@ -16,7 +16,7 @@ class CartState extends State<Cart> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   static var totalHarga;
 
-  Widget button(String title) {
+  Widget button(String title, int d) {
     return ScopedModelDescendant<AppModel>(
       builder: (context, child, model) {
         return Row(
@@ -45,6 +45,7 @@ class CartState extends State<Cart> {
                 ),
               ),
               onPressed: () {
+                print(d);
                 Timer(Duration(milliseconds: 500), () {
                   if (model.cartListing.length == 0) {
                     showCartSnak(model.cartEmpty);
@@ -52,8 +53,9 @@ class CartState extends State<Cart> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Forms(),
-                      ),
+                          builder: (context) => Forms(
+                                id: d,
+                              )),
                     );
                   }
                 });
@@ -115,7 +117,8 @@ class CartState extends State<Cart> {
                             builder: (context, child, model) {
                               return InkResponse(
                                 onTap: () {
-                                  model.removeCart(d);
+                                  print(d.idtenan);
+                                  model.removeCart(d, d.idtenan);
                                 },
                                 child: Padding(
                                   padding: EdgeInsets.only(right: 10.0),
@@ -346,7 +349,7 @@ class CartState extends State<Cart> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   totalBar(),
-                  button('ORDER'),
+                  button('ORDER', model.catalog[0].idtenan),
                 ],
               );
             },

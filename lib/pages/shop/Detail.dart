@@ -216,10 +216,17 @@ class DetailState extends State<Detail> {
                     children: <Widget>[
                       Container(
                         height: 300.0,
-                        child: Image(
-                          image: NetworkImage(
-                              'http://www.malmalioboro.co.id/${widget.detail.gambar}'),
-                          fit: BoxFit.contain,
+                        width: 300,
+                        child: Material(
+                          elevation: 5,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(10),
+                          ),
+                          child: Image(
+                            image: NetworkImage(
+                                'http://www.malmalioboro.co.id/${widget.detail.gambar}'),
+                            fit: BoxFit.contain,
+                          ),
                         ),
                       ),
                       counterBar()

@@ -12,6 +12,7 @@ class Home extends StatefulWidget {
 }
 
 class HomeState extends State<Home> {
+  List<PromoList> promoData;
   Widget appBar(title) {
     return Column(
       children: [
@@ -93,48 +94,46 @@ class HomeState extends State<Home> {
     );
   }
 
-  Widget carousel() => ScopedModelDescendant<AppModel>(
-        builder: (context, child, model) => Container(
-          width: MediaQuery.of(context).size.width,
-          child: CarouselSlider.builder(
-            itemCount: 10,
-            itemBuilder: (context, index) => GestureDetector(
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => DealDetail(
-                    index: index,
-                  ),
+  Widget carousel() => Container(
+        width: MediaQuery.of(context).size.width,
+        child: CarouselSlider.builder(
+          itemCount: 10,
+          itemBuilder: (context, index) => GestureDetector(
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => DealDetail(
+                  index: index,
                 ),
               ),
-              child: Container(
-                padding: EdgeInsets.symmetric(vertical: 10),
-                child: Material(
-                  elevation: 3,
+            ),
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 10),
+              child: Material(
+                elevation: 3,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(15),
+                ),
+                child: ClipRRect(
                   borderRadius: BorderRadius.all(
-                    Radius.circular(15),
+                    Radius.circular(15.0),
                   ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(15.0),
-                    ),
-                    child: Image.network(
-                      'https://malmalioboro.co.id/${model.promo[index].logo}',
-                      fit: BoxFit.fill,
-                    ),
+                  child: Image.network(
+                    'https://malmalioboro.co.id/${promoData[index].logo}',
+                    fit: BoxFit.fill,
                   ),
                 ),
               ),
             ),
-            options: CarouselOptions(
-              height: MediaQuery.of(context).size.height * 0.25,
-              viewportFraction: 0.4,
-              autoPlay: true,
-              enlargeCenterPage: true,
-              autoPlayCurve: Curves.fastLinearToSlowEaseIn,
-              enableInfiniteScroll: true,
-              pauseAutoPlayOnTouch: true,
-            ),
+          ),
+          options: CarouselOptions(
+            height: MediaQuery.of(context).size.height * 0.25,
+            viewportFraction: 0.4,
+            autoPlay: true,
+            enlargeCenterPage: true,
+            autoPlayCurve: Curves.fastLinearToSlowEaseIn,
+            enableInfiniteScroll: true,
+            pauseAutoPlayOnTouch: true,
           ),
         ),
       );
@@ -348,6 +347,12 @@ class HomeState extends State<Home> {
         ],
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    promoData = ScopedModel.of<AppModel>(context).promo;
   }
 
   @override

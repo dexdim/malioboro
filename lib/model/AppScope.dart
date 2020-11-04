@@ -207,6 +207,7 @@ class AppModel extends Model {
   }
 
   Future<String> fetchData(String id) async {
+    cart.clear();
     Map body = {'idtenan': '$id'};
     http.Response response = await http.post(
       Uri.encodeFull(url),
@@ -272,6 +273,7 @@ class AppModel extends Model {
       qry = 'CREATE TABLE IF NOT EXISTS cart_list_$id ( '
           'id INTEGER PRIMARY KEY,'
           'shopid INTEGER,'
+          'idtenan INTEGER,'
           'nama TEXT,'
           'deskripsi TEXT,'
           'harga INT,'
@@ -298,6 +300,8 @@ class AppModel extends Model {
 
   //Isi data item dari API ke dalam tabel item_list & list array _data
   insertInLocal(id) async {
+    catalog.clear();
+
     try {
       await this._db.transaction(
         (tx) async {
@@ -374,7 +378,7 @@ class AppModel extends Model {
       (tx) async {
         try {
           var qry =
-              "INSERT INTO cart_list_$id (shopid, nama, deskripsi, harga, gambar, counter, subtotal) VALUES (${d.id},'${d.nama}', '${d.deskripsi}', ${d.harga},'${d.gambar}', ${d.counter}, ${d.subtotal})";
+              "INSERT INTO cart_list_$id (shopid, idtenan, nama, deskripsi, harga, gambar, counter, subtotal) VALUES (${d.id}, '${d.idtenan}', '${d.nama}', '${d.deskripsi}', ${d.harga},'${d.gambar}', ${d.counter}, ${d.subtotal})";
           var _res = await tx.execute(qry);
           this.fetchCartList(id);
         } catch (e) {
@@ -395,6 +399,7 @@ class AppModel extends Model {
         (dd) {
           Data d = new Data();
           d.id = dd['id'];
+          d.idtenan = dd['idtenan'];
           d.nama = dd['nama'];
           d.deskripsi = dd['deskripsi'];
           d.harga = dd['harga'];
@@ -426,9 +431,9 @@ class AppModel extends Model {
   }
 
   //Delete record dari tabel cart_list jika ada item yang dihapus
-  removeCartDB(Data d) async {
+  removeCartDB(Data d, idtenan) async {
     try {
-      var qry = 'DELETE FROM cart_list where id = ${d.id}';
+      var qry = 'DELETE FROM cart_list_$idtenan where id = ${d.id}';
       this._db.rawDelete(qry).then(
         (data) {
           print(data);
@@ -447,8 +452,8 @@ class AppModel extends Model {
   }
 
   // Remove Cart
-  void removeCart(Data dd) {
-    this.removeCartDB(dd);
+  void removeCart(Data dd, idtenan) {
+    this.removeCartDB(dd, idtenan);
   }
 
   printCart() {}

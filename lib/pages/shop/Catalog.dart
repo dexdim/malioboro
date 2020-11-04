@@ -38,6 +38,7 @@ class CatalogState extends State<Catalog> {
   void initState() {
     super.initState();
     data = ScopedModel.of<AppModel>(context).catalog;
+    searchList.clear();
     searchList = data;
     isSearching = false;
   }
@@ -68,13 +69,17 @@ class CatalogState extends State<Catalog> {
 
   Widget itemImage(index) {
     return Container(
-      child: ClipRRect(
+      height: 200,
+      width: 200,
+      child: Material(
         borderRadius: BorderRadius.all(
           Radius.circular(10),
         ),
-        child: Image.network(
-          'http://www.malmalioboro.co.id/${searchList[index].gambar}',
-          fit: BoxFit.cover,
+        elevation: 5,
+        child: ClipRRect(
+          child: Image.network(
+            'http://www.malmalioboro.co.id/${searchList[index].gambar}',
+          ),
         ),
       ),
     );

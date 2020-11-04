@@ -9,6 +9,8 @@ class Deal extends StatefulWidget {
 }
 
 class DealState extends State<Deal> {
+  List<PromoList> promoData;
+
   Widget appBar(title) {
     return Column(
       children: [
@@ -133,8 +135,13 @@ class DealState extends State<Deal> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    promoData = ScopedModel.of<AppModel>(context).promo;
+  }
+
+  @override
   Widget build(BuildContext context) {
-    List<PromoList> promoData = ScopedModel.of<AppModel>(context).promo;
     return Column(
       children: [
         appBar('Get Special Discount & Hot Deals!'),
