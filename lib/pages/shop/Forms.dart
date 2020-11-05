@@ -19,6 +19,7 @@ class FormsState extends State<Forms> {
   final namaController = TextEditingController();
   final alamatController = TextEditingController();
   final nomorhpController = TextEditingController();
+  int idtenant;
   String namapemesan;
   String nomorhp;
   bool validate = false;
@@ -30,9 +31,7 @@ class FormsState extends State<Forms> {
     super.dispose();
   }
 
-  Widget button(String title, id) {
-    List<TenantList> tenantData = ScopedModel.of<AppModel>(context).tenant;
-
+  Widget button(String title, nama, nomor) {
     return ScopedModelDescendant<AppModel>(builder: (context, child, model) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -60,9 +59,7 @@ class FormsState extends State<Forms> {
               ),
             ),
             onPressed: () {
-              print(widget.id);
-              print(tenantData[id].nama);
-              print('a');
+              print(nama);
               if (formKey.currentState.validate()) {
                 var finalPrint = '';
                 printItem(Data d) {
@@ -70,7 +67,7 @@ class FormsState extends State<Forms> {
                       '\nNama barang : ${d.nama}\nHarga satuan : Rp ${d.harga}\nKode barcode : ${d.deskripsi}\nJumlah : ${d.counter} , Harga subtotal : Rp ${d.subtotal}\n';
                 }
 
-                finalPrint += 'Hi ${tenantData[id].nama}\n';
+                finalPrint += 'Hi $nama\n';
                 finalPrint +=
                     'Ini daftar belanja saya dari Malioboro Mall Shop and Deals\n';
                 finalPrint += 'Nama : ${namaController.text}\n';
@@ -83,7 +80,7 @@ class FormsState extends State<Forms> {
                     '\n\nTolong cek ketersediaan stocknya. Terima kasih.';
 
                 FlutterOpenWhatsapp.sendSingleMessage(
-                    '${tenantData[id].telp}', '${finalPrint.toString()}');
+                    '$nomor', '${finalPrint.toString()}');
               }
             },
             splashColor: Colors.transparent,
@@ -186,6 +183,13 @@ class FormsState extends State<Forms> {
 
   @override
   Widget build(BuildContext context) {
+    List<TenantList> tenantData = ScopedModel.of<AppModel>(context).tenant;
+    int id = tenantData.indexWhere(
+      (item) => item.id == widget.id.toString(),
+    );
+    print(id);
+    String nama = tenantData[id].nama;
+    String nomor = tenantData[id].telp;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -244,7 +248,7 @@ class FormsState extends State<Forms> {
         child: Container(
           width: MediaQuery.of(context).size.width,
           height: 70,
-          child: button('CLICK HERE TO BUY', widget.id),
+          child: button('CLICK HERE TO BUY', nama, nomor),
         ),
       ),
     );
