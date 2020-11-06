@@ -157,10 +157,8 @@ class AppModel extends Model {
   }
 
   Future<String> fetchPromo() async {
-    Map body = {'jenis': 'Promo'};
-    http.Response response = await http.post(
+    http.Response response = await http.get(
       Uri.encodeFull(promoUrl),
-      body: body,
     );
     var parse = json.decode(response.body);
     parse?.forEach(
