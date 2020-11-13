@@ -14,6 +14,7 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   bool accept = false;
+  bool success;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmController = TextEditingController();
@@ -176,8 +177,17 @@ class _SignUpState extends State<SignUp> {
         ),
       ),
       onPressed: () async {
-        SignInSignUpResult result = await Auth.signUp(
+        /*SignInSignUpResult result = await Auth.signUp(
             email: emailController.text, password: passwordController.text);
+            if(result.user != null){
+              Navigator.push(
+                         context,
+                         MaterialPageRoute(
+                            builder: (context) => Login (
+                              user: result.user,
+                            )));
+                  }
+            };*/
         Navigator.push(
           context,
           PageTransition(

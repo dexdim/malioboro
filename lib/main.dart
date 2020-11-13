@@ -117,9 +117,8 @@ class SplashState extends State<Splash> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => Root(
-          auth: Auth(),
-        ),
+        builder: (context) => //Root(auth: Auth()),
+            Menu(),
       ),
     );
   }

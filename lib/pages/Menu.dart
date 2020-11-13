@@ -149,10 +149,10 @@ class _MenuState extends State<Menu> {
           ),
           title: Text('Deals'),
         ),
-        SalomonBottomBarItem(
+        /*SalomonBottomBarItem(
           icon: Icon(Icons.account_circle_outlined),
           title: Text('Profile'),
-        ),
+        ),*/
       ],
     );
   }

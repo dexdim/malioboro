@@ -3,8 +3,12 @@ import 'package:malioboromall/pages/profile/EditProfile.dart';
 import 'package:malioboromall/pages/user/Change.dart';
 import 'package:malioboromall/pages/user/Login.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:malioboromall/auth/Auth.dart';
 
 class Profile extends StatefulWidget {
+  Profile({Key key, this.auth}) : super(key: key);
+
+  final Auth auth;
   @override
   ProfileState createState() => ProfileState();
 }
@@ -91,12 +95,12 @@ class ProfileState extends State<Profile> {
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.05,
           ),
-          text(context, 'Full Name', 'Joko Widodo'),
-          text(context, 'Address', 'Istana Negara Bogor'),
-          text(context, 'Birthdate', '21 June 1961'),
+          text(context, 'Full Name', 'User'),
+          text(context, 'Address', 'Address'),
+          text(context, 'Birthdate', '01 January 1970'),
           text(context, 'Gender', 'Male'),
           text(context, 'Mobile Number', '08123456789'),
-          text(context, 'Email', 'jokowi@gmail.com'),
+          text(context, 'Email', 'user@gmail.com'),
           Expanded(
             child: Container(),
           ),
@@ -164,7 +168,25 @@ class ProfileState extends State<Profile> {
             fontSize: 20, fontWeight: FontWeight.w400, color: Colors.black),
       ),
       //onPressed: validateAndSubmit,
-      onPressed: () {
+      onPressed: () async {
+        widget.auth.getCurrentUser().then(
+          (user) {
+            if (user == null) {
+              Scaffold.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('No one has signed in.'),
+                ),
+              );
+              return;
+            }
+            Auth.signOut();
+            final String uid = user.uid;
+            Scaffold.of(context).showSnackBar(SnackBar(
+              content: Text(uid + ' has successfully signed out.'),
+            ));
+          },
+        );
+
         Navigator.push(
           context,
           PageTransition(

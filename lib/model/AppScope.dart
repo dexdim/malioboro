@@ -123,7 +123,7 @@ class AppModel extends Model {
   final String newsUrl =
       'http://www.malmalioboro.co.id/index.php/api/news/get_list';
   final String promoUrl =
-      'http://www.malmalioboro.co.id/index.php/api/event/get_list_promo_50';
+      'https://www.malmalioboro.co.id/index.php/api/event/get_list_promo_50';
   final String tenantUrl =
       'http://www.malmalioboro.co.id/index.php/api/tenant/get_list';
 
