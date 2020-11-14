@@ -258,7 +258,7 @@ class DetailState extends State<Detail> {
                       ),
                       SizedBox(height: 10),
                       Text(
-                        'Barcode : ${widget.detail.deskripsi}',
+                        'Description : ${widget.detail.deskripsi}',
                         style: TextStyle(
                             fontWeight: FontWeight.w500, fontSize: 20),
                       ),

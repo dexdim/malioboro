@@ -64,7 +64,7 @@ class FormsState extends State<Forms> {
                 var finalPrint = '';
                 printItem(Data d) {
                   finalPrint +=
-                      '\nNama barang : ${d.nama}\nHarga satuan : Rp ${d.harga}\nKode barcode : ${d.deskripsi}\nJumlah : ${d.counter} , Harga subtotal : Rp ${d.subtotal}\n';
+                      '\nNama barang : ${d.nama}\nHarga satuan : Rp ${d.harga}\nJumlah : ${d.counter} , Harga subtotal : Rp ${d.subtotal}\n';
                 }
 
                 finalPrint += 'Hi $nama\n';
