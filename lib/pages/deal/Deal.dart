@@ -20,7 +20,7 @@ class DealState extends State<Deal> {
         Text(
           title,
           style: TextStyle(
-            fontSize: 22,
+            fontSize: 20,
             fontWeight: FontWeight.w500,
             shadows: [
               Shadow(
@@ -76,7 +76,7 @@ class DealState extends State<Deal> {
           Text(
             promoData[index].tenant,
             style: TextStyle(
-              fontSize: 20,
+              fontSize: 16,
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -87,6 +87,7 @@ class DealState extends State<Deal> {
             ),
           ),
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Icon(
                 Icons.event,
@@ -96,10 +97,12 @@ class DealState extends State<Deal> {
               SizedBox(
                 width: 5,
               ),
-              Text(
-                '${promoData[index].tglawal} - ${promoData[index].tglakhir}',
-                style: TextStyle(
-                  fontSize: 16,
+              Expanded(
+                child: Text(
+                  '${promoData[index].tglawal} - ${promoData[index].tglakhir}',
+                  style: TextStyle(
+                    fontSize: 14,
+                  ),
                 ),
               ),
             ],

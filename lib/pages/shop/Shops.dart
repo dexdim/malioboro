@@ -78,8 +78,9 @@ class ShopsState extends State<Shops> {
 
   Widget appBarTitle = Text(
     'Choose the Store & Start Shopping!',
+    textAlign: TextAlign.center,
     style: TextStyle(
-      fontSize: 22,
+      fontSize: 20,
       shadows: [
         Shadow(
           offset: Offset(0.00, 2.00),
@@ -96,15 +97,22 @@ class ShopsState extends State<Shops> {
         SizedBox(
           height: 40,
         ),
-        Stack(
-          alignment: AlignmentDirectional.center,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Align(
-              alignment: Alignment.center,
-              child: appBarTitle,
+            Expanded(
+              flex: 1,
+              child: Container(),
             ),
-            Align(
-              alignment: Alignment.centerRight,
+            Expanded(
+              flex: 8,
+              child: Align(
+                alignment: Alignment.center,
+                child: appBarTitle,
+              ),
+            ),
+            Expanded(
+              flex: 1,
               child: Padding(
                 padding: EdgeInsets.only(
                   right: 20,
@@ -187,7 +195,7 @@ class ShopsState extends State<Shops> {
       child: Text(
         'CATALOGUE',
         style: TextStyle(
-            fontSize: 20, fontWeight: FontWeight.w400, color: Colors.black),
+            fontSize: 18, fontWeight: FontWeight.w400, color: Colors.black),
       ),
       onPressed: () {
         Navigator.push(
@@ -208,67 +216,72 @@ class ShopsState extends State<Shops> {
     Main.appModel.fetchData(element.id);
 
     return AlertDialog(
-      content: Stack(
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Positioned(
-            top: -15,
-            right: -35,
-            child: FlatButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Icon(
-                Icons.close,
-                color: Colors.brown,
-              ),
+          Container(
+            child: Stack(
+              alignment: Alignment.topRight,
+              children: [
+                Positioned(
+                  child: FlatButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Icon(
+                      Icons.close,
+                      color: Colors.brown,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                element.nama,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w500,
-                  shadows: [
-                    Shadow(
-                      offset: Offset(0.00, 2.00),
-                      color: Colors.brown.withOpacity(0.50),
-                      blurRadius: 5,
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Container(
-                child: Material(
-                  elevation: 3,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
+          Container(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  element.nama,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                    shadows: [
+                      Shadow(
+                        offset: Offset(0.00, 2.00),
+                        color: Colors.brown.withOpacity(0.50),
+                        blurRadius: 5,
+                      ),
+                    ],
                   ),
-                  child: ClipRRect(
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  child: Material(
+                    elevation: 3,
                     borderRadius: BorderRadius.all(
                       Radius.circular(10),
                     ),
-                    child: Image.network(
-                      'https://malmalioboro.co.id/${element.image}',
-                      fit: BoxFit.fill,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+                      child: Image.network(
+                        'https://malmalioboro.co.id/${element.image}',
+                        fit: BoxFit.fill,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.05,
-              ),
-              button(element),
-            ],
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.05,
+                ),
+                button(element),
+              ],
+            ),
           ),
         ],
       ),
@@ -295,18 +308,12 @@ class ShopsState extends State<Shops> {
           Text(
             element.nama,
             style: TextStyle(
-              fontSize: 18,
+              fontSize: 16,
               fontWeight: FontWeight.w600,
             ),
           ),
           Text(
             '${element.lokasi} FLOOR',
-            style: TextStyle(
-              fontSize: 18,
-            ),
-          ),
-          Text(
-            element.kategori,
             style: TextStyle(
               fontSize: 16,
             ),
@@ -315,12 +322,12 @@ class ShopsState extends State<Shops> {
             children: [
               Icon(
                 Icons.local_phone_outlined,
-                size: 16,
+                size: 14,
               ),
               Text(
                 ' : ${element.telp2}',
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 14,
                 ),
               ),
             ],
@@ -329,13 +336,13 @@ class ShopsState extends State<Shops> {
             children: [
               ImageIcon(
                 AssetImage('assets/icon/whatsapp.png'),
-                size: 16,
+                size: 14,
                 color: Colors.green,
               ),
               Text(
                 ' : ${element.telp}',
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 14,
                 ),
               ),
             ],
@@ -353,7 +360,7 @@ class ShopsState extends State<Shops> {
       ),
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
-        height: MediaQuery.of(context).size.height / 7,
+        height: MediaQuery.of(context).size.height / 6,
         child: Row(
           children: [
             itemImage(element, context),
@@ -383,8 +390,9 @@ class ShopsState extends State<Shops> {
       );
       this.appBarTitle = Text(
         'Choose the Store & Start Shopping!',
+        textAlign: TextAlign.center,
         style: TextStyle(
-          fontSize: 22,
+          fontSize: 20,
           shadows: [
             Shadow(
               offset: Offset(0.00, 2.00),

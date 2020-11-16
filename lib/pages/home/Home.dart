@@ -258,21 +258,24 @@ class HomeState extends State<Home> {
           vertical: 5,
         ),
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Icon(
               Icons.event_available,
               color: Colors.redAccent,
-              size: 18,
+              size: 16,
             ),
             SizedBox(
               width: 5,
             ),
-            Text(
-              '$eventTitle, $tglawal - $tglakhir',
-              style: TextStyle(
-                fontSize: 18,
+            Expanded(
+              child: Text(
+                '$eventTitle, $tglawal - $tglakhir',
+                style: TextStyle(
+                  fontSize: 14,
+                ),
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -297,7 +300,7 @@ class HomeState extends State<Home> {
       children: <Widget>[
         Container(
           height: 40,
-          width: 40,
+          width: 60,
           child: InkWell(
             child: Image(
               image: AssetImage('assets/icon/$title.png'),
@@ -321,7 +324,7 @@ class HomeState extends State<Home> {
         ),
         Text(
           '$title',
-          style: TextStyle(fontSize: 16),
+          style: TextStyle(fontSize: 14),
         ),
       ],
     );
