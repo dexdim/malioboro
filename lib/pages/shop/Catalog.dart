@@ -77,6 +77,9 @@ class CatalogState extends State<Catalog> {
         ),
         elevation: 5,
         child: ClipRRect(
+          borderRadius: BorderRadius.all(
+            Radius.circular(10),
+          ),
           child: Image.network(
             'http://www.malmalioboro.co.id/${searchList[index].gambar}',
           ),

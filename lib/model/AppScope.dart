@@ -7,7 +7,6 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:http/http.dart' as http;
-//import '../Cart.dart';
 
 class NewsList {
   dynamic id;
