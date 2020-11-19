@@ -13,6 +13,7 @@ class Home extends StatefulWidget {
 
 class HomeState extends State<Home> {
   List<PromoList> promoData;
+  List<EventList> eventData;
   Widget appBar(title) {
     return Column(
       children: [
@@ -246,7 +247,7 @@ class HomeState extends State<Home> {
     );
   }
 
-  Widget listevent(String eventTitle, String tglawal, String tglakhir) {
+  Widget listEvent(index) {
     return GestureDetector(
       onTap: () => showDialog(
         context: context,
@@ -268,13 +269,15 @@ class HomeState extends State<Home> {
             SizedBox(
               width: 5,
             ),
-            Expanded(
-              child: Text(
-                '$eventTitle\n$tglawal - $tglakhir',
-                style: TextStyle(
-                  fontSize: 14,
-                ),
-              ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('${eventData[index].nama}'),
+                Text(
+                  '${eventData[index].tglawal} - ${eventData[index].tglakhir}',
+                )
+              ],
             ),
           ],
         ),
@@ -283,14 +286,13 @@ class HomeState extends State<Home> {
   }
 
   Widget event() {
-    return Column(
-      children: <Widget>[
-        listevent('Malioboro Mall Foodstival', '14 July 2020', '31 July 2020'),
-        listevent('Event 2', 'Oktober 2020', 'November 2020'),
-        listevent('Event 3', 'Oktober 2020', 'November 2020'),
-        listevent('Event 4', 'Oktober 2020', 'November 2020'),
-        listevent('Event 5', 'Oktober 2020', 'November 2020'),
-      ],
+    return ListView.builder(
+      itemBuilder: (context, index) {
+        return listEvent(index);
+      },
+      itemCount: eventData.length,
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
     );
   }
 
@@ -356,6 +358,7 @@ class HomeState extends State<Home> {
   void initState() {
     super.initState();
     promoData = ScopedModel.of<AppModel>(context).promo;
+    eventData = ScopedModel.of<AppModel>(context).event;
   }
 
   @override

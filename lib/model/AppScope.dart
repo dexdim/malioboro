@@ -56,7 +56,6 @@ class EventList {
   String tglakhir;
   String jenis;
   String deskripsi;
-  String tenant;
   String logo;
 
   EventList(
@@ -66,7 +65,6 @@ class EventList {
     this.tglakhir,
     this.jenis,
     this.deskripsi,
-    this.tenant,
     this.logo,
   );
 }
@@ -146,7 +144,7 @@ class AppModel extends Model {
   final String newsUrl =
       'http://www.malmalioboro.co.id/index.php/api/news/get_list';
   final String eventUrl =
-      'https://www.malmalioboro.co.id/index.php/api/event/get_list_event_10';
+      'https://www.malmalioboro.co.id/index.php/api/event/get_list_event_5';
   final String promoUrl =
       'https://www.malmalioboro.co.id/index.php/api/event/get_list_promo_50';
   final String tenantUrl =
@@ -195,7 +193,6 @@ class AppModel extends Model {
           e['tglakhir'],
           e['jenis'],
           e['deskripsi'],
-          e['tenant'],
           e['logo'],
         );
         event.add(fetch);
