@@ -77,10 +77,10 @@ class ShopsState extends State<Shops> {
   );
 
   Widget appBarTitle = Text(
-    'Choose the Store & Start Shopping!',
+    'Choose the Store & Go Shopping!',
     textAlign: TextAlign.center,
     style: TextStyle(
-      fontSize: 20,
+      fontSize: 18,
       shadows: [
         Shadow(
           offset: Offset(0.00, 2.00),
@@ -308,26 +308,23 @@ class ShopsState extends State<Shops> {
           Text(
             element.nama,
             style: TextStyle(
-              fontSize: 16,
               fontWeight: FontWeight.w600,
             ),
           ),
           Text(
             '${element.lokasi} FLOOR',
-            style: TextStyle(
-              fontSize: 16,
-            ),
+            style: TextStyle(),
           ),
           Row(
             children: [
               Icon(
                 Icons.local_phone_outlined,
-                size: 14,
+                size: 13,
               ),
               Text(
                 ' : ${element.telp2}',
                 style: TextStyle(
-                  fontSize: 14,
+                  fontSize: 13,
                 ),
               ),
             ],
@@ -336,13 +333,13 @@ class ShopsState extends State<Shops> {
             children: [
               ImageIcon(
                 AssetImage('assets/icon/whatsapp.png'),
-                size: 14,
+                size: 13,
                 color: Colors.green,
               ),
               Text(
                 ' : ${element.telp}',
                 style: TextStyle(
-                  fontSize: 14,
+                  fontSize: 13,
                 ),
               ),
             ],
@@ -359,7 +356,7 @@ class ShopsState extends State<Shops> {
         builder: (BuildContext context) => popupTenant(element),
       ),
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         height: MediaQuery.of(context).size.height / 6,
         child: Row(
           children: [
@@ -389,10 +386,10 @@ class ShopsState extends State<Shops> {
         size: 26,
       );
       this.appBarTitle = Text(
-        'Choose the Store & Start Shopping!',
+        'Choose the Store & Go Shopping!',
         textAlign: TextAlign.center,
         style: TextStyle(
-          fontSize: 20,
+          fontSize: 18,
           shadows: [
             Shadow(
               offset: Offset(0.00, 2.00),
@@ -439,7 +436,7 @@ class ShopsState extends State<Shops> {
                   child: Text(
                     value,
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(fontSize: 16),
                   ),
                 ),
               ),

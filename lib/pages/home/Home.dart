@@ -30,7 +30,7 @@ class HomeState extends State<Home> {
           title,
           textAlign: TextAlign.center,
           style: TextStyle(
-            fontSize: 20,
+            fontSize: 18,
             fontWeight: FontWeight.w500,
             shadows: [
               Shadow(
@@ -147,7 +147,7 @@ class HomeState extends State<Home> {
           '$subtitle',
           style: TextStyle(
             fontWeight: FontWeight.w500,
-            fontSize: 18,
+            fontSize: 16,
             color: Colors.black,
             shadows: [
               Shadow(
@@ -234,7 +234,7 @@ class HomeState extends State<Home> {
               ),
               Text(
                 'Event date : 14 July 2020 - 31 July 2020',
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(fontSize: 16),
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.05,
@@ -263,14 +263,14 @@ class HomeState extends State<Home> {
             Icon(
               Icons.event_available,
               color: Colors.redAccent,
-              size: 16,
+              size: 14,
             ),
             SizedBox(
               width: 5,
             ),
             Expanded(
               child: Text(
-                '$eventTitle, $tglawal - $tglakhir',
+                '$eventTitle\n$tglawal - $tglakhir',
                 style: TextStyle(
                   fontSize: 14,
                 ),
@@ -300,7 +300,7 @@ class HomeState extends State<Home> {
       children: <Widget>[
         Container(
           height: 40,
-          width: 60,
+          width: 100,
           child: InkWell(
             child: Image(
               image: AssetImage('assets/icon/$title.png'),
@@ -335,7 +335,7 @@ class HomeState extends State<Home> {
       width: MediaQuery.of(context).size.width,
       height: 80,
       margin: EdgeInsets.symmetric(
-          vertical: 20, horizontal: MediaQuery.of(context).size.width * 0.20),
+          vertical: 20, horizontal: MediaQuery.of(context).size.width * 0.15),
       child: Row(
         children: <Widget>[
           Expanded(
@@ -366,7 +366,7 @@ class HomeState extends State<Home> {
           SizedBox(
             height: 20,
           ),
-          appBar('Hi User!\nWelcome to Malioboro Mall - Shop & Deals'),
+          appBar('Welcome to Malioboro Mall Shop & Deals'),
           Expanded(
             child: SingleChildScrollView(
               padding: EdgeInsets.only(

@@ -53,7 +53,7 @@ class FormsState extends State<Forms> {
             child: Text(
               title,
               style: TextStyle(
-                fontSize: 20,
+                fontSize: 18,
                 fontWeight: FontWeight.w400,
                 color: Colors.black,
               ),
@@ -96,7 +96,9 @@ class FormsState extends State<Forms> {
       width: MediaQuery.of(context).size.width / 1.3,
       child: Text(
         'Please fill in the blanks to order',
-        style: TextStyle(fontSize: 20),
+        style: TextStyle(
+          fontSize: 18,
+        ),
         textAlign: TextAlign.center,
       ),
     );
@@ -106,7 +108,7 @@ class FormsState extends State<Forms> {
     return InputDecoration(
       contentPadding: EdgeInsets.all(10),
       labelText: title,
-      labelStyle: TextStyle(color: Colors.grey[850], fontSize: 18),
+      labelStyle: TextStyle(color: Colors.grey[850], fontSize: 16),
       enabledBorder: OutlineInputBorder(
         borderSide: BorderSide(
           color: Colors.grey,
@@ -143,7 +145,7 @@ class FormsState extends State<Forms> {
                   keyboardType: TextInputType.number,
                   controller: controller,
                   onSaved: (value) => title = value,
-                  style: TextStyle(color: Colors.grey[850], fontSize: 16),
+                  style: TextStyle(color: Colors.grey[850], fontSize: 14),
                   decoration: inputDecoration(title),
                   validator: (value) {
                     if (value.isEmpty) {
@@ -166,7 +168,7 @@ class FormsState extends State<Forms> {
                 child: TextFormField(
                   controller: controller,
                   onSaved: (value) => title = value,
-                  style: TextStyle(color: Colors.grey[850], fontSize: 16),
+                  style: TextStyle(color: Colors.grey[850], fontSize: 14),
                   decoration: inputDecoration(title),
                   validator: (value) {
                     if (value.isEmpty) {
@@ -197,7 +199,7 @@ class FormsState extends State<Forms> {
         title: Text(
           'Order Form',
           style: TextStyle(
-            fontSize: 26,
+            fontSize: 18,
             shadows: [
               Shadow(
                 offset: Offset(0.00, 2.00),

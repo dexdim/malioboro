@@ -39,7 +39,7 @@ class CartState extends State<Cart> {
               child: Text(
                 title,
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 18,
                   fontWeight: FontWeight.w400,
                   color: Colors.black,
                 ),
@@ -108,7 +108,7 @@ class CartState extends State<Cart> {
                           child: Text(
                             d.nama,
                             style: TextStyle(
-                                fontWeight: FontWeight.w600, fontSize: 20),
+                                fontWeight: FontWeight.w600, fontSize: 18),
                           ),
                         ),
                         Container(
@@ -137,40 +137,30 @@ class CartState extends State<Cart> {
                       child: Row(children: <Widget>[
                         Text(
                           'Total : ',
-                          style: TextStyle(fontSize: 18),
+                          style: TextStyle(fontSize: 16),
                         ),
                         counterBar(d.counter),
                       ]),
                     ),
-                    Row(children: <Widget>[
-                      Text(
-                        'Price : ',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                      Text(
-                        '${NumberFormat.currency(
+                    Expanded(
+                      child: Text(
+                        'Price : ${NumberFormat.currency(
                           locale: 'id',
                           name: 'Rp ',
                           decimalDigits: 0,
                         ).format(d.harga)},-',
-                        style: TextStyle(fontSize: 18),
+                        style: TextStyle(fontSize: 16),
                       ),
-                    ]),
+                    ),
                     Expanded(
-                      child: Row(children: <Widget>[
-                        Text(
-                          'Subtotal price : ',
-                          style: TextStyle(fontSize: 18),
-                        ),
-                        Text(
-                          '${NumberFormat.currency(
-                            locale: 'id',
-                            name: 'Rp ',
-                            decimalDigits: 0,
-                          ).format(d.subtotal)},-',
-                          style: TextStyle(fontSize: 18),
-                        ),
-                      ]),
+                      child: Text(
+                        'Subtotal price : ${NumberFormat.currency(
+                          locale: 'id',
+                          name: 'Rp ',
+                          decimalDigits: 0,
+                        ).format(d.subtotal)},-',
+                        style: TextStyle(fontSize: 16),
+                      ),
                     ),
                   ],
                 ),
@@ -237,20 +227,25 @@ class CartState extends State<Cart> {
     return Container(
       margin: EdgeInsets.only(right: 20),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Container(
             width: 110,
             child: Text(
               'Total price :',
               style: TextStyle(
-                  fontSize: 22.0,
-                  color: Colors.brown,
-                  fontWeight: FontWeight.w600),
+                fontSize: 18.0,
+                color: Colors.brown,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
           Text(
             '$totalHarga,-',
-            style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w500),
+            style: TextStyle(
+              fontSize: 18.0,
+              fontWeight: FontWeight.w500,
+            ),
           ),
         ],
       ),
@@ -280,7 +275,7 @@ class CartState extends State<Cart> {
         title: Text(
           'Your Shopping List!',
           style: TextStyle(
-            fontSize: 22,
+            fontSize: 18,
             shadows: [
               Shadow(
                 offset: Offset(0.00, 2.00),
@@ -333,7 +328,7 @@ class CartState extends State<Cart> {
         color: Color(0xfffee18e),
         child: Container(
           width: MediaQuery.of(context).size.width,
-          height: 70,
+          height: 90,
           child: ScopedModelDescendant<AppModel>(
             builder: (context, child, model) {
               totalHarga = NumberFormat.currency(
@@ -345,8 +340,8 @@ class CartState extends State<Cart> {
                     .fold(0, (total, current) => total + current.subtotal)),
               );
 
-              return Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   totalBar(),
                   button('ORDER', model.catalog[0].idtenan),

@@ -41,7 +41,7 @@ class DetailState extends State<Detail> {
         child: Text(
           title,
           style: TextStyle(
-            fontSize: 20,
+            fontSize: 18,
             fontWeight: FontWeight.w400,
             color: Colors.black,
           ),
@@ -81,14 +81,14 @@ class DetailState extends State<Detail> {
           ),
           child: Icon(
             Icons.remove,
-            size: 20,
+            size: 16,
           ),
         ),
       ),
       SizedBox(width: 30),
       Text(
         "$counter",
-        style: TextStyle(fontSize: 26),
+        style: TextStyle(fontSize: 20),
       ),
       SizedBox(width: 30),
       GestureDetector(
@@ -107,7 +107,7 @@ class DetailState extends State<Detail> {
           ),
           child: Icon(
             Icons.add,
-            size: 20,
+            size: 16,
           ),
         ),
       ),
@@ -119,7 +119,7 @@ class DetailState extends State<Detail> {
       SnackBar(
         content: Text(
           msg,
-          style: TextStyle(color: Colors.white, fontSize: 18),
+          style: TextStyle(color: Colors.white, fontSize: 16),
         ),
         backgroundColor: (flag) ? Colors.green : Colors.red[500],
         duration: Duration(seconds: 5),
@@ -131,13 +131,14 @@ class DetailState extends State<Detail> {
     return Container(
       margin: EdgeInsets.only(right: 20),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Container(
             width: 140.0,
             child: Text(
               'Subtotal price :',
               style: TextStyle(
-                  fontSize: 22.0,
+                  fontSize: 18.0,
                   color: Colors.brown,
                   fontWeight: FontWeight.w600),
             ),
@@ -151,7 +152,7 @@ class DetailState extends State<Detail> {
                 name: 'Rp ',
                 decimalDigits: 0,
               ).format(widget.detail.subtotal)},-',
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
             );
           }),
         ],
@@ -174,7 +175,7 @@ class DetailState extends State<Detail> {
         title: Text(
           'Item Detail',
           style: TextStyle(
-            fontSize: 22,
+            fontSize: 18,
             shadows: [
               Shadow(
                 offset: Offset(0.00, 2.00),
@@ -210,13 +211,12 @@ class DetailState extends State<Detail> {
             child: ListView(
               children: <Widget>[
                 Container(
-                  height: 425,
                   padding: EdgeInsets.only(top: 25.0),
                   child: Column(
                     children: <Widget>[
                       Container(
-                        height: 300.0,
-                        width: 300,
+                        height: 250.0,
+                        width: 250,
                         child: Material(
                           elevation: 5,
                           borderRadius: BorderRadius.all(
@@ -239,28 +239,28 @@ class DetailState extends State<Detail> {
                 ),
                 Container(
                   padding:
-                      EdgeInsets.symmetric(horizontal: 50.0, vertical: 20.0),
+                      EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Text(
                         widget.detail.nama,
                         style: TextStyle(
-                            fontWeight: FontWeight.w600, fontSize: 22.0),
+                            fontWeight: FontWeight.w600, fontSize: 18.0),
                       ),
                       SizedBox(height: 10),
                       Text(
                         'Price : $hargaSatuan,-',
                         style: TextStyle(
                             fontWeight: FontWeight.w600,
-                            fontSize: 20.0,
+                            fontSize: 16.0,
                             color: Colors.brown),
                       ),
                       SizedBox(height: 10),
                       Text(
                         'Description : ${widget.detail.deskripsi}',
                         style: TextStyle(
-                            fontWeight: FontWeight.w500, fontSize: 20),
+                            fontWeight: FontWeight.w500, fontSize: 16),
                       ),
                       SizedBox(
                         height: 10,
@@ -268,7 +268,8 @@ class DetailState extends State<Detail> {
                       Text(
                         '*The price may be changed without notice.',
                         style: TextStyle(
-                            fontWeight: FontWeight.w400, fontSize: 16),
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
                     ],
                   ),
@@ -283,10 +284,10 @@ class DetailState extends State<Detail> {
         color: Color(0xfffee18e),
         child: Container(
           width: MediaQuery.of(context).size.width,
-          height: 70.0,
-          child: Row(
+          height: 90.0,
+          child: Column(
             mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               subtotalBar(),
               button('ADD TO CART'),

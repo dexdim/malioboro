@@ -49,6 +49,28 @@ class PromoList {
   );
 }
 
+class EventList {
+  dynamic id;
+  String nama;
+  String tglawal;
+  String tglakhir;
+  String jenis;
+  String deskripsi;
+  String tenant;
+  String logo;
+
+  EventList(
+    this.id,
+    this.nama,
+    this.tglawal,
+    this.tglakhir,
+    this.jenis,
+    this.deskripsi,
+    this.tenant,
+    this.logo,
+  );
+}
+
 class TenantList {
   dynamic id;
   String nama;
@@ -100,11 +122,13 @@ List data;
 class AppModel extends Model {
   AppModel() {
     fetchNews();
+    fetchEvent();
     fetchPromo();
     fetchTenant();
   }
   //CartState cartState;
   List<NewsList> news = [];
+  List<EventList> event = [];
   List<PromoList> promo = [];
   List<TenantList> tenant = [];
   List<Data> catalog = [];
@@ -121,6 +145,8 @@ class AppModel extends Model {
       'https://www.malmalioboro.co.id/index.php/api/produk/get_list';
   final String newsUrl =
       'http://www.malmalioboro.co.id/index.php/api/news/get_list';
+  final String eventUrl =
+      'https://www.malmalioboro.co.id/index.php/api/event/get_list_event_10';
   final String promoUrl =
       'https://www.malmalioboro.co.id/index.php/api/event/get_list_promo_50';
   final String tenantUrl =
@@ -153,6 +179,29 @@ class AppModel extends Model {
       },
     );
     return 'Success!';
+  }
+
+  Future<String> fetchEvent() async {
+    http.Response response = await http.get(
+      Uri.encodeFull(eventUrl),
+    );
+    var parse = json.decode(response.body);
+    parse?.forEach(
+      (dynamic e) {
+        final EventList fetch = EventList(
+          e['id'],
+          e['nama'],
+          e['tglawal'],
+          e['tglakhir'],
+          e['jenis'],
+          e['deskripsi'],
+          e['tenant'],
+          e['logo'],
+        );
+        event.add(fetch);
+      },
+    );
+    return ('Success!');
   }
 
   Future<String> fetchPromo() async {

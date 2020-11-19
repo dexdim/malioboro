@@ -69,8 +69,8 @@ class CatalogState extends State<Catalog> {
 
   Widget itemImage(index) {
     return Container(
-      height: 200,
-      width: 200,
+      height: 150,
+      width: 150,
       child: Material(
         borderRadius: BorderRadius.all(
           Radius.circular(10),
@@ -82,6 +82,8 @@ class CatalogState extends State<Catalog> {
           ),
           child: Image.network(
             'http://www.malmalioboro.co.id/${searchList[index].gambar}',
+            height: 150,
+            width: 150,
           ),
         ),
       ),
@@ -92,7 +94,7 @@ class CatalogState extends State<Catalog> {
     return Text(
       '${searchList[index].nama}',
       textAlign: TextAlign.center,
-      style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
     );
   }
 
@@ -112,7 +114,7 @@ class CatalogState extends State<Catalog> {
               decimalDigits: 0,
             ).format(searchList[index].harga)},-',
             style: TextStyle(
-              fontSize: 18,
+              fontSize: 14,
             ),
             textAlign: TextAlign.center,
           ),
@@ -130,7 +132,7 @@ class CatalogState extends State<Catalog> {
   Widget appBarTitle = Text(
     'Catalogue',
     style: TextStyle(
-      fontSize: 22,
+      fontSize: 18,
       shadows: [
         Shadow(
           offset: Offset(0.00, 2.00),
@@ -269,7 +271,7 @@ class CatalogState extends State<Catalog> {
       this.appBarTitle = Text(
         'Catalogue',
         style: TextStyle(
-          fontSize: 20,
+          fontSize: 18,
           shadows: [
             Shadow(
               offset: Offset(0.00, 2.00),
@@ -285,7 +287,7 @@ class CatalogState extends State<Catalog> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    final double itemHeight = (size.height - kToolbarHeight + 50) / 3.5;
+    final double itemHeight = (size.height - kToolbarHeight) / 3;
     final double itemWidth = size.width / 3;
     final double aspectRatio = itemWidth / itemHeight;
 
