@@ -172,8 +172,9 @@ class HomeState extends State<Home> {
     );
   }
 
-  Widget popupEvent() {
+  Widget popupEvent(index) {
     return AlertDialog(
+      contentPadding: EdgeInsets.all(10),
       content: Stack(
         children: [
           Positioned(
@@ -185,7 +186,7 @@ class HomeState extends State<Home> {
               },
               child: Icon(
                 Icons.close,
-                color: Colors.brown,
+                color: Colors.red,
               ),
             ),
           ),
@@ -193,13 +194,13 @@ class HomeState extends State<Home> {
             mainAxisSize: MainAxisSize.min,
             children: [
               SizedBox(
-                height: 10,
+                height: 30,
               ),
               Text(
-                'Malioboro Mall Foodstival',
+                '${eventData[index].nama}',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 24,
+                  fontSize: 20,
                   fontWeight: FontWeight.w500,
                   shadows: [
                     Shadow(
@@ -214,6 +215,7 @@ class HomeState extends State<Home> {
                 height: 20,
               ),
               Container(
+                margin: EdgeInsets.symmetric(horizontal: 15),
                 child: Material(
                   elevation: 3,
                   borderRadius: BorderRadius.all(
@@ -224,7 +226,7 @@ class HomeState extends State<Home> {
                       Radius.circular(10),
                     ),
                     child: Image.network(
-                      'http://www.malmalioboro.co.id/assets/images/event/8d887a83900a3d80f797e2d08d4bb63f.jpg',
+                      'http://www.malmalioboro.co.id/${eventData[index].logo}',
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -234,8 +236,8 @@ class HomeState extends State<Home> {
                 height: MediaQuery.of(context).size.height * 0.05,
               ),
               Text(
-                'Event date : 14 July 2020 - 31 July 2020',
-                style: TextStyle(fontSize: 16),
+                'Event date :\n${eventData[index].tglawal} - ${eventData[index].tglakhir}',
+                textAlign: TextAlign.center,
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.05,
@@ -251,7 +253,7 @@ class HomeState extends State<Home> {
     return GestureDetector(
       onTap: () => showDialog(
         context: context,
-        builder: (BuildContext context) => popupEvent(),
+        builder: (BuildContext context) => popupEvent(index),
       ),
       child: Container(
         margin: EdgeInsets.symmetric(
@@ -259,7 +261,6 @@ class HomeState extends State<Home> {
           vertical: 5,
         ),
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Icon(
               Icons.event_available,
@@ -269,15 +270,21 @@ class HomeState extends State<Home> {
             SizedBox(
               width: 5,
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('${eventData[index].nama}'),
-                Text(
-                  '${eventData[index].tglawal} - ${eventData[index].tglakhir}',
-                )
-              ],
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '${eventData[index].nama}',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    '${eventData[index].tglawal} - ${eventData[index].tglakhir}',
+                    style: TextStyle(fontSize: 13),
+                  )
+                ],
+              ),
             ),
           ],
         ),
@@ -373,7 +380,7 @@ class HomeState extends State<Home> {
           Expanded(
             child: SingleChildScrollView(
               padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).size.height * 0.05,
+                bottom: MediaQuery.of(context).size.height * 0.075,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,

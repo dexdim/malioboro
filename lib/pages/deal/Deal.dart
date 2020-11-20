@@ -118,7 +118,7 @@ class DealState extends State<Deal> {
       ),
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-        height: MediaQuery.of(context).size.height / 6,
+        height: MediaQuery.of(context).size.height / 5,
         child: Container(
           child: Row(
             children: [

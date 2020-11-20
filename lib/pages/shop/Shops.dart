@@ -77,7 +77,7 @@ class ShopsState extends State<Shops> {
   );
 
   Widget appBarTitle = Text(
-    'Choose the Store & Go Shopping!',
+    'Choose the Store & Go Shop!',
     textAlign: TextAlign.center,
     style: TextStyle(
       fontSize: 18,
@@ -216,31 +216,29 @@ class ShopsState extends State<Shops> {
     Main.appModel.fetchData(element.id);
 
     return AlertDialog(
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
+      contentPadding: EdgeInsets.all(10),
+      content: Stack(
         children: [
-          Container(
-            child: Stack(
-              alignment: Alignment.topRight,
-              children: [
-                Positioned(
-                  child: FlatButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Icon(
-                      Icons.close,
-                      color: Colors.brown,
-                    ),
-                  ),
-                ),
-              ],
+          Positioned(
+            top: -15,
+            right: -35,
+            child: FlatButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Icon(
+                Icons.close,
+                color: Colors.red,
+              ),
             ),
           ),
           Container(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
+                SizedBox(
+                  height: 30,
+                ),
                 Text(
                   element.nama,
                   textAlign: TextAlign.center,
@@ -260,6 +258,7 @@ class ShopsState extends State<Shops> {
                   height: 20,
                 ),
                 Container(
+                  margin: EdgeInsets.symmetric(horizontal: 15),
                   child: Material(
                     elevation: 3,
                     borderRadius: BorderRadius.all(
@@ -386,7 +385,7 @@ class ShopsState extends State<Shops> {
         size: 26,
       );
       this.appBarTitle = Text(
-        'Choose the Store & Go Shopping!',
+        'Choose the Store & Go Shop!',
         textAlign: TextAlign.center,
         style: TextStyle(
           fontSize: 18,
