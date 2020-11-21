@@ -245,6 +245,7 @@ class DetailState extends State<Detail> {
                     children: <Widget>[
                       Text(
                         widget.detail.nama,
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                             fontWeight: FontWeight.w600, fontSize: 18.0),
                       ),
@@ -290,6 +291,9 @@ class DetailState extends State<Detail> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               subtotalBar(),
+              SizedBox(
+                height: 10,
+              ),
               button('ADD TO CART'),
             ],
           ),

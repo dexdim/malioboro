@@ -72,6 +72,7 @@ class DealState extends State<Deal> {
       flex: 5,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
             promoData[index].tenant,
@@ -141,7 +142,7 @@ class DealState extends State<Deal> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        appBar('Get Special Discount & Hot Deals!'),
+        appBar('Get Special Discount & Deals!'),
         Expanded(
           child: ListView.separated(
             padding: EdgeInsets.only(

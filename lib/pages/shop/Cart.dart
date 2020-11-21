@@ -344,6 +344,9 @@ class CartState extends State<Cart> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   totalBar(),
+                  SizedBox(
+                    height: 10,
+                  ),
                   button('ORDER', model.catalog[0].idtenan),
                 ],
               );

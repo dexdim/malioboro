@@ -116,7 +116,7 @@ class News extends StatelessWidget {
             ),
             Column(
               children: [
-                appBar('News and Attraction'),
+                appBar('News & Attractions'),
                 Expanded(
                   child: ListView.builder(
                     padding: EdgeInsets.symmetric(

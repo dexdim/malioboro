@@ -258,21 +258,28 @@ class HomeState extends State<Home> {
       child: Container(
         margin: EdgeInsets.symmetric(
           horizontal: 40,
-          vertical: 5,
+          vertical: 10,
         ),
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Icon(
-              Icons.event_available,
-              color: Colors.redAccent,
-              size: 14,
+            Column(
+              children: [
+                SizedBox(
+                  height: 2,
+                ),
+                Icon(
+                  Icons.event_available,
+                  color: Colors.redAccent,
+                  size: 14,
+                ),
+              ],
             ),
             SizedBox(
-              width: 5,
+              width: 10,
             ),
             Expanded(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(

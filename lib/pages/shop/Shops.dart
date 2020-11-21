@@ -77,7 +77,7 @@ class ShopsState extends State<Shops> {
   );
 
   Widget appBarTitle = Text(
-    'Choose the Store & Go Shop!',
+    'Choose the Store & Go Shopping!',
     textAlign: TextAlign.center,
     style: TextStyle(
       fontSize: 18,
@@ -287,7 +287,7 @@ class ShopsState extends State<Shops> {
     );
   }
 
-  Widget itemImage(element, context) {
+  Widget itemImage(element) {
     return Container(
       width: MediaQuery.of(context).size.height / 9,
       margin: EdgeInsets.fromLTRB(20, 0, 10, 0),
@@ -359,7 +359,7 @@ class ShopsState extends State<Shops> {
         height: MediaQuery.of(context).size.height / 6,
         child: Row(
           children: [
-            itemImage(element, context),
+            itemImage(element),
             VerticalDivider(),
             SizedBox(
               width: 10,
