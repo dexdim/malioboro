@@ -174,49 +174,52 @@ class _MenuState extends State<Menu> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Scaffold(
-        key: scaffoldKey,
-        extendBody: true,
-        body: Stack(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  stops: [0.1, 0.8],
-                  colors: [
-                    Colors.white,
-                    Color(0xfffee18e),
-                  ],
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Container(
+        child: Scaffold(
+          key: scaffoldKey,
+          extendBody: true,
+          body: Stack(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    stops: [0.1, 0.8],
+                    colors: [
+                      Colors.white,
+                      Color(0xfffee18e),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            body[selectedIndex],
-          ],
-        ),
-        bottomNavigationBar: Container(
-          padding: EdgeInsets.fromLTRB(15, 0, 15, 15),
-          child: Material(
-            elevation: 5,
-            color: Colors.white,
-            borderRadius: BorderRadius.all(
-              Radius.circular(30.0),
-            ),
-            child: bottomBar(),
+              body[selectedIndex],
+            ],
           ),
-        ),
-        floatingActionButton: Visibility(
-          visible: visible,
-          child: Container(
-            margin: EdgeInsets.only(right: 5),
-            width: 70,
-            height: 70,
-            decoration: BoxDecoration(
-                border: Border.all(color: Colors.black12, width: 3),
-                shape: BoxShape.circle),
-            child: cartButton(),
+          bottomNavigationBar: Container(
+            padding: EdgeInsets.fromLTRB(15, 0, 15, 15),
+            child: Material(
+              elevation: 5,
+              color: Colors.white,
+              borderRadius: BorderRadius.all(
+                Radius.circular(30.0),
+              ),
+              child: bottomBar(),
+            ),
+          ),
+          floatingActionButton: Visibility(
+            visible: visible,
+            child: Container(
+              margin: EdgeInsets.only(right: 5),
+              width: 70,
+              height: 70,
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black12, width: 3),
+                  shape: BoxShape.circle),
+              child: cartButton(),
+            ),
           ),
         ),
       ),

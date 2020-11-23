@@ -91,13 +91,16 @@ class CatalogState extends State<Catalog> {
   }
 
   Widget itemName(index) {
-    return Flexible(
-      child: Container(
-        child: Text(
-          '${searchList[index].nama}',
-          overflow: TextOverflow.ellipsis,
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+    return Padding(
+      padding: EdgeInsets.only(top: 5),
+      child: Flexible(
+        child: Container(
+          child: Text(
+            '${searchList[index].nama}',
+            overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
+          ),
         ),
       ),
     );
@@ -292,7 +295,7 @@ class CatalogState extends State<Catalog> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    final double itemHeight = (size.height - kToolbarHeight) / 6;
+    final double itemHeight = (size.height - kToolbarHeight) / 5;
     final double itemWidth = size.width / 4;
     final double aspectRatio = itemWidth / itemHeight;
 
@@ -321,10 +324,12 @@ class CatalogState extends State<Catalog> {
               child: GridView.builder(
                 shrinkWrap: true,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, childAspectRatio: aspectRatio),
+                  crossAxisCount: 2,
+                  childAspectRatio: aspectRatio,
+                ),
                 itemBuilder: (context, index) {
                   return Padding(
-                    padding: EdgeInsets.all(5.0),
+                    padding: EdgeInsets.all(2.0),
                     child: GestureDetector(
                       onTap: () {
                         Navigator.push(
@@ -340,9 +345,6 @@ class CatalogState extends State<Catalog> {
                         decoration: BoxDecoration(
                           shape: BoxShape.rectangle,
                           border: Border.all(color: Colors.brown[200]),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(10),
-                          ),
                         ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,

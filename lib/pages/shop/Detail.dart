@@ -222,10 +222,15 @@ class DetailState extends State<Detail> {
                           borderRadius: BorderRadius.all(
                             Radius.circular(10),
                           ),
-                          child: Image(
-                            image: NetworkImage(
-                                'http://www.malmalioboro.co.id/${widget.detail.gambar}'),
-                            fit: BoxFit.contain,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10),
+                            ),
+                            child: Image(
+                              image: NetworkImage(
+                                  'http://www.malmalioboro.co.id/${widget.detail.gambar}'),
+                              fit: BoxFit.contain,
+                            ),
                           ),
                         ),
                       ),
