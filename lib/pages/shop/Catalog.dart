@@ -325,7 +325,6 @@ class CatalogState extends State<Catalog> {
                 shrinkWrap: true,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  childAspectRatio: aspectRatio,
                 ),
                 itemBuilder: (context, index) {
                   return Padding(
