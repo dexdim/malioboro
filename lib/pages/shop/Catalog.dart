@@ -91,15 +91,17 @@ class CatalogState extends State<Catalog> {
   }
 
   Widget itemName(index) {
-    return Padding(
-      padding: EdgeInsets.only(top: 5),
-      child: Flexible(
-        child: Container(
-          child: Text(
-            '${searchList[index].nama}',
-            overflow: TextOverflow.ellipsis,
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
+    return Container(
+      child: Padding(
+        padding: EdgeInsets.only(top: 5),
+        child: Flexible(
+          child: Container(
+            child: Text(
+              '${searchList[index].nama}',
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
+            ),
           ),
         ),
       ),
@@ -322,7 +324,6 @@ class CatalogState extends State<Catalog> {
             child: Padding(
               padding: EdgeInsets.all(5.0),
               child: GridView.builder(
-                shrinkWrap: true,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                 ),
@@ -340,12 +341,14 @@ class CatalogState extends State<Catalog> {
                         );
                       },
                       child: Container(
+                        height: 600,
                         padding: EdgeInsets.all(5.0),
                         decoration: BoxDecoration(
                           shape: BoxShape.rectangle,
                           border: Border.all(color: Colors.brown[200]),
                         ),
                         child: Column(
+                          mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
                             itemImage(index),
