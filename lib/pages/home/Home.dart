@@ -180,7 +180,7 @@ class HomeState extends State<Home> {
           Positioned(
             top: -15,
             right: -35,
-            child: FlatButton(
+            child: TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },

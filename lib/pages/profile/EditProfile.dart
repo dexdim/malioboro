@@ -154,7 +154,7 @@ class EditProfileState extends State<EditProfile> {
                     SizedBox(
                       width: 20.0,
                     ),
-                    RaisedButton(
+                    ElevatedButton(
                       onPressed: () => _selectDate(context),
                       child: Text(
                         'Select date',
@@ -163,7 +163,10 @@ class EditProfileState extends State<EditProfile> {
                           color: Colors.white,
                         ),
                       ),
-                      color: Colors.brown,
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(Colors.brown),
+                      ),
                     ),
                   ],
                 ),
