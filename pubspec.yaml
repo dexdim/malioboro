@@ -29,6 +29,7 @@ dependencies:
   scoped_model: ^1.0.1
   sqflite: ^2.0.0+3
   url_launcher: ^6.0.2
+  whatsapp_unilink: ^2.0.0
 
 dev_dependencies:
   flutter_test:
