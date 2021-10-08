@@ -160,7 +160,7 @@ class AppModel extends Model {
 
   Future<String> fetchNews() async {
     http.Response response = await http.get(
-      Uri.encodeFull(newsUrl),
+      Uri.parse(newsUrl),
     );
     var parse = json.decode(response.body);
     parse?.forEach(
@@ -181,7 +181,7 @@ class AppModel extends Model {
 
   Future<String> fetchEvent() async {
     http.Response response = await http.get(
-      Uri.encodeFull(eventUrl),
+      Uri.parse(eventUrl),
     );
     var parse = json.decode(response.body);
     parse?.forEach(
@@ -203,7 +203,7 @@ class AppModel extends Model {
 
   Future<String> fetchPromo() async {
     http.Response response = await http.get(
-      Uri.encodeFull(promoUrl),
+      Uri.parse(promoUrl),
     );
     var parse = json.decode(response.body);
     parse?.forEach(
@@ -226,7 +226,7 @@ class AppModel extends Model {
 
   Future<String> fetchTenant() async {
     http.Response response = await http.get(
-      Uri.encodeFull(tenantUrl),
+      Uri.parse(tenantUrl),
     );
     var parse = json.decode(response.body);
     parse?.forEach(
@@ -253,7 +253,7 @@ class AppModel extends Model {
     cart.clear();
     Map body = {'idtenan': '$id'};
     http.Response response = await http.post(
-      Uri.encodeFull(url),
+      Uri.parse(url),
       body: body,
     );
     var parse = json.decode(response.body);
