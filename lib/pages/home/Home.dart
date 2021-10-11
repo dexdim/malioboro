@@ -99,7 +99,7 @@ class HomeState extends State<Home> {
         width: MediaQuery.of(context).size.width,
         child: CarouselSlider.builder(
           itemCount: 10,
-          itemBuilder: (context, index) => GestureDetector(
+          itemBuilder: (context, index, pgindex) => GestureDetector(
             onTap: () => Navigator.push(
               context,
               MaterialPageRoute(

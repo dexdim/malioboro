@@ -1,0 +1,6 @@
+package id.co.malmalioboro.malioboro
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity() {
+}
